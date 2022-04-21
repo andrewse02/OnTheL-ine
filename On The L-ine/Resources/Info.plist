@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>RobotoCondensed-Bold.tff</string>
+		<string>RobotoCondensed-BoldItalic.tff</string>
+		<string>RobotoCondensed-Italic.tff</string>
+		<string>RobotoCondensed-Light.tff</string>
+		<string>RobotoCondensed-LightItalic.tff</string>
+		<string>RobotoCondensed-Regular.tff</string>
+		<string>Raleway-Italic-VariableFont_wght.ttf</string>
+		<string>Raleway-VariableFont_wght.ttf</string>
+		<string>Raleway-BoldItalic.tff</string>
+		<string>Raleway-MediumItalic.tff</string>
+		<string>Raleway-ThinItalic.tff</string>
+		<string>Raleway-ExtraLight.tff</string>
+		<string>Raleway-Medium.tff</string>
+		<string>Raleway-SemiBold.tff</string>
+		<string>Raleway-ExtraBold.tff</string>
+		<string>Raleway-ExtraBoldItalic.tff</string>
+		<string>Raleway-Regular.tff</string>
+		<string>Raleway-ExtraLightItalic.tff</string>
+		<string>Raleway-SemiBoldItalic.tff</string>
+		<string>Raleway-Light.tff</string>
+		<string>Raleway-Black.tff</string>
+		<string>Raleway-BlackItalic.tff</string>
+		<string>Raleway-LightItalic.tff</string>
+		<string>Raleway-Thin.tff</string>
+		<string>Raleway-Italic.tff</string>
+		<string>Raleway-Bold.tff</string>
+	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+					<key>UISceneStoryboardFile</key>
+					<string>Main</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>
