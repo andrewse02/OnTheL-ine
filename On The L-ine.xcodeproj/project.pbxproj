@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9A170D15280F049E0012A60D /* ComputerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A170D14280F049E0012A60D /* ComputerManager.swift */; };
+		9A37C2A0281471EF003C5E55 /* UIButton+CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */; };
 		9A538FAA280DBE9A00E9E55C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A538FA9280DBE9A00E9E55C /* Board.swift */; };
 		9A8BD8992813A4FE00ED1701 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8BD8982813A4FE00ED1701 /* NotificationManager.swift */; };
 		9A9252D2281058FF0069BAFC /* Benchmarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9252D1281058FF0069BAFC /* Benchmarkers.swift */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		9A170D14280F049E0012A60D /* ComputerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerManager.swift; sourceTree = "<group>"; };
+		9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+CustomButton.swift"; sourceTree = "<group>"; };
 		9A538FA9280DBE9A00E9E55C /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		9A8BD8982813A4FE00ED1701 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9A9252D1281058FF0069BAFC /* Benchmarkers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmarkers.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				9AA2BFDF2811C28C00A55D8F /* UIView+Gradient.swift */,
+				9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				9AA8615428062699002FD013 /* MoveManager.swift in Sources */,
 				9A170D15280F049E0012A60D /* ComputerManager.swift in Sources */,
 				9AA8615A28062922002FD013 /* Constants.swift in Sources */,
+				9A37C2A0281471EF003C5E55 /* UIButton+CustomButton.swift in Sources */,
 				9A9252D2281058FF0069BAFC /* Benchmarkers.swift in Sources */,
 				9AA2BFE22811C33900A55D8F /* MainMenuViewController.swift in Sources */,
 				9AA8615C28062B5B002FD013 /* BoardManager.swift in Sources */,

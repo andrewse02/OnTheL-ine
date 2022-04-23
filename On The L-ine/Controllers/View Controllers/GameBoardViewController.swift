@@ -40,6 +40,7 @@ class GameBoardViewController: UIViewController {
             }
         }
     }
+    
     let cellSpacing: CGFloat = 3
     
     // MARK: - Outlets
@@ -133,20 +134,9 @@ class GameBoardViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
         collectionView.addGestureRecognizer(tapGestureRecognizer)
         
-        let lightAttributes = [NSAttributedString.Key.font: UIFont(name: "RalewayRoman-SemiBold", size: 18) ?? UIFont(), NSAttributedString.Key.foregroundColor: Colors.light ?? UIColor()] as [NSAttributedString.Key : Any]
-        let darkAttributes = [NSAttributedString.Key.font: UIFont(name: "RalewayRoman-SemiBold", size: 18) ?? UIFont(), NSAttributedString.Key.foregroundColor: Colors.dark ?? UIColor()] as [NSAttributedString.Key : Any]
-        
-        let skipAttributes = NSMutableAttributedString(string: "Skip", attributes: darkAttributes)
-        skipButton.setAttributedTitle(skipAttributes, for: .normal)
-        skipButton.layer.cornerRadius = skipButton.frame.height / 4
-        
-        let mainMenuAttributes = NSMutableAttributedString(string: "Main Menu", attributes: lightAttributes)
-        mainMenuButton.setAttributedTitle(mainMenuAttributes, for: .normal)
-        mainMenuButton.layer.cornerRadius = mainMenuButton.frame.height / 4
-        
-        let playAgainAttributes = NSMutableAttributedString(string: "Play Again", attributes: lightAttributes)
-        playAgainButton.setAttributedTitle(playAgainAttributes, for: .normal)
-        playAgainButton.layer.cornerRadius = playAgainButton.frame.height / 4
+        skipButton.customButton(titleText: "Skip", titleColor: Colors.dark)
+        mainMenuButton.customButton(titleText: "Main Menu", titleColor: Colors.light)
+        playAgainButton.customButton(titleText: "Play Again", titleColor: Colors.light)
         
         updateViews()
     }
