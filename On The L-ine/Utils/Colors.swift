@@ -33,6 +33,7 @@ class Colors {
     // MARK: - Miscellaneous Colors
     
     static let yellow = UIColor(named: "Yellow")
+    static let yelloLight = UIColor(named: "Yellow-Light")
     static let green = UIColor(named: "Green")
     
 }

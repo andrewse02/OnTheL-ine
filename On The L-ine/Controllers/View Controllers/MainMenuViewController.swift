@@ -83,7 +83,6 @@ class MainMenuViewController: UIViewController {
         
         let settingsAttributes = NSMutableAttributedString(string: "Settings", attributes: attributes)
         settingsButton.setAttributedTitle(settingsAttributes, for: .normal)
-        
     }
     
     func presentGameBoard(gameMode: GameMode) {

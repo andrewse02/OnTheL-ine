@@ -12,6 +12,9 @@ class TurnManager {
     // MARK: - Properties
     
     static let shared = TurnManager()
+    
+    var gameEnded = false
+    
     var currentTurn: Turn?
     var selectedNeutral: SelectionCollectionViewCell? {
         willSet {
@@ -48,6 +51,7 @@ class TurnManager {
         
         if availableMoves.count <= 0 {
             print("\(player.stringValue) loses!")
+            gameEnded = true
         } else if player == .computer {
             var bestMove: (lPosition: LPosition, neutralMove: NeutralMove?)?
             Benchmarkers().printTimeElapsedWhenRunningCode(title: "Minimax") {

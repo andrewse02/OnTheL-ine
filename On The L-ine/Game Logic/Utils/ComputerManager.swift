@@ -25,7 +25,7 @@ class ComputerManager {
         var bestEval = Int.max
         var bestMove: (lPosition: LPosition, neutralMove: NeutralMove?)?
         
-        for (index, move) in MoveManager.availableMoves(for: player, in: board).enumerated() {
+        for (_, move) in MoveManager.availableMoves(for: player, in: board).enumerated() {
             var newBoard = board.newBoard(for: player, lPosition: move.lPosition)
             if let neutralMove = move.neutralMove {
                 newBoard = newBoard.newBoard(for: player, neutralMove: neutralMove)

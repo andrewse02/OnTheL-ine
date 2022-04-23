@@ -46,6 +46,11 @@ class GameBoardViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var turnLabel: UILabel!
+    
+    @IBOutlet weak var endOptionsStackView: UIStackView!
+    @IBOutlet weak var mainMenuButton: UIButton!
+    @IBOutlet weak var playAgainButton: UIButton!
     
     // MARK: - Lifecycles
     
@@ -58,8 +63,13 @@ class GameBoardViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func skipButtonTapped(_ sender: Any) {
-        TurnManager.shared.progressTurn()
-        updateSkipButton()
+        DispatchQueue.global(qos: .userInitiated).async {
+            TurnManager.shared.progressTurn()
+            
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
+        }
     }
     
     @IBAction func rotateClockwiseButtonTapped(_ sender: Any) {
@@ -74,9 +84,35 @@ class GameBoardViewController: UIViewController {
         collectionView.reloadData()
     }
     
+    @IBAction func mainMenuButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+        
+        guard let gameMode = gameMode else { return }
+        let players = gameMode.players()
+        
+        BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
+        TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
+        TurnManager.shared.gameEnded = false
+        
+        updateViews()
+    }
+    
+    @IBAction func playAgainButtonTapped(_ sender: Any) {
+        guard let gameMode = gameMode else { return }
+        let players = gameMode.players()
+        
+        BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
+        TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
+        TurnManager.shared.gameEnded = false
+        
+        updateViews()
+    }
+    
     // MARK: - Helper Functions
     
     func setupViews() {
+        view.verticalGradient()
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         BoardManager.shared.delegate = self
@@ -84,7 +120,7 @@ class GameBoardViewController: UIViewController {
         guard let gameMode = gameMode else { return }
         let players = gameMode.players()
         
-        if BoardManager.shared.currentBoard == nil { BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent) }
+        BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
         TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
         
         self.collectionView.register(SelectionCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -96,14 +132,51 @@ class GameBoardViewController: UIViewController {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
         collectionView.addGestureRecognizer(tapGestureRecognizer)
+        
+        let lightAttributes = [NSAttributedString.Key.font: UIFont(name: "RalewayRoman-SemiBold", size: 18) ?? UIFont(), NSAttributedString.Key.foregroundColor: Colors.light ?? UIColor()] as [NSAttributedString.Key : Any]
+        let darkAttributes = [NSAttributedString.Key.font: UIFont(name: "RalewayRoman-SemiBold", size: 18) ?? UIFont(), NSAttributedString.Key.foregroundColor: Colors.dark ?? UIColor()] as [NSAttributedString.Key : Any]
+        
+        let skipAttributes = NSMutableAttributedString(string: "Skip", attributes: darkAttributes)
+        skipButton.setAttributedTitle(skipAttributes, for: .normal)
+        skipButton.layer.cornerRadius = skipButton.frame.height / 4
+        
+        let mainMenuAttributes = NSMutableAttributedString(string: "Main Menu", attributes: lightAttributes)
+        mainMenuButton.setAttributedTitle(mainMenuAttributes, for: .normal)
+        mainMenuButton.layer.cornerRadius = mainMenuButton.frame.height / 4
+        
+        let playAgainAttributes = NSMutableAttributedString(string: "Play Again", attributes: lightAttributes)
+        playAgainButton.setAttributedTitle(playAgainAttributes, for: .normal)
+        playAgainButton.layer.cornerRadius = playAgainButton.frame.height / 4
+        
+        updateViews()
     }
     
-    func updateSkipButton() {
-        skipButton.isHidden = TurnManager.shared.currentTurn?.turnType != .neutralPiece
+    func updateViews() {
+        guard let gameMode = gameMode,
+              let currentTurn = TurnManager.shared.currentTurn,
+              let player = currentTurn.playerType,
+              let turnType = currentTurn.turnType else { return }
+        let players = gameMode.players()
+        
+        if TurnManager.shared.gameEnded {
+            turnLabel.text = "\([PlayerType.player, PlayerType.local].contains(player.opposite) ? "You" : "\(player.opposite.stringValue)") Won!"
+            turnLabel.textColor = player.opposite == players.player ? Colors.primary : Colors.highlight
+            
+            endOptionsStackView.isHidden = false
+        } else {
+            turnLabel.text = "\([PlayerType.player, PlayerType.local].contains(player) ? "Your" : "\(player.stringValue)'s") Turn"
+            turnLabel.textColor = player == players.player ? Colors.primary : Colors.highlight
+            
+            endOptionsStackView.isHidden = true
+        }
+        
+        skipButton.isHidden = turnType != .neutralPiece
+        collectionView.reloadData()
     }
     
     @objc func onPan(_ sender: UIPanGestureRecognizer) {
-        guard let currentTurn = TurnManager.shared.currentTurn,
+        guard !TurnManager.shared.gameEnded,
+              let currentTurn = TurnManager.shared.currentTurn,
               currentTurn.turnType == .lPiece else { return }
         
         if sender.state == .changed || sender.state == .began{
@@ -129,7 +202,7 @@ class GameBoardViewController: UIViewController {
                 board.setCurrentPosition(for: currentPlayer, selections: selections.toArray(), shapeIndex: move.1)
                 
                 TurnManager.shared.progressTurn()
-                updateSkipButton()
+                updateViews()
             }
             
             collectionView.reloadData()
@@ -138,7 +211,8 @@ class GameBoardViewController: UIViewController {
     }
     
     @objc func onTap(_ sender: UITapGestureRecognizer) {
-        guard let board = BoardManager.shared.currentBoard,
+        guard !TurnManager.shared.gameEnded,
+              let board = BoardManager.shared.currentBoard,
               let currentTurn = TurnManager.shared.currentTurn,
               currentTurn.turnType == .neutralPiece else { return }
         
@@ -154,9 +228,10 @@ class GameBoardViewController: UIViewController {
                 if let _ = MoveManager.makeNeutralMove(in: board, origin: selectedNeutral, destination: tappedCell) {
                     DispatchQueue.global(qos: .userInitiated).async {
                         TurnManager.shared.progressTurn()
+                        DispatchQueue.main.async {
+                            self.updateViews()
+                        }
                     }
-                    
-                    updateSkipButton()
                 }
                 
                 collectionView.reloadData()

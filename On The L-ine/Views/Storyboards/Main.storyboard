@@ -28,7 +28,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V3G-aD-B8r">
                                 <rect key="frame" x="41.5" y="76" width="331" height="331"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="Dark"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="V3G-aD-B8r" secondAttribute="height" multiplier="1:1" id="Mko-HK-NG5"/>
                                 </constraints>
@@ -40,21 +40,14 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Vl-4k-wRd">
-                                <rect key="frame" x="41.5" y="415" width="63" height="37"/>
-                                <color key="tintColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Vl-4k-wRd">
+                                <rect key="frame" x="41.5" y="415" width="97" height="37.5"/>
+                                <color key="backgroundColor" name="Yellow"/>
+                                <color key="tintColor" name="Dark"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Skip">
-                                            <attributes>
-                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="20" name="Helvetica"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                    <color key="baseBackgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Skip">
+                                    <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                    <directionalEdgeInsets key="contentInsets" top="8" leading="30" bottom="8" trailing="30"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="skipButtonTapped:" destination="AJB-G3-822" eventType="touchUpInside" id="51v-Mc-csA"/>
@@ -86,14 +79,56 @@
                                     <action selector="rotateClockwiseButtonTapped:" destination="AJB-G3-822" eventType="touchUpInside" id="uNa-Tm-IfQ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(player)'s turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMP-Cq-n2m">
+                                <rect key="frame" x="128" y="485" width="158" height="28.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="24"/>
+                                <color key="textColor" name="Primary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Y4j-Pa-1Me">
+                                <rect key="frame" x="20.5" y="529.5" width="373" height="37.5"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDg-0V-73R">
+                                        <rect key="frame" x="0.0" y="0.0" width="174.5" height="37.5"/>
+                                        <color key="backgroundColor" name="Middle Dark"/>
+                                        <color key="tintColor" name="Light"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Main Menu">
+                                            <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                            <directionalEdgeInsets key="contentInsets" top="8" leading="30" bottom="8" trailing="30"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="mainMenuButtonTapped:" destination="AJB-G3-822" eventType="touchUpInside" id="HH5-VJ-gUa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PsY-7H-Dx3">
+                                        <rect key="frame" x="198.5" y="0.0" width="174.5" height="37.5"/>
+                                        <color key="backgroundColor" name="Green"/>
+                                        <color key="tintColor" name="Dark"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Play Again">
+                                            <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                            <directionalEdgeInsets key="contentInsets" top="8" leading="30" bottom="8" trailing="30"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="playAgainButtonTapped:" destination="AJB-G3-822" eventType="touchUpInside" id="R69-DJ-9HX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="33x-kX-GpF"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Primary-Dark"/>
                         <constraints>
+                            <constraint firstItem="Y4j-Pa-1Me" firstAttribute="centerX" secondItem="33x-kX-GpF" secondAttribute="centerX" id="Prj-kM-p4e"/>
+                            <constraint firstItem="Y4j-Pa-1Me" firstAttribute="top" secondItem="NMP-Cq-n2m" secondAttribute="bottom" constant="16" id="RRi-Y8-H3u"/>
                             <constraint firstItem="V3G-aD-B8r" firstAttribute="centerX" secondItem="yOH-c1-5tu" secondAttribute="centerX" id="Sk7-oX-W6M"/>
+                            <constraint firstItem="Y4j-Pa-1Me" firstAttribute="width" secondItem="yOH-c1-5tu" secondAttribute="width" multiplier="0.9" id="Tsp-aI-Jr6"/>
+                            <constraint firstItem="NMP-Cq-n2m" firstAttribute="centerX" secondItem="yOH-c1-5tu" secondAttribute="centerX" id="bfu-Jp-zkd"/>
                             <constraint firstItem="3Vl-4k-wRd" firstAttribute="leading" secondItem="V3G-aD-B8r" secondAttribute="leading" id="cbB-5W-Xdw"/>
                             <constraint firstItem="I26-Fh-RhN" firstAttribute="top" secondItem="V3G-aD-B8r" secondAttribute="bottom" constant="8" id="f5O-GM-FOV"/>
                             <constraint firstItem="V3G-aD-B8r" firstAttribute="width" secondItem="yOH-c1-5tu" secondAttribute="width" multiplier="0.8" id="jfR-tX-WRd"/>
+                            <constraint firstItem="NMP-Cq-n2m" firstAttribute="top" secondItem="I26-Fh-RhN" secondAttribute="bottom" constant="32" id="jny-Oa-R1Y"/>
                             <constraint firstItem="3Vl-4k-wRd" firstAttribute="top" secondItem="V3G-aD-B8r" secondAttribute="bottom" constant="8" id="kI4-0u-bps"/>
                             <constraint firstItem="V3G-aD-B8r" firstAttribute="top" secondItem="33x-kX-GpF" secondAttribute="top" constant="32" id="kVb-CY-2il"/>
                             <constraint firstItem="qDe-3Z-YWZ" firstAttribute="trailing" secondItem="V3G-aD-B8r" secondAttribute="trailing" id="os7-tq-T6h"/>
@@ -103,7 +138,11 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="V3G-aD-B8r" id="6mm-ie-GFX"/>
+                        <outlet property="endOptionsStackView" destination="Y4j-Pa-1Me" id="XTu-9R-fGn"/>
+                        <outlet property="mainMenuButton" destination="iDg-0V-73R" id="OR5-j4-Pq8"/>
+                        <outlet property="playAgainButton" destination="PsY-7H-Dx3" id="b3y-Im-Z0j"/>
                         <outlet property="skipButton" destination="3Vl-4k-wRd" id="2dC-mo-fUE"/>
+                        <outlet property="turnLabel" destination="NMP-Cq-n2m" id="jmB-ua-H9V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2d-cQ-EBg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -119,13 +158,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On The L-ine" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLq-gI-j62">
-                                <rect key="frame" x="59" y="76" width="296.5" height="56"/>
+                                <rect key="frame" x="59" y="76" width="296" height="56"/>
                                 <fontDescription key="fontDescription" name="Raleway-Black" family="Raleway" pointSize="48"/>
                                 <color key="textColor" name="Light"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Modes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxS-LO-2vx">
-                                <rect key="frame" x="132" y="196" width="150.5" height="28"/>
+                                <rect key="frame" x="132" y="196" width="150" height="28"/>
                                 <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="24"/>
                                 <color key="textColor" name="Light"/>
                                 <nil key="highlightedColor"/>
@@ -242,17 +281,32 @@
         <image name="arrowshape.turn.up.backward.fill" catalog="system" width="128" height="106"/>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
         <image name="questionmark.circle.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="Dark">
+            <color red="0.016000000759959221" green="0.059000000357627869" blue="0.086000002920627594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Green">
+            <color red="0.0" green="1" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Light">
             <color red="0.98299998044967651" green="0.98400002717971802" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Middle Dark">
+            <color red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="Primary">
+            <color red="0.004999999888241291" green="0.72899997234344482" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Primary-Dark">
+            <color red="0.0" green="0.32499998807907104" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Primary-Middle Dark">
             <color red="0.0" green="0.52100002765655518" blue="0.80199998617172241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Yellow">
+            <color red="0.94999998807907104" green="0.93000006675720215" blue="0.51200002431869507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
