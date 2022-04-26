@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class MainMenuViewController: UIViewController {
+    
+    // MARK: - Properties
+    
+    var handle: AuthStateDidChangeListenerHandle?
     
     // MARK: - Outlets
     
@@ -16,6 +22,7 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var onlineButton: UIButton!
     
     @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var accountButton: UIButton!
     
     // MARK: - Lifecycles
     
@@ -23,6 +30,46 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        try? Auth.auth().signOut()
+//
+//        HTTPServerManager.signUpRequest(username: "Andrew", password: "Password") { result in
+//            switch result {
+//            case .success(let token):
+//                print("Sign up successful, received token: \(token)")
+//                AuthManager.signIn(token: token) { result, error in
+//                    if let error = error {
+//                        return print("Error signing in: \(error)")
+//                    }
+//
+//                    AuthManager.setDisplayName(username: "Andrew") { error in
+//                        if let error = error {
+//                            return print("Error setting displayName: \(error)")
+//                        }
+//
+//                        print("displayName set successfully to: Andrew")
+//                    }
+//                }
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//
+//        handle = Auth.auth().addStateDidChangeListener({ auth, user in
+//            if let user = user {
+//                print("\nHandle User: \(user.displayName ?? "No display name yet")\n")
+//            }
+//        })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+//        Auth.auth().removeStateDidChangeListener(handle!)
     }
     
     // MARK: - Actions
@@ -48,6 +95,21 @@ class MainMenuViewController: UIViewController {
         // TODO: - Present Tutorial
     }
     
+    @IBAction func accountButtonTapped(_ sender: Any) {
+        if AuthManager.currentUser != nil {
+            DispatchQueue.global(qos: .userInitiated).async {
+                try? Auth.auth().signOut()
+                AuthManager.currentUser = nil
+                
+                DispatchQueue.main.async {
+                    self.updateAccountButton()
+                }
+            }
+        } else {
+            presentAccountForm()
+        }
+    }
+    
     // MARK: - Helper Functions
     
     func setupViews() {
@@ -60,7 +122,17 @@ class MainMenuViewController: UIViewController {
         localButton.customButton(titleText: "Local", titleColor: Colors.light)
         computerButton.customButton(titleText: "Computer", titleColor: Colors.light)
         onlineButton.customButton(titleText: "Online", titleColor: Colors.light)
+        
         settingsButton.customOutlinedButton(titleText: "Settings", titleColor: Colors.light, borderColor: Colors.light)
+        updateAccountButton()
+    }
+    
+    func updateAccountButton() {
+        if AuthManager.currentUser != nil {
+            accountButton.customButton(titleText: "Sign Out", titleColor: Colors.light, backgroundColor: Colors.highlight)
+        } else {
+            accountButton.customOutlinedButton(titleText: "Sign In/Sign Up", titleColor: Colors.light, borderColor: Colors.light)
+        }
     }
     
     func presentGameBoard(gameMode: GameMode) {
@@ -70,5 +142,12 @@ class MainMenuViewController: UIViewController {
         
         gameBoardViewController.modalPresentationStyle = .fullScreen
         self.present(gameBoardViewController, animated: true)
+    }
+    
+    func presentAccountForm() {
+        guard let accountFormViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountForm") as? AccountFormViewController else { return }
+        
+        accountFormViewController.modalPresentationStyle = .fullScreen
+        self.present(accountFormViewController, animated: true)
     }
 }

@@ -7,9 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		423CB3938CBBE2D9DE17E0CC /* Pods_On_The_L_ine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AF38C39125AEB556FD6A2D /* Pods_On_The_L_ine.framework */; };
+		9A0678C428171CE800C7D82E /* HTTPServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0678C328171CE800C7D82E /* HTTPServerManager.swift */; };
+		9A0678C728173F1500C7D82E /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0678C628173F1500C7D82E /* NetworkError.swift */; };
+		9A0678C9281752C600C7D82E /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0678C8281752C600C7D82E /* WebSocketManager.swift */; };
+		9A0678CD2818A30E00C7D82E /* AccountFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0678CC2818A30E00C7D82E /* AccountFormViewController.swift */; };
+		9A0678D12818ACF600C7D82E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0678D02818ACF600C7D82E /* CustomTextField.swift */; };
+		9A1433F12814998B00FCDC70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A1433F02814998B00FCDC70 /* GoogleService-Info.plist */; };
 		9A170D15280F049E0012A60D /* ComputerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A170D14280F049E0012A60D /* ComputerManager.swift */; };
 		9A37C2A0281471EF003C5E55 /* UIButton+CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */; };
 		9A538FAA280DBE9A00E9E55C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A538FA9280DBE9A00E9E55C /* Board.swift */; };
+		9A57A9D12814F355001D8013 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57A9D02814F355001D8013 /* AuthManager.swift */; };
+		9A57A9D32814FE54001D8013 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57A9D22814FE54001D8013 /* FirestoreManager.swift */; };
 		9A8BD8992813A4FE00ED1701 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8BD8982813A4FE00ED1701 /* NotificationManager.swift */; };
 		9A9252D2281058FF0069BAFC /* Benchmarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9252D1281058FF0069BAFC /* Benchmarkers.swift */; };
 		9A9252D42810A3730069BAFC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9252D32810A3730069BAFC /* Colors.swift */; };
@@ -61,9 +70,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FD6C652F40FF5CAB46497B2 /* Pods-On The L-ine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On The L-ine.release.xcconfig"; path = "Target Support Files/Pods-On The L-ine/Pods-On The L-ine.release.xcconfig"; sourceTree = "<group>"; };
+		5693FE55FB59C8529DB10E8E /* Pods-On The L-ine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On The L-ine.debug.xcconfig"; path = "Target Support Files/Pods-On The L-ine/Pods-On The L-ine.debug.xcconfig"; sourceTree = "<group>"; };
+		9A0678C328171CE800C7D82E /* HTTPServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerManager.swift; sourceTree = "<group>"; };
+		9A0678C628173F1500C7D82E /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		9A0678C8281752C600C7D82E /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
+		9A0678CC2818A30E00C7D82E /* AccountFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFormViewController.swift; sourceTree = "<group>"; };
+		9A0678D02818ACF600C7D82E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		9A1433F02814998B00FCDC70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A170D14280F049E0012A60D /* ComputerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerManager.swift; sourceTree = "<group>"; };
 		9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+CustomButton.swift"; sourceTree = "<group>"; };
+		9A4C0A2328149FB000765FAC /* On The L-ine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "On The L-ine.entitlements"; sourceTree = "<group>"; };
 		9A538FA9280DBE9A00E9E55C /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		9A57A9D02814F355001D8013 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		9A57A9D22814FE54001D8013 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		9A8BD8982813A4FE00ED1701 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9A9252D1281058FF0069BAFC /* Benchmarkers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmarkers.swift; sourceTree = "<group>"; };
 		9A9252D32810A3730069BAFC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -114,6 +134,7 @@
 		9AA8616028066E0B002FD013 /* PlayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerType.swift; sourceTree = "<group>"; };
 		9AA86162280670E0002FD013 /* TurnManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnManager.swift; sourceTree = "<group>"; };
 		9AD3433528120FD400B37131 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		F3AF38C39125AEB556FD6A2D /* Pods_On_The_L_ine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_On_The_L_ine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,12 +142,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				423CB3938CBBE2D9DE17E0CC /* Pods_On_The_L_ine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A0678C528173F0A00C7D82E /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				9A0678C628173F1500C7D82E /* NetworkError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		9AA2BFDE2811C28000A55D8F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +230,8 @@
 			children = (
 				9AA8611128061FC0002FD013 /* On The L-ine */,
 				9AA8611028061FC0002FD013 /* Products */,
+				FB49B8A419D0328805ABEA2C /* Pods */,
+				E2AFE277CC88878D952216A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,12 +246,14 @@
 		9AA8611128061FC0002FD013 /* On The L-ine */ = {
 			isa = PBXGroup;
 			children = (
+				9A4C0A2328149FB000765FAC /* On The L-ine.entitlements */,
 				9AA861572806287C002FD013 /* Game Logic */,
 				9AA8614228062251002FD013 /* Controllers */,
 				9AA8614328062251002FD013 /* Views */,
 				9AA8615D28062E76002FD013 /* Models */,
 				9AA8614428062251002FD013 /* Utils */,
 				9AA8612628062115002FD013 /* Resources */,
+				9A1433F02814998B00FCDC70 /* GoogleService-Info.plist */,
 			);
 			path = "On The L-ine";
 			sourceTree = "<group>";
@@ -256,11 +290,16 @@
 		9AA8614428062251002FD013 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9A0678C528173F0A00C7D82E /* Errors */,
 				9AA2BFDE2811C28000A55D8F /* Extensions */,
 				9AA8614C28062251002FD013 /* Data Structures */,
 				9A9252D1281058FF0069BAFC /* Benchmarkers.swift */,
 				9A9252D32810A3730069BAFC /* Colors.swift */,
 				9A8BD8982813A4FE00ED1701 /* NotificationManager.swift */,
+				9A57A9D02814F355001D8013 /* AuthManager.swift */,
+				9A57A9D22814FE54001D8013 /* FirestoreManager.swift */,
+				9A0678C328171CE800C7D82E /* HTTPServerManager.swift */,
+				9A0678C8281752C600C7D82E /* WebSocketManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -270,6 +309,7 @@
 			children = (
 				9AA2BFE12811C33900A55D8F /* MainMenuViewController.swift */,
 				9AA8614728062251002FD013 /* GameBoardViewController.swift */,
+				9A0678CC2818A30E00C7D82E /* AccountFormViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -278,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				9AA8614A28062251002FD013 /* SelectionCollectionViewCell.swift */,
+				9A0678D02818ACF600C7D82E /* CustomTextField.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -330,6 +371,23 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		E2AFE277CC88878D952216A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F3AF38C39125AEB556FD6A2D /* Pods_On_The_L_ine.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB49B8A419D0328805ABEA2C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5693FE55FB59C8529DB10E8E /* Pods-On The L-ine.debug.xcconfig */,
+				0FD6C652F40FF5CAB46497B2 /* Pods-On The L-ine.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -337,9 +395,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9AA8612328061FC1002FD013 /* Build configuration list for PBXNativeTarget "On The L-ine" */;
 			buildPhases = (
+				760CEC2A3CFD3AA7AF39D65E /* [CP] Check Pods Manifest.lock */,
 				9AA8610B28061FC0002FD013 /* Sources */,
 				9AA8610C28061FC0002FD013 /* Frameworks */,
 				9AA8610D28061FC0002FD013 /* Resources */,
+				DC155B0629F5595E6F69149C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -413,6 +473,7 @@
 				9AA86150280622B6002FD013 /* LaunchScreen.storyboard in Resources */,
 				9AA2BFEE2811CCA800A55D8F /* RobotoCondensed-Regular.ttf in Resources */,
 				9AA2C00A2811CE7200A55D8F /* Raleway-MediumItalic.ttf in Resources */,
+				9A1433F12814998B00FCDC70 /* GoogleService-Info.plist in Resources */,
 				9AA2C00B2811CE7200A55D8F /* Raleway-ThinItalic.ttf in Resources */,
 				9AA2C01C2811CE7200A55D8F /* Raleway-VariableFont_wght.ttf in Resources */,
 				9AA2BFEB2811CCA800A55D8F /* RobotoCondensed-Italic.ttf in Resources */,
@@ -424,24 +485,72 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		760CEC2A3CFD3AA7AF39D65E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-On The L-ine-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC155B0629F5595E6F69149C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-On The L-ine/Pods-On The L-ine-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-On The L-ine/Pods-On The L-ine-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-On The L-ine/Pods-On The L-ine-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9AA8610B28061FC0002FD013 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A0678CD2818A30E00C7D82E /* AccountFormViewController.swift in Sources */,
 				9AA8616128066E0B002FD013 /* PlayerType.swift in Sources */,
+				9A57A9D12814F355001D8013 /* AuthManager.swift in Sources */,
 				9A9252D42810A3730069BAFC /* Colors.swift in Sources */,
 				9AA2BFE02811C28C00A55D8F /* UIView+Gradient.swift in Sources */,
 				9AA8611328061FC0002FD013 /* AppDelegate.swift in Sources */,
 				9A538FAA280DBE9A00E9E55C /* Board.swift in Sources */,
+				9A0678C428171CE800C7D82E /* HTTPServerManager.swift in Sources */,
+				9A0678D12818ACF600C7D82E /* CustomTextField.swift in Sources */,
 				9AA8615228062688002FD013 /* GameBoardViewController.swift in Sources */,
 				9AA8611528061FC0002FD013 /* SceneDelegate.swift in Sources */,
+				9A0678C728173F1500C7D82E /* NetworkError.swift in Sources */,
 				9AA8615428062699002FD013 /* MoveManager.swift in Sources */,
 				9A170D15280F049E0012A60D /* ComputerManager.swift in Sources */,
 				9AA8615A28062922002FD013 /* Constants.swift in Sources */,
 				9A37C2A0281471EF003C5E55 /* UIButton+CustomButton.swift in Sources */,
 				9A9252D2281058FF0069BAFC /* Benchmarkers.swift in Sources */,
 				9AA2BFE22811C33900A55D8F /* MainMenuViewController.swift in Sources */,
+				9A0678C9281752C600C7D82E /* WebSocketManager.swift in Sources */,
 				9AA8615C28062B5B002FD013 /* BoardManager.swift in Sources */,
 				9AA8615F28062ED5002FD013 /* BoardPiece.swift in Sources */,
 				9AD3433628120FD400B37131 /* GameMode.swift in Sources */,
@@ -449,6 +558,7 @@
 				9AA861552806269D002FD013 /* Stack.swift in Sources */,
 				9AA86163280670E0002FD013 /* TurnManager.swift in Sources */,
 				9AA861532806268E002FD013 /* SelectionCollectionViewCell.swift in Sources */,
+				9A57A9D32814FE54001D8013 /* FirestoreManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,9 +683,11 @@
 		};
 		9AA8612428061FC1002FD013 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5693FE55FB59C8529DB10E8E /* Pods-On The L-ine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "On The L-ine/On The L-ine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 72A8K5D64W;
@@ -603,9 +715,11 @@
 		};
 		9AA8612528061FC1002FD013 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FD6C652F40FF5CAB46497B2 /* Pods-On The L-ine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "On The L-ine/On The L-ine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 72A8K5D64W;
