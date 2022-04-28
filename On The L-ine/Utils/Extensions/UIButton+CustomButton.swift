@@ -17,6 +17,9 @@ extension UIButton {
         self.setAttributedTitle(buttonAttributes, for: .normal)
         self.layer.cornerRadius = self.frame.height / 4
         
+        self.layer.borderWidth = 0
+        self.layer.borderColor = .none
+        
         if let backgroundColor = backgroundColor {
             self.backgroundColor = backgroundColor
         }
@@ -31,6 +34,8 @@ extension UIButton {
         
         self.layer.borderWidth = 1
         self.layer.borderColor = borderColor?.cgColor
+        
+        self.backgroundColor = .none
     }
     
     func customTextButton(titleText: String, titleColor: UIColor?) {
@@ -42,14 +47,12 @@ extension UIButton {
     }
     
     // Unused, remove function crashes
-    func addUnderline() {
-        let underline = CALayer()
+    func addUnderline(underline: CALayer) {
+        let size = CGSize(width: self.frame.width * 0.6, height: 3)
+        
         underline.backgroundColor = Colors.light?.cgColor
-        underline.frame = CGRect(origin: CGPoint(x: 0, y: 40), size: CGSize(width: self.frame.width * 0.8, height: 3))
+        underline.frame = CGRect(origin: CGPoint(x: (self.frame.width / 2) - (size.width / 2), y: self.frame.height - size.height), size: size)
         
         self.layer.addSublayer(underline)
-        for sublayer in self.layer.sublayers ?? [] {
-            print(sublayer.bounds)
-        }
     }
 }

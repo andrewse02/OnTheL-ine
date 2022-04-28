@@ -35,35 +35,10 @@ class MainMenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        try? Auth.auth().signOut()
-//
-//        HTTPServerManager.signUpRequest(username: "Andrew", password: "Password") { result in
-//            switch result {
-//            case .success(let token):
-//                print("Sign up successful, received token: \(token)")
-//                AuthManager.signIn(token: token) { result, error in
-//                    if let error = error {
-//                        return print("Error signing in: \(error)")
-//                    }
-//
-//                    AuthManager.setDisplayName(username: "Andrew") { error in
-//                        if let error = error {
-//                            return print("Error setting displayName: \(error)")
-//                        }
-//
-//                        print("displayName set successfully to: Andrew")
-//                    }
-//                }
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//
-//        handle = Auth.auth().addStateDidChangeListener({ auth, user in
-//            if let user = user {
-//                print("\nHandle User: \(user.displayName ?? "No display name yet")\n")
-//            }
-//        })
+        handle = Auth.auth().addStateDidChangeListener({ auth, user in
+            AuthManager.currentUser = user != nil ? user : nil
+            self.updateAccountButton()
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,8 +58,12 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func onlineButtonTapped(_ sender: Any) {
-        // TODO: - Present Online Modes
-        presentGameBoard(gameMode: .online)
+        WebSocketManager.shared.connect { data, ack in
+            print("Connected")
+            WebSocketManager.shared.joinQueue { data, ack in
+                print("Joined queue")
+            }
+        }
     }
     
     @IBAction func settingsButtonTapped(_ sender: Any) {

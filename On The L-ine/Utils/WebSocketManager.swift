@@ -15,14 +15,22 @@ class WebSocketManager {
     var socket: SocketIOClient?
     
     func connect(completion: @escaping NormalCallback) {
-        let manager = SocketManager(socketURL: HTTPServerManager.baseURL!, config: [.forceWebsockets(true)])
+        let manager = SocketManager(socketURL: HTTPServerManager.baseURL!, config: [
+            .forceWebsockets(true)
+        ])
         self.manager = manager
         
         let socket = manager.defaultSocket
         self.socket = socket
-        
+                
         socket.on(clientEvent: .connect, callback: completion)
         socket.on("match", callback: onMatch)
+        
+        AuthManager.currentUser?.getIDTokenForcingRefresh(true, completion: { token, error in
+            if let error = error { return print("\n~~~~~Error in \(#filePath) within function \(#function) at line \(#line)~~~~~\n", "\n\(error)\n\n\(error.localizedDescription)") }
+            
+            socket.connect(withPayload: ["token": token ?? ""])
+        })
     }
     
     func onMatch(data: [Any], ack: SocketAckEmitter) {

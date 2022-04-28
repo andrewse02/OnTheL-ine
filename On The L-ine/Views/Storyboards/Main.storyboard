@@ -363,6 +363,25 @@
                                     <constraint firstItem="JHb-cH-O0c" firstAttribute="width" secondItem="t9w-CD-s66" secondAttribute="width" multiplier="0.85" id="zjq-uK-Sx6"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0J6-v3-iRz">
+                                <rect key="frame" x="41.5" y="512" width="88" height="21.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                <color key="textColor" name="Dark"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="JohnDoe123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6dF-2V-R3o" customClass="CustomTextField" customModule="On_The_L_ine" customModuleProvider="target">
+                                <rect key="frame" x="41.5" y="541.5" width="331" height="20.5"/>
+                                <color key="backgroundColor" name="Light"/>
+                                <color key="textColor" name="Dark"/>
+                                <fontDescription key="fontDescription" name="RalewayRoman-Regular" family="Raleway" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPX-fB-i6S">
+                                <rect key="frame" x="41.5" y="578" width="82.5" height="21.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                <color key="textColor" name="Dark"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Minimum 8 Characters" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uYD-4Q-1ze" customClass="CustomTextField" customModule="On_The_L_ine" customModuleProvider="target">
                                 <rect key="frame" x="41.5" y="607.5" width="331" height="19"/>
                                 <color key="backgroundColor" name="Light"/>
@@ -370,20 +389,8 @@
                                 <fontDescription key="fontDescription" name="RalewayRoman-Regular" family="Raleway" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0J6-v3-iRz">
-                                <rect key="frame" x="41.5" y="512" width="88" height="21.5"/>
-                                <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
-                                <color key="textColor" name="Dark"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPX-fB-i6S">
-                                <rect key="frame" x="41.5" y="578" width="82.5" height="21.5"/>
-                                <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
-                                <color key="textColor" name="Dark"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4c1-8x-RJT">
-                                <rect key="frame" x="41.5" y="658.5" width="331" height="41.5"/>
+                                <rect key="frame" x="41.5" y="812.5" width="331" height="41.5"/>
                                 <color key="backgroundColor" name="AccentColor"/>
                                 <color key="tintColor" name="Light"/>
                                 <state key="normal" title="Button"/>
@@ -396,13 +403,6 @@
                                     <action selector="submitButtonTapped:" destination="UYA-Qx-wOJ" eventType="touchUpInside" id="IXO-zh-f58"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="JohnDoe123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6dF-2V-R3o" customClass="CustomTextField" customModule="On_The_L_ine" customModuleProvider="target">
-                                <rect key="frame" x="41.5" y="541.5" width="331" height="20.5"/>
-                                <color key="backgroundColor" name="Light"/>
-                                <color key="textColor" name="Dark"/>
-                                <fontDescription key="fontDescription" name="RalewayRoman-Regular" family="Raleway" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zrq-yT-RdW"/>
                         <color key="backgroundColor" name="Light"/>
@@ -412,11 +412,11 @@
                             <constraint firstItem="t9w-CD-s66" firstAttribute="top" secondItem="uYM-nC-WfK" secondAttribute="top" id="FyC-af-SOb"/>
                             <constraint firstItem="6dF-2V-R3o" firstAttribute="centerX" secondItem="zrq-yT-RdW" secondAttribute="centerX" id="ISM-nL-o6d"/>
                             <constraint firstItem="zrq-yT-RdW" firstAttribute="trailing" secondItem="t9w-CD-s66" secondAttribute="trailing" id="IWR-f5-e3B"/>
-                            <constraint firstItem="4c1-8x-RJT" firstAttribute="top" secondItem="uYD-4Q-1ze" secondAttribute="bottom" constant="32" id="LcZ-O7-tE9"/>
                             <constraint firstItem="aPX-fB-i6S" firstAttribute="top" secondItem="6dF-2V-R3o" secondAttribute="bottom" constant="16" id="M3C-AD-BdT"/>
                             <constraint firstItem="4c1-8x-RJT" firstAttribute="width" secondItem="uYM-nC-WfK" secondAttribute="width" multiplier="0.8" id="M4D-Qd-u4Q"/>
                             <constraint firstItem="6dF-2V-R3o" firstAttribute="width" secondItem="uYM-nC-WfK" secondAttribute="width" multiplier="0.8" id="WFS-x7-HSJ"/>
                             <constraint firstItem="6dF-2V-R3o" firstAttribute="top" secondItem="0J6-v3-iRz" secondAttribute="bottom" constant="8" id="YBD-pX-gok"/>
+                            <constraint firstItem="zrq-yT-RdW" firstAttribute="bottom" secondItem="4c1-8x-RJT" secondAttribute="bottom" constant="8" id="ccI-8s-u2P"/>
                             <constraint firstItem="0J6-v3-iRz" firstAttribute="top" secondItem="t9w-CD-s66" secondAttribute="bottom" constant="64" id="gXj-dk-vVn"/>
                             <constraint firstItem="uYD-4Q-1ze" firstAttribute="width" secondItem="uYM-nC-WfK" secondAttribute="width" multiplier="0.8" id="goV-oc-Mhq"/>
                             <constraint firstItem="t9w-CD-s66" firstAttribute="leading" secondItem="zrq-yT-RdW" secondAttribute="leading" id="jIy-Gt-qIe"/>

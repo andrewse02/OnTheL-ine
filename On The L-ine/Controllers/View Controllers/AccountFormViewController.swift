@@ -16,6 +16,8 @@ class AccountFormViewController: UIViewController {
             updateButtons(selected: selected!, notSelected: selected == signInButton ? signUpButton : signInButton)
         }
     }
+    
+    var underline: CALayer?
 
     // MARK: - Outlets
     
@@ -42,15 +44,70 @@ class AccountFormViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func signInButtonTapped(_ sender: Any) {
+        if selected == signInButton { return }
+        
         selected = signInButton
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
+        if selected == signUpButton { return }
+        
         selected = signUpButton
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
+        guard let usernameText = usernameTextField.text,
+              let passwordText = passwordTextField.text else { return }
         
+        var valid = true
+        
+        if usernameText.isEmpty {
+            usernameTextField.layer.borderColor = Colors.highlight?.cgColor
+            valid = false
+        } else {
+            usernameTextField.layer.borderColor = Colors.lightDark?.cgColor
+        }
+        
+        if passwordText.count < 8 {
+            passwordTextField.layer.borderColor = Colors.highlight?.cgColor
+            valid = false
+        } else { passwordTextField.layer.borderColor = Colors.lightDark?.cgColor }
+        
+        if valid {
+            if selected == signInButton {
+                AuthManager.signIn(username: usernameText, password: passwordText) { result in
+                    switch result {
+                    case .success(let token):
+                        AuthManager.signIn(token: token) { result, error in
+                            if let error = error {
+                                print(error)
+                            } else {
+                                guard result?.user != nil else { return print("User not there? Who knows why honestly.") }
+                                self.dismiss(animated: true)
+                            }
+                        }
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            } else if selected == signUpButton {
+                AuthManager.signUp(username: usernameText, password: passwordText) { result in
+                    switch result {
+                    case .success(let token):
+                        AuthManager.signIn(token: token) { result, error in
+                            if let error = error {
+                                print(error)
+                            } else {
+                                guard result?.user != nil else { return print("User not there? Who knows why honestly.") }
+                                self.dismiss(animated: true)
+                            }
+                        }
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Helper Functions
@@ -65,8 +122,19 @@ class AccountFormViewController: UIViewController {
         usernameTextField.setupView()
         passwordTextField.setupView()
         
+        
+        self.underline = CALayer()
         selected = signInButton
+        
         submitButton.horizontalGradient()
+        
+        view.keyboardLayoutGuide.topAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap(_:))))
+    }
+    
+    @objc func onTap(_ sender: UITapGestureRecognizer) {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
     
     func updateButtons(selected: UIButton, notSelected: UIButton) {
@@ -74,5 +142,7 @@ class AccountFormViewController: UIViewController {
         
         selected.customTextButton(titleText: selected.titleLabel?.text ?? "", titleColor: Colors.light)
         notSelected.customTextButton(titleText: notSelected.titleLabel?.text ?? "", titleColor: Colors.light?.withAlphaComponent(0.5))
+        
+        selected.addUnderline(underline: underline ?? CALayer())
     }
 }
