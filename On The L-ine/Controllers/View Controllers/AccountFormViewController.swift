@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class AccountFormViewController: UIViewController {
     
@@ -96,9 +97,30 @@ class AccountFormViewController: UIViewController {
                     case .success(let token):
                         AuthManager.signIn(token: token) { result, error in
                             if let error = error {
-                                print(error)
+                                print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(error)\n\n\(error.localizedDescription)")
                             } else {
                                 guard result?.user != nil else { return print("User not there? Who knows why honestly.") }
+                                
+                                Auth.auth().currentUser?.getIDTokenForcingRefresh(true, completion: { token, error in
+                                    if let error = error {
+                                        print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(error)\n\n\(error.localizedDescription)")
+                                    }
+                                    
+                                    AuthManager.setDisplayName(token: token!) { error in
+                                        if let error = error {
+                                            print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(error)\n\n\(error.localizedDescription)")
+                                        } else {
+                                            Auth.auth().currentUser?.reload(completion: { error in
+                                                if let error = error {
+                                                    print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(error)\n\n\(error.localizedDescription)")
+                                                } else {
+                                                    AuthManager.currentUser = Auth.auth().currentUser
+                                                }
+                                            })
+                                        }
+                                    }
+                                })
+                                
                                 self.dismiss(animated: true)
                             }
                         }

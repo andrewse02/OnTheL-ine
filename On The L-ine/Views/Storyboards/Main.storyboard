@@ -6,7 +6,6 @@
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -15,6 +14,15 @@
         </array>
         <array key="Raleway-Bold.ttf">
             <string>Raleway-Bold</string>
+        </array>
+        <array key="Raleway-ExtraBold.ttf">
+            <string>Raleway-ExtraBold</string>
+        </array>
+        <array key="Raleway-Medium.ttf">
+            <string>Raleway-Medium</string>
+        </array>
+        <array key="Raleway-MediumItalic.ttf">
+            <string>Raleway-MediumItalic</string>
         </array>
         <array key="Raleway-SemiBold.ttf">
             <string>Raleway-SemiBold</string>
@@ -33,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V3G-aD-B8r">
-                                <rect key="frame" x="41.5" y="76" width="331" height="331"/>
+                                <rect key="frame" x="62" y="76" width="290" height="290"/>
                                 <color key="backgroundColor" name="Dark"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="V3G-aD-B8r" secondAttribute="height" multiplier="1:1" id="Mko-HK-NG5"/>
@@ -47,7 +55,7 @@
                                 <cells/>
                             </collectionView>
                             <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Vl-4k-wRd">
-                                <rect key="frame" x="41.5" y="415" width="97" height="37.5"/>
+                                <rect key="frame" x="62" y="374" width="97" height="37.5"/>
                                 <color key="backgroundColor" name="Yellow"/>
                                 <color key="tintColor" name="Dark"/>
                                 <state key="normal" title="Button"/>
@@ -60,39 +68,25 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDe-3Z-YWZ">
-                                <rect key="frame" x="316.5" y="415" width="56" height="38"/>
-                                <color key="tintColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="62" y="35" width="49.5" height="33"/>
+                                <color key="tintColor" name="Light"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="arrowshape.turn.up.backward.fill" catalog="system" title="">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20"/>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                    <color key="baseBackgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.backward.fill" catalog="system" title="">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="16"/>
+                                    <color key="baseForegroundColor" name="Light"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="rotateCounterClockwiseButtonTapped:" destination="AJB-G3-822" eventType="touchUpInside" id="ezk-nJ-5cZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I26-Fh-RhN">
-                                <rect key="frame" x="252.5" y="415" width="56" height="38"/>
-                                <color key="tintColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="arrowshape.turn.up.right.fill" catalog="system" title="">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20"/>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                    <color key="baseBackgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="rotateClockwiseButtonTapped:" destination="AJB-G3-822" eventType="touchUpInside" id="uNa-Tm-IfQ"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(player)'s turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMP-Cq-n2m">
-                                <rect key="frame" x="128" y="485" width="158" height="28.5"/>
+                                <rect key="frame" x="128" y="475.5" width="158" height="28.5"/>
                                 <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="24"/>
                                 <color key="textColor" name="Primary"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Y4j-Pa-1Me">
-                                <rect key="frame" x="20.5" y="529.5" width="373" height="37.5"/>
+                                <rect key="frame" x="20.5" y="520" width="373" height="37.5"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDg-0V-73R">
                                         <rect key="frame" x="0.0" y="0.0" width="174.5" height="37.5"/>
@@ -122,24 +116,41 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I26-Fh-RhN">
+                                <rect key="frame" x="4.5" y="76" width="49.5" height="33"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.right.fill" catalog="system" title="">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="16"/>
+                                    <color key="baseForegroundColor" name="Light"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.transform.rotation.z">
+                                        <real key="value" value="-1.5700000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="rotateClockwiseButtonTapped:" destination="AJB-G3-822" eventType="touchUpInside" id="uNa-Tm-IfQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="33x-kX-GpF"/>
                         <color key="backgroundColor" name="Primary-Dark"/>
                         <constraints>
+                            <constraint firstItem="I26-Fh-RhN" firstAttribute="top" secondItem="V3G-aD-B8r" secondAttribute="top" id="7Nd-ey-ppA"/>
+                            <constraint firstItem="V3G-aD-B8r" firstAttribute="leading" secondItem="I26-Fh-RhN" secondAttribute="trailing" constant="8" id="Fdu-77-5K6"/>
+                            <constraint firstItem="NMP-Cq-n2m" firstAttribute="top" secondItem="3Vl-4k-wRd" secondAttribute="bottom" constant="64" id="JEl-eL-GxC"/>
                             <constraint firstItem="Y4j-Pa-1Me" firstAttribute="centerX" secondItem="33x-kX-GpF" secondAttribute="centerX" id="Prj-kM-p4e"/>
                             <constraint firstItem="Y4j-Pa-1Me" firstAttribute="top" secondItem="NMP-Cq-n2m" secondAttribute="bottom" constant="16" id="RRi-Y8-H3u"/>
                             <constraint firstItem="V3G-aD-B8r" firstAttribute="centerX" secondItem="yOH-c1-5tu" secondAttribute="centerX" id="Sk7-oX-W6M"/>
                             <constraint firstItem="Y4j-Pa-1Me" firstAttribute="width" secondItem="yOH-c1-5tu" secondAttribute="width" multiplier="0.9" id="Tsp-aI-Jr6"/>
+                            <constraint firstItem="qDe-3Z-YWZ" firstAttribute="leading" secondItem="V3G-aD-B8r" secondAttribute="leading" id="WJh-Fz-Qkg"/>
                             <constraint firstItem="NMP-Cq-n2m" firstAttribute="centerX" secondItem="yOH-c1-5tu" secondAttribute="centerX" id="bfu-Jp-zkd"/>
                             <constraint firstItem="3Vl-4k-wRd" firstAttribute="leading" secondItem="V3G-aD-B8r" secondAttribute="leading" id="cbB-5W-Xdw"/>
-                            <constraint firstItem="I26-Fh-RhN" firstAttribute="top" secondItem="V3G-aD-B8r" secondAttribute="bottom" constant="8" id="f5O-GM-FOV"/>
-                            <constraint firstItem="V3G-aD-B8r" firstAttribute="width" secondItem="yOH-c1-5tu" secondAttribute="width" multiplier="0.8" id="jfR-tX-WRd"/>
-                            <constraint firstItem="NMP-Cq-n2m" firstAttribute="top" secondItem="I26-Fh-RhN" secondAttribute="bottom" constant="32" id="jny-Oa-R1Y"/>
+                            <constraint firstItem="V3G-aD-B8r" firstAttribute="width" secondItem="yOH-c1-5tu" secondAttribute="width" multiplier="0.7" id="jfR-tX-WRd"/>
                             <constraint firstItem="3Vl-4k-wRd" firstAttribute="top" secondItem="V3G-aD-B8r" secondAttribute="bottom" constant="8" id="kI4-0u-bps"/>
                             <constraint firstItem="V3G-aD-B8r" firstAttribute="top" secondItem="33x-kX-GpF" secondAttribute="top" constant="32" id="kVb-CY-2il"/>
-                            <constraint firstItem="qDe-3Z-YWZ" firstAttribute="trailing" secondItem="V3G-aD-B8r" secondAttribute="trailing" id="os7-tq-T6h"/>
-                            <constraint firstItem="qDe-3Z-YWZ" firstAttribute="leading" secondItem="I26-Fh-RhN" secondAttribute="trailing" constant="8" id="rzi-5U-ydf"/>
-                            <constraint firstItem="qDe-3Z-YWZ" firstAttribute="top" secondItem="V3G-aD-B8r" secondAttribute="bottom" constant="8" id="xav-os-JJr"/>
+                            <constraint firstItem="V3G-aD-B8r" firstAttribute="top" secondItem="qDe-3Z-YWZ" secondAttribute="bottom" constant="8" id="vA7-M5-ia7"/>
                         </constraints>
                     </view>
                     <connections>
@@ -153,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2d-cQ-EBg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66.666666666666671" y="39.508928571428569"/>
+            <point key="canvasLocation" x="-117" y="48"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="5z1-mv-hQ9">
@@ -163,13 +174,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On The L-ine" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLq-gI-j62">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On The L-ine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLq-gI-j62">
                                 <rect key="frame" x="59" y="76" width="296.5" height="56"/>
                                 <fontDescription key="fontDescription" name="Raleway-Black" family="Raleway" pointSize="48"/>
                                 <color key="textColor" name="Light"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Modes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxS-LO-2vx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Modes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxS-LO-2vx">
                                 <rect key="frame" x="132" y="196" width="150.5" height="28"/>
                                 <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="24"/>
                                 <color key="textColor" name="Light"/>
@@ -214,7 +225,7 @@
                                 <rect key="frame" x="41.5" y="354" width="331" height="41"/>
                                 <color key="tintColor" name="Light"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Online">
+                                <buttonConfiguration key="configuration" style="plain" title="Onl-ine">
                                     <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
                                     <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
                                 </buttonConfiguration>
@@ -315,7 +326,7 @@
                                             <constraint firstAttribute="width" secondItem="267-Jp-OKK" secondAttribute="height" multiplier="1:1" id="WXH-na-1Aw"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On The L-ine" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SC6-md-EHa">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On The L-ine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SC6-md-EHa">
                                         <rect key="frame" x="96" y="278.5" width="222.5" height="42.5"/>
                                         <fontDescription key="fontDescription" name="Raleway-Black" family="Raleway" pointSize="36"/>
                                         <color key="textColor" name="Light"/>
@@ -363,7 +374,7 @@
                                     <constraint firstItem="JHb-cH-O0c" firstAttribute="width" secondItem="t9w-CD-s66" secondAttribute="width" multiplier="0.85" id="zjq-uK-Sx6"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0J6-v3-iRz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0J6-v3-iRz">
                                 <rect key="frame" x="41.5" y="512" width="88" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
                                 <color key="textColor" name="Dark"/>
@@ -376,7 +387,7 @@
                                 <fontDescription key="fontDescription" name="RalewayRoman-Regular" family="Raleway" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPX-fB-i6S">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPX-fB-i6S">
                                 <rect key="frame" x="41.5" y="578" width="82.5" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
                                 <color key="textColor" name="Dark"/>
@@ -438,13 +449,369 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zu6-cd-0In" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-988" y="751"/>
+            <point key="canvasLocation" x="-117" y="1475"/>
+        </scene>
+        <!--Online Menu View Controller-->
+        <scene sceneID="OaQ-6Y-YuS">
+            <objects>
+                <viewController storyboardIdentifier="OnlineMenu" id="WhJ-f1-EP7" customClass="OnlineMenuViewController" customModule="On_The_L_ine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Ro-EI-UEp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcW-Rf-BG7">
+                                <rect key="frame" x="58" y="92" width="298.5" height="56"/>
+                                <fontDescription key="fontDescription" name="Raleway-Black" family="Raleway" pointSize="48"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I9y-kD-Qaz">
+                                <rect key="frame" x="41.5" y="212" width="331" height="41"/>
+                                <color key="tintColor" name="Light"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Local">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="18" name="Raleway-SemiBold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain" title="Quick Match">
+                                    <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="quickMatchTapped:" destination="WhJ-f1-EP7" eventType="touchUpInside" id="aBc-Z4-hd8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97a-SY-IFH">
+                                <rect key="frame" x="41.5" y="269" width="331" height="41"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Create Room">
+                                    <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="createRoomTapped:" destination="WhJ-f1-EP7" eventType="touchUpInside" id="MAo-U2-dq0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKd-cL-Gl6">
+                                <rect key="frame" x="41.5" y="431" width="331" height="41"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Friends">
+                                    <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="friendsTapped:" destination="WhJ-f1-EP7" eventType="touchUpInside" id="lOD-7S-qdd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59o-U6-bHD">
+                                <rect key="frame" x="16" y="44" width="61" height="43"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backTapped:" destination="WhJ-f1-EP7" eventType="touchUpInside" id="M1I-UF-5XY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69q-aE-Tif">
+                                <rect key="frame" x="41.5" y="326" width="331" height="41"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Join Room">
+                                    <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="joinRoomTapped:" destination="WhJ-f1-EP7" eventType="touchUpInside" id="EyU-Ct-SKK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7xv-ZM-Rzm"/>
+                        <color key="backgroundColor" name="Primary-Middle Dark"/>
+                        <constraints>
+                            <constraint firstItem="69q-aE-Tif" firstAttribute="top" secondItem="97a-SY-IFH" secondAttribute="bottom" constant="16" id="8In-Ad-N2q"/>
+                            <constraint firstItem="59o-U6-bHD" firstAttribute="leading" secondItem="7xv-ZM-Rzm" secondAttribute="leading" constant="16" id="BLv-Ak-lze"/>
+                            <constraint firstItem="59o-U6-bHD" firstAttribute="top" secondItem="2Ro-EI-UEp" secondAttribute="topMargin" id="E5Z-jy-6Fb"/>
+                            <constraint firstItem="97a-SY-IFH" firstAttribute="centerX" secondItem="7xv-ZM-Rzm" secondAttribute="centerX" id="ExA-Gl-q8K"/>
+                            <constraint firstItem="mcW-Rf-BG7" firstAttribute="top" secondItem="7xv-ZM-Rzm" secondAttribute="top" constant="48" id="GHy-Um-P35"/>
+                            <constraint firstItem="97a-SY-IFH" firstAttribute="width" secondItem="2Ro-EI-UEp" secondAttribute="width" multiplier="0.8" id="HUl-6n-4p7"/>
+                            <constraint firstItem="I9y-kD-Qaz" firstAttribute="width" secondItem="2Ro-EI-UEp" secondAttribute="width" multiplier="0.8" id="KSd-z5-xHI"/>
+                            <constraint firstItem="fKd-cL-Gl6" firstAttribute="width" secondItem="2Ro-EI-UEp" secondAttribute="width" multiplier="0.8" id="MIK-OA-MDm"/>
+                            <constraint firstItem="fKd-cL-Gl6" firstAttribute="centerX" secondItem="7xv-ZM-Rzm" secondAttribute="centerX" id="MnY-4o-oGf"/>
+                            <constraint firstItem="I9y-kD-Qaz" firstAttribute="top" secondItem="mcW-Rf-BG7" secondAttribute="bottom" constant="64" id="MyR-Ro-w4g"/>
+                            <constraint firstItem="97a-SY-IFH" firstAttribute="top" secondItem="I9y-kD-Qaz" secondAttribute="bottom" constant="16" id="UIQ-IE-4TE"/>
+                            <constraint firstItem="69q-aE-Tif" firstAttribute="width" secondItem="2Ro-EI-UEp" secondAttribute="width" multiplier="0.8" id="lyX-k3-v5I"/>
+                            <constraint firstItem="fKd-cL-Gl6" firstAttribute="top" secondItem="69q-aE-Tif" secondAttribute="bottom" constant="64" id="tgG-QE-61I"/>
+                            <constraint firstItem="I9y-kD-Qaz" firstAttribute="centerX" secondItem="7xv-ZM-Rzm" secondAttribute="centerX" id="u4W-IJ-s7z"/>
+                            <constraint firstItem="mcW-Rf-BG7" firstAttribute="centerX" secondItem="7xv-ZM-Rzm" secondAttribute="centerX" id="xCl-Em-qsr"/>
+                            <constraint firstItem="69q-aE-Tif" firstAttribute="centerX" secondItem="7xv-ZM-Rzm" secondAttribute="centerX" id="z8T-Tk-60J"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="createRoomButton" destination="97a-SY-IFH" id="71V-DF-Gyv"/>
+                        <outlet property="friendsButton" destination="fKd-cL-Gl6" id="RJ2-Ds-WYW"/>
+                        <outlet property="joinRoomButton" destination="69q-aE-Tif" id="31v-6d-8wU"/>
+                        <outlet property="quickMatchButton" destination="I9y-kD-Qaz" id="Rj6-Dg-c7e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UJe-1j-9u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-117" y="765"/>
+        </scene>
+        <!--Queue View Controller-->
+        <scene sceneID="KNG-Xg-zc6">
+            <objects>
+                <viewController storyboardIdentifier="Queue" id="LAK-6n-ugr" customClass="QueueViewController" customModule="On_The_L_ine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P29-eY-lWv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Queue..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rF-SK-uBq">
+                                <rect key="frame" x="82.5" y="92" width="249" height="56"/>
+                                <fontDescription key="fontDescription" name="Raleway-Black" family="Raleway" pointSize="48"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rtg-qb-tqa">
+                                <rect key="frame" x="16" y="44" width="61" height="43"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backTapped:" destination="LAK-6n-ugr" eventType="touchUpInside" id="Yi4-PQ-Nyt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yil-ah-7QA"/>
+                        <color key="backgroundColor" name="Primary-Middle Dark"/>
+                        <constraints>
+                            <constraint firstItem="Rtg-qb-tqa" firstAttribute="leading" secondItem="yil-ah-7QA" secondAttribute="leading" constant="16" id="I9O-oT-Hyi"/>
+                            <constraint firstItem="Rtg-qb-tqa" firstAttribute="top" secondItem="P29-eY-lWv" secondAttribute="topMargin" id="nka-QJ-PTO"/>
+                            <constraint firstItem="6rF-SK-uBq" firstAttribute="centerX" secondItem="yil-ah-7QA" secondAttribute="centerX" id="wII-Nv-0MB"/>
+                            <constraint firstItem="6rF-SK-uBq" firstAttribute="top" secondItem="yil-ah-7QA" secondAttribute="top" constant="48" id="yWI-Bg-I57"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rqw-w3-acN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="832" y="765"/>
+        </scene>
+        <!--Match Found View Controller-->
+        <scene sceneID="OLb-Jk-EUJ">
+            <objects>
+                <viewController storyboardIdentifier="MatchFound" id="7Wo-2k-pT6" customClass="MatchFoundViewController" customModule="On_The_L_ine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8qE-c6-Hns">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZA-91-DhR">
+                                <rect key="frame" x="54.5" y="76" width="305" height="56"/>
+                                <fontDescription key="fontDescription" name="Raleway-Black" family="Raleway" pointSize="48"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-BL-7bp">
+                                <rect key="frame" x="158" y="196" width="98" height="38"/>
+                                <fontDescription key="fontDescription" name="Raleway-ExtraBold" family="Raleway" pointSize="32"/>
+                                <color key="textColor" name="Primary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoH-QW-FKd">
+                                <rect key="frame" x="186.5" y="266" width="41" height="38"/>
+                                <fontDescription key="fontDescription" name="Raleway-ExtraBold" family="Raleway" pointSize="32"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWN-H4-8Ni">
+                                <rect key="frame" x="129" y="336" width="156" height="38"/>
+                                <fontDescription key="fontDescription" name="Raleway-ExtraBold" family="Raleway" pointSize="32"/>
+                                <color key="textColor" name="Highlight"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eHj-VG-Lm5"/>
+                        <color key="backgroundColor" name="Primary-Middle Dark"/>
+                        <constraints>
+                            <constraint firstItem="uZA-91-DhR" firstAttribute="top" secondItem="eHj-VG-Lm5" secondAttribute="top" constant="32" id="CEt-na-cPO"/>
+                            <constraint firstItem="aWN-H4-8Ni" firstAttribute="top" secondItem="QoH-QW-FKd" secondAttribute="bottom" constant="32" id="JGY-5m-LsA"/>
+                            <constraint firstItem="QoH-QW-FKd" firstAttribute="centerX" secondItem="eHj-VG-Lm5" secondAttribute="centerX" id="KU2-Xl-HAW"/>
+                            <constraint firstItem="bIj-BL-7bp" firstAttribute="centerX" secondItem="eHj-VG-Lm5" secondAttribute="centerX" id="Tt8-Mt-aQd"/>
+                            <constraint firstItem="QoH-QW-FKd" firstAttribute="top" secondItem="bIj-BL-7bp" secondAttribute="bottom" constant="32" id="bAc-fI-ci1"/>
+                            <constraint firstItem="uZA-91-DhR" firstAttribute="centerX" secondItem="eHj-VG-Lm5" secondAttribute="centerX" id="ctA-Js-UuA"/>
+                            <constraint firstItem="aWN-H4-8Ni" firstAttribute="centerX" secondItem="eHj-VG-Lm5" secondAttribute="centerX" id="hez-M6-qJS"/>
+                            <constraint firstItem="bIj-BL-7bp" firstAttribute="top" secondItem="uZA-91-DhR" secondAttribute="bottom" constant="64" id="rl3-2Y-Uu2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="opponentLabel" destination="aWN-H4-8Ni" id="W6h-0h-6ft"/>
+                        <outlet property="playerLabel" destination="bIj-BL-7bp" id="Dwj-2n-BrB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2yS-Sr-MzR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1683" y="765"/>
+        </scene>
+        <!--Create Room View Controller-->
+        <scene sceneID="Trf-XG-NjS">
+            <objects>
+                <viewController storyboardIdentifier="CreateRoom" id="T7h-ed-RFI" customClass="CreateRoomViewController" customModule="On_The_L_ine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BQH-YJ-Vd4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQ0-zS-6bl">
+                                <rect key="frame" x="54" y="92" width="306.5" height="56.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-Black" family="Raleway" pointSize="48"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsK-vf-Fib">
+                                <rect key="frame" x="41.5" y="446" width="331" height="41.5"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Start">
+                                    <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="startTapped:" destination="T7h-ed-RFI" eventType="touchUpInside" id="enn-mx-NSC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPF-JT-7Xc">
+                                <rect key="frame" x="16" y="44" width="60.5" height="43"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backTapped:" destination="T7h-ed-RFI" eventType="touchUpInside" id="ABy-k6-nHg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Code: (code)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWd-Dx-gXo">
+                                <rect key="frame" x="98.5" y="180.5" width="217" height="28.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="24"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to copy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOp-Ux-zbo">
+                                <rect key="frame" x="159.5" y="217" width="95.5" height="21.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-MediumItalic" family="Raleway" pointSize="18"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWr-lS-G00">
+                                <rect key="frame" x="117" y="339" width="180.5" height="43"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1k3-58-SQt">
+                                        <rect key="frame" x="0.0" y="0.0" width="57.5" height="43"/>
+                                        <color key="tintColor" name="Light"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="person.fill.badge.plus" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="friendsTapped:" destination="T7h-ed-RFI" eventType="touchUpInside" id="iUF-ZL-a8W"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpJ-Zb-I8f">
+                                        <rect key="frame" x="57.5" y="0.0" width="63" height="43"/>
+                                        <color key="tintColor" name="Light"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="message.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="messageTapped:" destination="T7h-ed-RFI" eventType="touchUpInside" id="mFe-pX-Xb8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Caa-cH-YqR">
+                                        <rect key="frame" x="120.5" y="0.0" width="60" height="43"/>
+                                        <color key="tintColor" name="Light"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="qrcode" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="qrCodeTapped:" destination="T7h-ed-RFI" eventType="touchUpInside" id="0ll-Ru-nrS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NqB-8q-Xu0">
+                                <rect key="frame" x="131.5" y="302.5" width="151.5" height="28.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="24"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Lobby:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bs6-M1-cNw">
+                                <rect key="frame" x="155.5" y="519.5" width="103.5" height="28.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="24"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(username)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oq-jb-WNT">
+                                <rect key="frame" x="160" y="556" width="95" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="18"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1KT-u4-zkX"/>
+                        <color key="backgroundColor" name="Primary-Middle Dark"/>
+                        <constraints>
+                            <constraint firstItem="AsK-vf-Fib" firstAttribute="width" secondItem="BQH-YJ-Vd4" secondAttribute="width" multiplier="0.8" id="4gf-WT-WSD"/>
+                            <constraint firstItem="LQ0-zS-6bl" firstAttribute="top" secondItem="1KT-u4-zkX" secondAttribute="top" constant="48" id="4xk-4U-j9K"/>
+                            <constraint firstItem="AsK-vf-Fib" firstAttribute="centerX" secondItem="1KT-u4-zkX" secondAttribute="centerX" id="GVz-Qe-L7O"/>
+                            <constraint firstItem="nWd-Dx-gXo" firstAttribute="top" secondItem="LQ0-zS-6bl" secondAttribute="bottom" constant="32" id="MTl-un-Kf4"/>
+                            <constraint firstItem="AsK-vf-Fib" firstAttribute="top" secondItem="MWr-lS-G00" secondAttribute="bottom" constant="64" id="NWA-Or-Yng"/>
+                            <constraint firstItem="nWd-Dx-gXo" firstAttribute="centerX" secondItem="1KT-u4-zkX" secondAttribute="centerX" id="Q2n-Aa-JOh"/>
+                            <constraint firstItem="NqB-8q-Xu0" firstAttribute="centerX" secondItem="1KT-u4-zkX" secondAttribute="centerX" id="REm-3A-YKE"/>
+                            <constraint firstItem="LQ0-zS-6bl" firstAttribute="centerX" secondItem="1KT-u4-zkX" secondAttribute="centerX" id="e4e-Wc-idW"/>
+                            <constraint firstItem="wOp-Ux-zbo" firstAttribute="centerX" secondItem="1KT-u4-zkX" secondAttribute="centerX" id="eQ3-GB-O4c"/>
+                            <constraint firstItem="wOp-Ux-zbo" firstAttribute="top" secondItem="nWd-Dx-gXo" secondAttribute="bottom" constant="8" id="fHA-Ke-jy0"/>
+                            <constraint firstItem="bs6-M1-cNw" firstAttribute="centerX" secondItem="1KT-u4-zkX" secondAttribute="centerX" id="gWt-Oy-JwF"/>
+                            <constraint firstItem="KPF-JT-7Xc" firstAttribute="leading" secondItem="1KT-u4-zkX" secondAttribute="leading" constant="16" id="iKo-5g-nxU"/>
+                            <constraint firstItem="MWr-lS-G00" firstAttribute="top" secondItem="NqB-8q-Xu0" secondAttribute="bottom" constant="8" id="iN4-lK-Fxj"/>
+                            <constraint firstItem="NqB-8q-Xu0" firstAttribute="top" secondItem="wOp-Ux-zbo" secondAttribute="bottom" constant="64" id="kud-Pu-Z9v"/>
+                            <constraint firstItem="KPF-JT-7Xc" firstAttribute="top" secondItem="BQH-YJ-Vd4" secondAttribute="topMargin" id="w9A-W8-LhE"/>
+                            <constraint firstItem="bs6-M1-cNw" firstAttribute="top" secondItem="AsK-vf-Fib" secondAttribute="bottom" constant="32" id="yeV-Va-kX8"/>
+                            <constraint firstItem="MWr-lS-G00" firstAttribute="centerX" secondItem="1KT-u4-zkX" secondAttribute="centerX" id="zWJ-Pw-Le9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="inLobbyLabel" destination="bs6-M1-cNw" id="fBG-Q7-fUs"/>
+                        <outlet property="playersLabel" destination="7oq-jb-WNT" id="31m-1f-s4v"/>
+                        <outlet property="roomCodeLabel" destination="nWd-Dx-gXo" id="cV0-AX-mtS"/>
+                        <outlet property="startButton" destination="AsK-vf-Fib" id="ljb-Ju-wvG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zeY-xu-vSM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="832" y="1475"/>
         </scene>
     </scenes>
     <resources>
         <image name="AppIcon" width="128" height="128"/>
+        <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="arrowshape.turn.up.backward.fill" catalog="system" width="128" height="106"/>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
+        <image name="message.fill" catalog="system" width="128" height="113"/>
+        <image name="person.fill.badge.plus" catalog="system" width="128" height="124"/>
+        <image name="qrcode" catalog="system" width="128" height="114"/>
         <image name="questionmark.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="AccentColor">
             <color red="0.004999999888241291" green="0.72899997234344482" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -454,6 +821,9 @@
         </namedColor>
         <namedColor name="Green">
             <color red="0.0" green="1" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Highlight">
+            <color red="0.93800002336502075" green="0.032999999821186066" blue="0.016000000759959221" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Light">
             <color red="0.98299998044967651" green="0.98400002717971802" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -473,8 +843,5 @@
         <namedColor name="Yellow">
             <color red="0.94999998807907104" green="0.93000006675720215" blue="0.51200002431869507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

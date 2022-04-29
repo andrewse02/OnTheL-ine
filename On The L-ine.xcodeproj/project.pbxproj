@@ -19,9 +19,14 @@
 		9A538FAA280DBE9A00E9E55C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A538FA9280DBE9A00E9E55C /* Board.swift */; };
 		9A57A9D12814F355001D8013 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57A9D02814F355001D8013 /* AuthManager.swift */; };
 		9A57A9D32814FE54001D8013 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57A9D22814FE54001D8013 /* FirestoreManager.swift */; };
+		9A7304DA281B562800E86636 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7304D9281B562800E86636 /* CreateRoomViewController.swift */; };
 		9A8BD8992813A4FE00ED1701 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8BD8982813A4FE00ED1701 /* NotificationManager.swift */; };
 		9A9252D2281058FF0069BAFC /* Benchmarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9252D1281058FF0069BAFC /* Benchmarkers.swift */; };
 		9A9252D42810A3730069BAFC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9252D32810A3730069BAFC /* Colors.swift */; };
+		9A9A12B7281AE56700AE23E1 /* OnlineMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A12B6281AE56700AE23E1 /* OnlineMenuViewController.swift */; };
+		9A9A12BB281B027300AE23E1 /* MatchFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A12BA281B027300AE23E1 /* MatchFoundViewController.swift */; };
+		9A9A12BD281B037200AE23E1 /* OnlineMatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A12BC281B037200AE23E1 /* OnlineMatchManager.swift */; };
+		9A9A12BF281B045300AE23E1 /* QueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A12BE281B045300AE23E1 /* QueueViewController.swift */; };
 		9AA2BFE02811C28C00A55D8F /* UIView+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2BFDF2811C28C00A55D8F /* UIView+Gradient.swift */; };
 		9AA2BFE22811C33900A55D8F /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2BFE12811C33900A55D8F /* MainMenuViewController.swift */; };
 		9AA2BFEA2811CCA800A55D8F /* RobotoCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA2BFE42811CCA800A55D8F /* RobotoCondensed-LightItalic.ttf */; };
@@ -84,9 +89,14 @@
 		9A538FA9280DBE9A00E9E55C /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		9A57A9D02814F355001D8013 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		9A57A9D22814FE54001D8013 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		9A7304D9281B562800E86636 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
 		9A8BD8982813A4FE00ED1701 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9A9252D1281058FF0069BAFC /* Benchmarkers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmarkers.swift; sourceTree = "<group>"; };
 		9A9252D32810A3730069BAFC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		9A9A12B6281AE56700AE23E1 /* OnlineMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineMenuViewController.swift; sourceTree = "<group>"; };
+		9A9A12BA281B027300AE23E1 /* MatchFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchFoundViewController.swift; sourceTree = "<group>"; };
+		9A9A12BC281B037200AE23E1 /* OnlineMatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineMatchManager.swift; sourceTree = "<group>"; };
+		9A9A12BE281B045300AE23E1 /* QueueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueViewController.swift; sourceTree = "<group>"; };
 		9AA2BFDF2811C28C00A55D8F /* UIView+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gradient.swift"; sourceTree = "<group>"; };
 		9AA2BFE12811C33900A55D8F /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		9AA2BFE42811CCA800A55D8F /* RobotoCondensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -308,8 +318,12 @@
 			isa = PBXGroup;
 			children = (
 				9AA2BFE12811C33900A55D8F /* MainMenuViewController.swift */,
-				9AA8614728062251002FD013 /* GameBoardViewController.swift */,
+				9A9A12B6281AE56700AE23E1 /* OnlineMenuViewController.swift */,
 				9A0678CC2818A30E00C7D82E /* AccountFormViewController.swift */,
+				9AA8614728062251002FD013 /* GameBoardViewController.swift */,
+				9A9A12BE281B045300AE23E1 /* QueueViewController.swift */,
+				9A9A12BA281B027300AE23E1 /* MatchFoundViewController.swift */,
+				9A7304D9281B562800E86636 /* CreateRoomViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -356,6 +370,7 @@
 				9AA8615B28062B5B002FD013 /* BoardManager.swift */,
 				9AA86162280670E0002FD013 /* TurnManager.swift */,
 				9A170D14280F049E0012A60D /* ComputerManager.swift */,
+				9A9A12BC281B037200AE23E1 /* OnlineMatchManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -538,13 +553,17 @@
 				9A9252D42810A3730069BAFC /* Colors.swift in Sources */,
 				9AA2BFE02811C28C00A55D8F /* UIView+Gradient.swift in Sources */,
 				9AA8611328061FC0002FD013 /* AppDelegate.swift in Sources */,
+				9A9A12B7281AE56700AE23E1 /* OnlineMenuViewController.swift in Sources */,
 				9A538FAA280DBE9A00E9E55C /* Board.swift in Sources */,
 				9A0678C428171CE800C7D82E /* HTTPServerManager.swift in Sources */,
+				9A7304DA281B562800E86636 /* CreateRoomViewController.swift in Sources */,
 				9A0678D12818ACF600C7D82E /* CustomTextField.swift in Sources */,
 				9AA8615228062688002FD013 /* GameBoardViewController.swift in Sources */,
+				9A9A12BD281B037200AE23E1 /* OnlineMatchManager.swift in Sources */,
 				9AA8611528061FC0002FD013 /* SceneDelegate.swift in Sources */,
 				9A0678C728173F1500C7D82E /* NetworkError.swift in Sources */,
 				9AA8615428062699002FD013 /* MoveManager.swift in Sources */,
+				9A9A12BB281B027300AE23E1 /* MatchFoundViewController.swift in Sources */,
 				9A170D15280F049E0012A60D /* ComputerManager.swift in Sources */,
 				9AA8615A28062922002FD013 /* Constants.swift in Sources */,
 				9A37C2A0281471EF003C5E55 /* UIButton+CustomButton.swift in Sources */,
@@ -556,6 +575,7 @@
 				9AD3433628120FD400B37131 /* GameMode.swift in Sources */,
 				9A8BD8992813A4FE00ED1701 /* NotificationManager.swift in Sources */,
 				9AA861552806269D002FD013 /* Stack.swift in Sources */,
+				9A9A12BF281B045300AE23E1 /* QueueViewController.swift in Sources */,
 				9AA86163280670E0002FD013 /* TurnManager.swift in Sources */,
 				9AA861532806268E002FD013 /* SelectionCollectionViewCell.swift in Sources */,
 				9A57A9D32814FE54001D8013 /* FirestoreManager.swift in Sources */,

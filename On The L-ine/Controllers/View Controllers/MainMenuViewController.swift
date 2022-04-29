@@ -44,7 +44,9 @@ class MainMenuViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-//        Auth.auth().removeStateDidChangeListener(handle!)
+        if let handle = handle {
+            Auth.auth().removeStateDidChangeListener(handle)
+        }
     }
     
     // MARK: - Actions
@@ -60,9 +62,7 @@ class MainMenuViewController: UIViewController {
     @IBAction func onlineButtonTapped(_ sender: Any) {
         WebSocketManager.shared.connect { data, ack in
             print("Connected")
-            WebSocketManager.shared.joinQueue { data, ack in
-                print("Joined queue")
-            }
+            self.presentOnlineMenu()
         }
     }
     
@@ -128,5 +128,12 @@ class MainMenuViewController: UIViewController {
         
         accountFormViewController.modalPresentationStyle = .fullScreen
         self.present(accountFormViewController, animated: true)
+    }
+    
+    func presentOnlineMenu() {
+        guard let onlineMenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OnlineMenu") as? OnlineMenuViewController else { return }
+        
+        onlineMenuViewController.modalPresentationStyle = .fullScreen
+        self.present(onlineMenuViewController, animated: true)
     }
 }

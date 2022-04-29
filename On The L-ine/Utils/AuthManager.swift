@@ -25,11 +25,7 @@ class AuthManager {
         Auth.auth().signIn(withCustomToken: token, completion: completion)
     }
     
-    static func setDisplayName(username: String, completion: @escaping (Error?) -> Void) {
-        guard let user = Auth.auth().currentUser else { return completion(NetworkError.userNotLoggedIn) }
-        let changeRequest = user.createProfileChangeRequest()
-        
-        changeRequest.displayName = username
-        changeRequest.commitChanges(completion: completion)
+    static func setDisplayName(token: String, completion: @escaping (NetworkError?) -> Void) {
+        HTTPServerManager.setDisplayName(token: token, completion: completion)
     }
 }
