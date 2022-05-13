@@ -19,7 +19,7 @@ class AccountFormViewController: UIViewController {
     }
     
     var underline: CALayer?
-
+    
     // MARK: - Outlets
     
     @IBOutlet weak var containerView: UIView!
@@ -38,11 +38,15 @@ class AccountFormViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupViews()
     }
-
+    
     // MARK: - Actions
+    
+    @IBAction func backTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
     
     @IBAction func signInButtonTapped(_ sender: Any) {
         if selected == signInButton { return }
@@ -60,46 +64,105 @@ class AccountFormViewController: UIViewController {
         guard let usernameText = usernameTextField.text,
               let passwordText = passwordTextField.text else { return }
         
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        
+        guard let loadingScreen = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Loading") as? LoadingViewController else { return }
+        
+        loadingScreen.modalPresentationStyle = .overCurrentContext
+        self.present(loadingScreen, animated: true)
+        
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            guard let self = self else { return }
+            
+            self.handleSubmit(usernameText: usernameText, passwordText: passwordText) { shouldDismiss, errorText in
+                DispatchQueue.main.async {
+                    loadingScreen.dismiss(animated: true) {
+                        if shouldDismiss {
+                            self.dismiss(animated: true )
+                        } else {
+                            guard let errorText = errorText else { return }
+
+                            let toast = Toast.default(image: UIImage(systemName: "x.circle.fill") ?? UIImage(), title: errorText, backgroundColor: Colors.highlight ?? UIColor(), textColor: Colors.light ?? UIColor())
+                            toast.show(haptic: .error)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func handleSubmit(usernameText: String, passwordText: String, completion: @escaping (Bool, String?) -> Void) {
         var valid = true
         
-        if usernameText.isEmpty {
-            usernameTextField.layer.borderColor = Colors.highlight?.cgColor
-            valid = false
-        } else {
-            usernameTextField.layer.borderColor = Colors.lightDark?.cgColor
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            if usernameText.isEmpty {
+                self.usernameTextField.layer.borderColor = Colors.highlight?.cgColor
+                valid = false
+            } else {
+                self.usernameTextField.layer.borderColor = Colors.lightDark?.cgColor
+            }
+            
+            if passwordText.count < 8 {
+                self.passwordTextField.layer.borderColor = Colors.highlight?.cgColor
+                valid = false
+            } else { self.passwordTextField.layer.borderColor = Colors.lightDark?.cgColor }
         }
-        
-        if passwordText.count < 8 {
-            passwordTextField.layer.borderColor = Colors.highlight?.cgColor
-            valid = false
-        } else { passwordTextField.layer.borderColor = Colors.lightDark?.cgColor }
         
         if valid {
             if selected == signInButton {
-                AuthManager.signIn(username: usernameText, password: passwordText) { result in
-                    switch result {
-                    case .success(let token):
-                        AuthManager.signIn(token: token) { result, error in
-                            if let error = error {
-                                print(error)
-                            } else {
-                                guard result?.user != nil else { return print("User not there? Who knows why honestly.") }
-                                self.dismiss(animated: true)
-                            }
-                        }
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-            } else if selected == signUpButton {
-                AuthManager.signUp(username: usernameText, password: passwordText) { result in
+                AuthManager.signIn(username: usernameText, password: passwordText) { [weak self] result in
+                    guard let self = self else { return }
+                    
                     switch result {
                     case .success(let token):
                         AuthManager.signIn(token: token) { result, error in
                             if let error = error {
                                 print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(error)\n\n\(error.localizedDescription)")
                             } else {
-                                guard result?.user != nil else { return print("User not there? Who knows why honestly.") }
+                                guard result?.user != nil else { return }
+                                
+                                completion(true, nil)
+                            }
+                        }
+                    case .failure(let error):
+                        var errorText = ""
+                        
+                        switch error {
+                        case .invalidURL:
+                            errorText = "Provided URL was invalid!"
+                        case .noData, .invalidResponse:
+                            errorText = "Unexpected response recieved!"
+                        case .invalidRequest, .internalServerError, .userNotLoggedIn, .unableToDecode: break
+                        case .thrownError(let error):
+                            errorText = "Error: \(error.localizedDescription)"
+                        case .invalidCredentials:
+                            errorText = "Username or password is incorrect!"
+
+                            DispatchQueue.main.async {
+                                self.usernameTextField.layer.borderColor = Colors.highlight?.cgColor
+                                self.passwordTextField.layer.borderColor = Colors.highlight?.cgColor
+                            }
+                        }
+                            
+                        print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(error)\n\n\(error.localizedDescription)")
+                        
+                        completion(false, errorText)
+                    }
+                }
+            } else if selected == signUpButton {
+                AuthManager.signUp(username: usernameText, password: passwordText) { [weak self] result in
+                    guard let self = self else { return }
+                    
+                    switch result {
+                    case .success(let token):
+                        AuthManager.signIn(token: token) { result, error in
+                            if let error = error {
+                                print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(error)\n\n\(error.localizedDescription)")
+                            } else {
+                                guard result?.user != nil else { return }
                                 
                                 Auth.auth().currentUser?.getIDTokenForcingRefresh(true, completion: { token, error in
                                     if let error = error {
@@ -121,11 +184,31 @@ class AccountFormViewController: UIViewController {
                                     }
                                 })
                                 
-                                self.dismiss(animated: true)
+                                completion(true, nil)
                             }
                         }
                     case .failure(let error):
-                        print(error)
+                        var errorText = ""
+                        
+                        switch error {
+                        case .invalidURL:
+                            errorText = "Provided URL was invalid!"
+                        case .noData, .invalidResponse:
+                            errorText = "Unexpected response recieved!"
+                        case .invalidRequest, .internalServerError, .userNotLoggedIn, .unableToDecode: break
+                        case .thrownError(let error):
+                            errorText = "Error: \(error.localizedDescription)"
+                        case .invalidCredentials:
+                            errorText = "Username is taken!"
+                            
+                            DispatchQueue.main.async {
+                                self.usernameTextField.layer.borderColor = Colors.highlight?.cgColor
+                            }
+                        }
+                        
+                        print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(error)\n\n\(error.localizedDescription)")
+                        
+                        completion(false, errorText)
                     }
                 }
             }
@@ -139,18 +222,17 @@ class AccountFormViewController: UIViewController {
         containerView.layer.masksToBounds = true
         containerView.layer.cornerRadius = containerView.frame.height / 18
         
-        logoImageView.image = UIImage(named: "AppIcon")
+        logoImageView.image = UIImage(named: "Logo")
+        logoImageView.layer.cornerRadius = logoImageView.frame.height / 6.4
         
         usernameTextField.setupView()
         passwordTextField.setupView()
-        
         
         self.underline = CALayer()
         selected = signInButton
         
         submitButton.horizontalGradient()
         
-        view.keyboardLayoutGuide.topAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap(_:))))
     }
     

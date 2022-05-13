@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 private let reuseIdentifier = "selectionCell"
 
@@ -41,6 +42,9 @@ class GameBoardViewController: UIViewController {
         }
     }
     
+    var currentLIndexes: [CellIndex]?
+    var tappedCell: SelectionCollectionViewCell?
+    
     let cellSpacing: CGFloat = 3
     
     // MARK: - Outlets
@@ -49,26 +53,41 @@ class GameBoardViewController: UIViewController {
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var turnLabel: UILabel!
     
-    @IBOutlet weak var endOptionsStackView: UIStackView!
-    @IBOutlet weak var mainMenuButton: UIButton!
-    @IBOutlet weak var playAgainButton: UIButton!
-    
     // MARK: - Lifecycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
+        NotificationManager.observeMainMenu(observer: self, selector: #selector(onMainMenuTapped))
+        NotificationManager.observePlayAgain(observer: self, selector: #selector(onPlayAgainTapped))
     }
     
     // MARK: - Actions
     
     @IBAction func skipButtonTapped(_ sender: Any) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
+            
             TurnManager.shared.progressTurn()
             
+            if self.gameMode == .online {
+                guard let lIndexes = self.currentLIndexes else { return }
+                
+                
+                if let selectedNeutral = TurnManager.shared.selectedNeutral,
+                   let tappedCell = self.tappedCell {
+                    WebSocketManager.shared.sendMove(lIndexes: lIndexes, neutralMove: (origin: selectedNeutral.index!, destination: tappedCell.index!), completion: self.onMoveComplete)
+                } else {
+                    WebSocketManager.shared.sendMove(lIndexes: lIndexes, neutralMove: nil, completion: self.onMoveComplete)
+                }
+            }
+            
             DispatchQueue.main.async {
+                self.collectionView.reloadData()
                 self.updateViews()
+                
+                SoundManager.shared.playSound(soundFileName: "piece")
             }
         }
     }
@@ -85,30 +104,6 @@ class GameBoardViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    @IBAction func mainMenuButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true)
-        
-        guard let gameMode = gameMode else { return }
-        let players = gameMode.players()
-        
-        BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
-        TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
-        TurnManager.shared.gameEnded = false
-        
-        updateViews()
-    }
-    
-    @IBAction func playAgainButtonTapped(_ sender: Any) {
-        guard let gameMode = gameMode else { return }
-        let players = gameMode.players()
-        
-        BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
-        TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
-        TurnManager.shared.gameEnded = false
-        
-        updateViews()
-    }
-    
     // MARK: - Helper Functions
     
     func setupViews() {
@@ -121,8 +116,13 @@ class GameBoardViewController: UIViewController {
         guard let gameMode = gameMode else { return }
         let players = gameMode.players()
         
-        BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
-        TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
+        if BoardManager.shared.currentBoard == nil {
+            BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
+        }
+        
+        if TurnManager.shared.currentTurn == nil {
+            TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
+        }
         
         self.collectionView.register(SelectionCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
@@ -134,9 +134,9 @@ class GameBoardViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
         collectionView.addGestureRecognizer(tapGestureRecognizer)
         
+        NotificationManager.observeMoveMade(observer: self, selector: #selector(onMoveMade(notification:)))
+        
         skipButton.customButton(titleText: "Skip", titleColor: Colors.dark)
-        mainMenuButton.customButton(titleText: "Main Menu", titleColor: Colors.light)
-        playAgainButton.customButton(titleText: "Play Again", titleColor: Colors.light)
         
         updateViews()
     }
@@ -149,15 +149,19 @@ class GameBoardViewController: UIViewController {
         let players = gameMode.players()
         
         if TurnManager.shared.gameEnded {
-            turnLabel.text = "\([PlayerType.player, PlayerType.local].contains(player.opposite) ? "You" : "\(player.opposite.stringValue)") Won!"
-            turnLabel.textColor = player.opposite == players.player ? Colors.primary : Colors.highlight
+            guard let resultScreenViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Result") as? ResultScreenViewController else { return }
             
-            endOptionsStackView.isHidden = false
+            resultScreenViewController.didWin = player.opposite == players.player
+            
+            resultScreenViewController.modalPresentationStyle = .overCurrentContext
+            Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { [weak self] timer in
+                guard let self = self else { return }
+                
+                self.present(resultScreenViewController, animated: true)
+            }
         } else {
             turnLabel.text = "\([PlayerType.player, PlayerType.local].contains(player) ? "Your" : "\(player.stringValue)'s") Turn"
             turnLabel.textColor = player == players.player ? Colors.primary : Colors.highlight
-            
-            endOptionsStackView.isHidden = true
         }
         
         skipButton.isHidden = turnType != .neutralPiece
@@ -167,6 +171,7 @@ class GameBoardViewController: UIViewController {
     @objc func onPan(_ sender: UIPanGestureRecognizer) {
         guard !TurnManager.shared.gameEnded,
               let currentTurn = TurnManager.shared.currentTurn,
+              currentTurn.playerType != .online,
               currentTurn.turnType == .lPiece else { return }
         
         if sender.state == .changed || sender.state == .began{
@@ -185,17 +190,18 @@ class GameBoardViewController: UIViewController {
         } else if sender.state == .ended {
             guard let currentPlayer = currentTurn.playerType else { return }
             
-            guard let board = BoardManager.shared.currentBoard else { return }
-            let move = MoveManager.makeMove(for: currentPlayer, in: board, selections: selections.toArray())
+            guard BoardManager.shared.currentBoard != nil else { return }
+            let move = MoveManager.makeMove(for: currentPlayer, in: BoardManager.shared.currentBoard!, selections: selections.toArray())
             
             if move.0 != nil {
-                board.setCurrentPosition(for: currentPlayer, selections: selections.toArray(), shapeIndex: move.1)
+                BoardManager.shared.currentBoard!.setCurrentPosition(for: currentPlayer, selections: selections.toArray(), shapeIndex: move.1)
                 
                 TurnManager.shared.progressTurn()
                 updateViews()
             }
             
             collectionView.reloadData()
+            currentLIndexes = selections.toArray().map({ return $0.index ?? (row: -1, column: -1) })
             selections.clear()
         }
     }
@@ -216,7 +222,9 @@ class GameBoardViewController: UIViewController {
                 guard let selectedNeutral = TurnManager.shared.selectedNeutral else { return }
                 
                 if let _ = MoveManager.makeNeutralMove(in: board, origin: selectedNeutral, destination: tappedCell) {
-                    DispatchQueue.global(qos: .userInitiated).async {
+                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                        guard let self = self else { return }
+                        
                         TurnManager.shared.progressTurn()
                         DispatchQueue.main.async {
                             self.updateViews()
@@ -225,8 +233,58 @@ class GameBoardViewController: UIViewController {
                 }
                 
                 collectionView.reloadData()
+                
+                if gameMode == .online {
+                    guard let lIndexes = currentLIndexes else { return }
+                    self.tappedCell = tappedCell
+                    
+                    WebSocketManager.shared.sendMove(lIndexes: lIndexes, neutralMove: (origin: selectedNeutral.index!, destination: tappedCell.index!), completion: onMoveComplete)
+                }
+                
+                SoundManager.shared.playSound(soundFileName: "piece")
             }
         }
+    }
+    
+    func onMoveComplete(data: [Any]) {
+        
+    }
+    
+    @objc func onMoveMade(notification: Notification) {
+        guard let info = notification.userInfo?["info"] as? (board: [[String]], turn: String),
+              let username = Auth.auth().currentUser?.displayName else { return }
+        
+        TurnManager.shared.currentTurn = username == info.turn ? Turn(playerType: .local, turnType: .lPiece) : Turn(playerType: .online, turnType: .lPiece)
+        BoardManager.shared.currentBoard = Board(pieces: info.board)
+        
+        collectionView.reloadData()
+        updateViews()
+        
+        SoundManager.shared.playSound(soundFileName: "piece")
+    }
+    
+    @objc func onMainMenuTapped() {
+        self.dismiss(animated: true)
+        
+        guard let gameMode = gameMode else { return }
+        let players = gameMode.players()
+        
+        BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
+        TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
+        TurnManager.shared.gameEnded = false
+        
+        updateViews()
+    }
+    
+    @objc func onPlayAgainTapped() {
+        guard let gameMode = gameMode else { return }
+        let players = gameMode.players()
+        
+        BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
+        TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
+        TurnManager.shared.gameEnded = false
+        
+        updateViews()
     }
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BoardManagerDelegate {
+protocol BoardManagerDelegate: AnyObject {
     func currentBoardChanged()
 }
 
@@ -16,7 +16,7 @@ class BoardManager {
     // MARK: - Properties
     
     static let shared = BoardManager()
-    var delegate: BoardManagerDelegate?
+    weak var delegate: BoardManagerDelegate?
     var currentBoard: Board? {
         didSet {
             guard let delegate = delegate else { return }

@@ -10,7 +10,7 @@ import Foundation
 class HTTPServerManager {
 //    static let baseURL = URL(string: "http://otl.andrewelliott.me")
 //    static let baseURL = URL(string: "http://10.0.0.54")
-    static let baseURL = URL(string: "http://192.168.10.75")
+    static let baseURL = URL(string: "http://172.20.10.07")
 //    static let baseURL = URL(string: "http://localhost")
     
     private static let signUpEndpoint = "signup"
@@ -34,10 +34,17 @@ class HTTPServerManager {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error { return completion(.failure(.thrownError(error))) }
             
-            guard let data = data else { return completion(.failure(.noData)) }
-            guard let token = String(data: data, encoding: .utf8) else { return completion(.failure(.invalidResponse)) }
+            guard let response = response as? HTTPURLResponse else { return completion(.failure(.invalidResponse)) }
             
-            completion(.success(token))
+            switch response.statusCode {
+            case 409: return completion(.failure(.invalidCredentials))
+            case 201:
+                guard let data = data else { return completion(.failure(.noData)) }
+                guard let token = String(data: data, encoding: .utf8) else { return completion(.failure(.invalidResponse)) }
+                
+                return completion(.success(token))
+            default: return completion(.failure(.invalidResponse))
+            }
         }.resume()
     }
     
@@ -58,10 +65,17 @@ class HTTPServerManager {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error { return completion(.failure(.thrownError(error))) }
             
-            guard let data = data else { return completion(.failure(.noData)) }
-            guard let token = String(data: data, encoding: .utf8) else { return completion(.failure(.invalidResponse)) }
+            guard let response = response as? HTTPURLResponse else { return completion(.failure(.invalidResponse)) }
             
-            completion(.success(token))
+            switch response.statusCode {
+            case 401: return completion(.failure(.invalidCredentials))
+            case 200:
+                guard let data = data else { return completion(.failure(.noData)) }
+                guard let token = String(data: data, encoding: .utf8) else { return completion(.failure(.invalidResponse)) }
+                
+                return completion(.success(token))
+            default: return completion(.failure(.invalidResponse))
+            }
         }.resume()
     }
     
@@ -78,7 +92,14 @@ class HTTPServerManager {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error { return completion(.thrownError(error)) }
-            completion(nil)
+            
+            guard let response = response as? HTTPURLResponse else { return completion(.invalidResponse) }
+            
+            switch response.statusCode {
+            case 401: return completion(.invalidCredentials)
+            case 200: return completion(nil)
+            default: return completion(.invalidResponse)
+            }
         }.resume()
     }
 }

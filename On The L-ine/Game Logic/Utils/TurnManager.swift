@@ -46,7 +46,6 @@ class TurnManager {
         currentTurn.turnType = .lPiece
         
         let availableMoves = MoveManager.availableMoves(for: player, in: board)
-        print(availableMoves.count)
         
         if availableMoves.count <= 0 {
             gameEnded = true
@@ -62,7 +61,9 @@ class TurnManager {
                 newBoard = newBoard.newBoard(for: player, neutralMove: neutralMove)
             }
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                
                 BoardManager.shared.currentBoard = newBoard
                 self.changeTurn()
             }
@@ -78,7 +79,9 @@ class TurnManager {
             changeTurn()
         }
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
             self.selectedNeutral = nil
         }
     }

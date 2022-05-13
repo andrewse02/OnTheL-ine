@@ -35,10 +35,18 @@ class MainMenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        handle = Auth.auth().addStateDidChangeListener({ auth, user in
+        handle = Auth.auth().addStateDidChangeListener({ [weak self] auth, user in
+            guard let self = self else { return }
+               
             AuthManager.currentUser = user != nil ? user : nil
             self.updateAccountButton()
         })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let roomCode = DeepLinkManager.roomCode {
+            connectOnline()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,10 +68,7 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func onlineButtonTapped(_ sender: Any) {
-        WebSocketManager.shared.connect { data, ack in
-            print("Connected")
-            self.presentOnlineMenu()
-        }
+        connectOnline()
     }
     
     @IBAction func settingsButtonTapped(_ sender: Any) {
@@ -76,11 +81,13 @@ class MainMenuViewController: UIViewController {
     
     @IBAction func accountButtonTapped(_ sender: Any) {
         if AuthManager.currentUser != nil {
-            DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 try? Auth.auth().signOut()
                 AuthManager.currentUser = nil
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    
                     self.updateAccountButton()
                 }
             }
@@ -135,5 +142,29 @@ class MainMenuViewController: UIViewController {
         
         onlineMenuViewController.modalPresentationStyle = .fullScreen
         self.present(onlineMenuViewController, animated: true)
+    }
+    
+    func connectOnline() {
+        if AuthManager.currentUser == nil {
+            let toast = Toast.default(image: UIImage(systemName: "x.circle.fill") ?? UIImage(), title: "You must be logged in to play online!", backgroundColor: Colors.highlight ?? UIColor(), textColor: Colors.light ?? UIColor())
+            return toast.show(haptic: .error)
+        }
+        
+        guard let loadingScreen = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Loading") as? LoadingViewController else { return }
+        
+        loadingScreen.modalPresentationStyle = .overCurrentContext
+        self.present(loadingScreen, animated: true)
+        
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            guard let self = self else { return }
+            
+            WebSocketManager.shared.connect { data, ack in
+                DispatchQueue.main.async {
+                    loadingScreen.dismiss(animated: true) {
+                        self.presentOnlineMenu()
+                    }
+                }
+            }
+        }
     }
 }

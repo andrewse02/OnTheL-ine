@@ -18,6 +18,22 @@ class Board {
         self.pieces = pieces
     }
     
+    init(pieces: [[String]]) {
+        var resultArray: [[BoardPiece]] = []
+        
+        for i in 0..<pieces.count {
+            var iArray: [BoardPiece] = []
+            
+            for piece in pieces[i] {
+                iArray.append(BoardPiece.from(string: piece) ?? .empty)
+            }
+            
+            resultArray.append(iArray)
+        }
+        
+        self.pieces = resultArray
+    }
+    
     // MARK: - Helper Functions
     
     func copy() -> Board {

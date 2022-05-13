@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 enum BoardPiece {
     case empty
@@ -16,4 +17,15 @@ enum BoardPiece {
     case computer
     case local
     case online
+    
+    static func from(string: String) -> BoardPiece? {
+        guard let username = Auth.auth().currentUser?.displayName else { return nil }
+        
+        switch string {
+        case "#": return .empty
+        case "*": return .neutral
+        case username: return .local
+        default: return .online
+        }
+    }
 }

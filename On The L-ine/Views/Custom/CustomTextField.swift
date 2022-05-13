@@ -23,6 +23,8 @@ class CustomTextField: UITextField {
         
         self.layer.borderColor = Colors.lightDark?.cgColor
         self.layer.borderWidth = 2
+        
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [.foregroundColor: Colors.lightDark ?? UIColor()])
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {

@@ -18,6 +18,12 @@ class QueueViewController: UIViewController {
         NotificationManager.observeMatchFound(observer: self, selector: #selector(foundMatch(notification:)))
     }
     
+    // MARK: - Actions
+    
+    @IBAction func backTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
     // MARK: - Helper Functions
     
     @objc func foundMatch(notification: Notification) {

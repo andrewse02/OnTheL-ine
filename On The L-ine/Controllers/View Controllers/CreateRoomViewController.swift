@@ -6,13 +6,18 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class CreateRoomViewController: UIViewController {
     
     // MARK: - Properties
     
     var roomCode: String?
-    var players: [String]?
+    var players: [String] = [] {
+        didSet {
+            updateRoomPlayers()
+        }
+    }
     
     private let roomCodeText = "Room Code: "
     
@@ -21,7 +26,7 @@ class CreateRoomViewController: UIViewController {
     @IBOutlet weak var roomCodeLabel: UILabel!
     
     @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var inLobbyLabel: UILabel!
+    @IBOutlet weak var inRoomLabel: UILabel!
     @IBOutlet weak var playersLabel: UILabel!
     
     // MARK: - Lifecycles
@@ -30,9 +35,15 @@ class CreateRoomViewController: UIViewController {
         super.viewDidLoad()
 
         setupViews()
+        NotificationManager.observePlayerJoinRoom(observer: self, selector: #selector(onRoomJoin(notification:)))
+        NotificationManager.observeMatchStart(observer: self, selector: #selector(onMatchStart(notification:)))
     }
     
     // MARK: - Actions
+    
+    @IBAction func backTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
     
     @IBAction func friendsTapped(_ sender: Any) {
     }
@@ -44,6 +55,7 @@ class CreateRoomViewController: UIViewController {
     }
     
     @IBAction func startTapped(_ sender: Any) {
+        WebSocketManager.shared.startGame()
     }
     
     // MARK: - Helper Functions
@@ -56,14 +68,31 @@ class CreateRoomViewController: UIViewController {
     }
     
     func updateRoomPlayers() {
-        guard let players = players,
-              !players.isEmpty else {
-            [startButton, inLobbyLabel, playersLabel].forEach({ $0?.isHidden = true })
+        guard !players.isEmpty else {
+            [startButton, inRoomLabel, playersLabel].forEach({ $0?.isHidden = true })
             return
         }
         
         playersLabel.text = players.first
-        [startButton, inLobbyLabel, playersLabel].forEach({ $0?.isHidden = false })
+        [startButton, inRoomLabel, playersLabel].forEach({ $0?.isHidden = false })
     }
 
+    @objc func onRoomJoin(notification: Notification) {
+        guard let opponent = notification.userInfo?["opponent"] as? String else { return }
+        
+        players.append(opponent)
+    }
+    
+    @objc func onMatchStart(notification: Notification) {
+        guard let gameBoardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameBoard") as? GameBoardViewController,
+              let info = notification.userInfo?["info"] as? (board: [[String]], turn: String),
+              let username = Auth.auth().currentUser?.displayName else { return }
+        
+        gameBoardViewController.gameMode = .online
+        TurnManager.shared.currentTurn = username == info.turn ? Turn(playerType: .local, turnType: .lPiece) : Turn(playerType: .online, turnType: .lPiece)
+        BoardManager.shared.currentBoard = Board(pieces: info.board)
+        
+        gameBoardViewController.modalPresentationStyle = .fullScreen
+        self.present(gameBoardViewController, animated: true)
+    }
 }

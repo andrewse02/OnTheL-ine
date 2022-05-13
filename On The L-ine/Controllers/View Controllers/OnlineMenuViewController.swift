@@ -24,11 +24,20 @@ class OnlineMenuViewController: UIViewController {
         setupViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if let roomCode = DeepLinkManager.roomCode {
+            WebSocketManager.shared.joinRoom(roomCode: roomCode) { data in
+                guard let opponent = (data.first as? NSDictionary)?["opponent"] as? String else { return }
+            }
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func quickMatchTapped(_ sender: Any) {
-        WebSocketManager.shared.joinQueue { data in
-            guard let queueViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Queue") as? QueueViewController else { return }
+        WebSocketManager.shared.joinQueue { [weak self] data in
+            guard let self = self,
+                  let queueViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Queue") as? QueueViewController else { return }
             
             queueViewController.modalPresentationStyle = .fullScreen
             self.present(queueViewController, animated: true)
@@ -36,8 +45,9 @@ class OnlineMenuViewController: UIViewController {
     }
     
     @IBAction func createRoomTapped(_ sender: Any) {
-        WebSocketManager.shared.createRoom { data in
-            guard let roomCode = (data.first as? NSDictionary)?["match_code"] as? String,
+        WebSocketManager.shared.createRoom { [weak self] data in
+            guard let self = self,
+                  let roomCode = (data.first as? NSDictionary)?["match_code"] as? String,
                   let createRoomViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateRoom") as? CreateRoomViewController else { return }
             
             createRoomViewController.modalPresentationStyle = .fullScreen
@@ -47,6 +57,10 @@ class OnlineMenuViewController: UIViewController {
     }
     
     @IBAction func joinRoomTapped(_ sender: Any) {
+        guard let joinRoomViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "JoinRoom") as? JoinRoomViewController else { return }
+  
+        joinRoomViewController.modalPresentationStyle = .fullScreen
+        self.present(joinRoomViewController, animated: true)
     }
     
     @IBAction func friendsTapped(_ sender: Any) {
@@ -63,9 +77,13 @@ class OnlineMenuViewController: UIViewController {
         
         quickMatchButton.horizontalGradient()
         friendsButton.horizontalGradient()
+        createRoomButton.horizontalGradient()
+        joinRoomButton.horizontalGradient()
         
         quickMatchButton.customButton(titleText: "Quick Match", titleColor: Colors.light)
         friendsButton.customButton(titleText: "Friends", titleColor: Colors.light)
+        createRoomButton.customButton(titleText: "Create Room", titleColor: Colors.light)
+        joinRoomButton.customButton(titleText: "Join Room", titleColor: Colors.light)
     }
 
 }
