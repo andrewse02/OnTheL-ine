@@ -26,9 +26,7 @@ class OnlineMenuViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if let roomCode = DeepLinkManager.roomCode {
-            WebSocketManager.shared.joinRoom(roomCode: roomCode) { data in
-                guard let opponent = (data.first as? NSDictionary)?["opponent"] as? String else { return }
-            }
+            presentJoinRoom()
         }
     }
     
@@ -57,10 +55,7 @@ class OnlineMenuViewController: UIViewController {
     }
     
     @IBAction func joinRoomTapped(_ sender: Any) {
-        guard let joinRoomViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "JoinRoom") as? JoinRoomViewController else { return }
-  
-        joinRoomViewController.modalPresentationStyle = .fullScreen
-        self.present(joinRoomViewController, animated: true)
+        presentJoinRoom()
     }
     
     @IBAction func friendsTapped(_ sender: Any) {
@@ -84,6 +79,13 @@ class OnlineMenuViewController: UIViewController {
         friendsButton.customButton(titleText: "Friends", titleColor: Colors.light)
         createRoomButton.customButton(titleText: "Create Room", titleColor: Colors.light)
         joinRoomButton.customButton(titleText: "Join Room", titleColor: Colors.light)
+    }
+    
+    func presentJoinRoom() {
+        guard let joinRoomViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "JoinRoom") as? JoinRoomViewController else { return }
+  
+        joinRoomViewController.modalPresentationStyle = .fullScreen
+        self.present(joinRoomViewController, animated: true)
     }
 
 }

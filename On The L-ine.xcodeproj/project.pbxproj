@@ -84,6 +84,7 @@
 		9AC53DE52821983D006E8A3E /* IconAppleToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC53DDF2821983D006E8A3E /* IconAppleToastView.swift */; };
 		9AC53DE62821983E006E8A3E /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC53DE02821983D006E8A3E /* Toast.swift */; };
 		9AD3433628120FD400B37131 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3433528120FD400B37131 /* GameMode.swift */; };
+		9AF3079B2852554A00FCA51D /* QRCodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF3079A2852554A00FCA51D /* QRCodeManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -168,6 +169,7 @@
 		9AC53DDF2821983D006E8A3E /* IconAppleToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconAppleToastView.swift; sourceTree = "<group>"; };
 		9AC53DE02821983D006E8A3E /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		9AD3433528120FD400B37131 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		9AF3079A2852554A00FCA51D /* QRCodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeManager.swift; sourceTree = "<group>"; };
 		F3AF38C39125AEB556FD6A2D /* Pods_On_The_L_ine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_On_The_L_ine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -337,6 +339,7 @@
 				9A0678C8281752C600C7D82E /* WebSocketManager.swift */,
 				9AC53DD128217BF5006E8A3E /* SoundManager.swift */,
 				9A153DD42823330E00537CDE /* DeepLinkManager.swift */,
+				9AF3079A2852554A00FCA51D /* QRCodeManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				9A9A12BD281B037200AE23E1 /* OnlineMatchManager.swift in Sources */,
 				9A153DD52823330E00537CDE /* DeepLinkManager.swift in Sources */,
 				9AC53DE22821983D006E8A3E /* ToastView.swift in Sources */,
+				9AF3079B2852554A00FCA51D /* QRCodeManager.swift in Sources */,
 				9AC53DE62821983E006E8A3E /* Toast.swift in Sources */,
 				9A0678C728173F1500C7D82E /* NetworkError.swift in Sources */,
 				9AA8615428062699002FD013 /* MoveManager.swift in Sources */,
@@ -789,7 +793,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "On The L-ine/On The L-ine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 72A8K5D64W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "On The L-ine/Resources/Info.plist";
@@ -822,7 +826,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "On The L-ine/On The L-ine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 72A8K5D64W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "On The L-ine/Resources/Info.plist";

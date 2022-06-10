@@ -8,9 +8,8 @@
 import Foundation
 
 class HTTPServerManager {
-//    static let baseURL = URL(string: "http://otl.andrewelliott.me")
-//    static let baseURL = URL(string: "http://10.0.0.54")
-    static let baseURL = URL(string: "http://172.20.10.07")
+    static let baseURL = URL(string: "http://otl.andrewelliott.me")
+//    static let baseURL = URL(string: "http://192.168.1.211")
 //    static let baseURL = URL(string: "http://localhost")
     
     private static let signUpEndpoint = "signup"

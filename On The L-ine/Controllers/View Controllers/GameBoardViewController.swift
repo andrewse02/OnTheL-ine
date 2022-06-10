@@ -94,14 +94,26 @@ class GameBoardViewController: UIViewController {
     
     @IBAction func rotateClockwiseButtonTapped(_ sender: Any) {
         guard let board = BoardManager.shared.currentBoard else { return }
+        
         BoardManager.shared.currentBoard = board.rotateClockwise()
         collectionView.reloadData()
     }
     
     @IBAction func rotateCounterClockwiseButtonTapped(_ sender: Any) {
         guard let board = BoardManager.shared.currentBoard else { return }
+        
         BoardManager.shared.currentBoard = board.rotateCounterClockwise()
         collectionView.reloadData()
+    }
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        guard let gameMode = gameMode else { self.dismiss(animated: true); return }
+
+        if gameMode == .online {
+            // TODO: - Call function to send a leave game event to the server
+        }
+        
+        onMainMenuTapped()
     }
     
     // MARK: - Helper Functions

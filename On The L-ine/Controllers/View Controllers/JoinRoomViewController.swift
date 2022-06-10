@@ -36,9 +36,18 @@ class JoinRoomViewController: UIViewController {
         NotificationManager.observeMatchStart(observer: self, selector: #selector(onMatchStart(notification:)))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let roomCode = DeepLinkManager.roomCode {
+            joinRoom(roomCode: roomCode)
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func backTapped(_ sender: Any) {
+        DeepLinkManager.roomCode = nil
         self.dismiss(animated: true)
     }
     
@@ -46,23 +55,11 @@ class JoinRoomViewController: UIViewController {
         guard let roomCode = codeTextField.text,
               roomCode.count == 6 else { return }
         
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            guard let self = self else { return }
-            
-            WebSocketManager.shared.joinRoom(roomCode: roomCode) { data in
-                DispatchQueue.main.async {
-                    guard let opponent = (data.first as? NSDictionary)?["opponent"] as? String else {
-                        let toast = Toast.default(image: UIImage(systemName: "x.circle.fill") ?? UIImage(), title: "Could not join room!", backgroundColor: Colors.highlight ?? UIColor(), textColor: Colors.light ?? UIColor())
-                        return toast.show(haptic: .error)
-                    }
-                    
-                    self.players.append(opponent)
-                }
-            }
-        }
+        joinRoom(roomCode: roomCode)
     }
     
     @IBAction func qrCodeTapped(_ sender: Any) {
+        
     }
     
     // MARK: - Helper Functions
@@ -80,6 +77,23 @@ class JoinRoomViewController: UIViewController {
         
         playersLabel.text = players.first
         [inRoomLabel, playersLabel].forEach({ $0?.isHidden = false })
+    }
+    
+    func joinRoom(roomCode: String) {
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            guard let self = self else { return }
+            
+            WebSocketManager.shared.joinRoom(roomCode: roomCode) { data in
+                DispatchQueue.main.async {
+                    guard let opponent = (data.first as? NSDictionary)?["opponent"] as? String else {
+                        let toast = Toast.default(image: UIImage(systemName: "x.circle.fill") ?? UIImage(), title: "Could not join room!", backgroundColor: Colors.highlight ?? UIColor(), textColor: Colors.light ?? UIColor())
+                        return toast.show(haptic: .error)
+                    }
+                    
+                    self.players.append(opponent)
+                }
+            }
+        }
     }
     
     @objc func onMatchStart(notification: Notification) {

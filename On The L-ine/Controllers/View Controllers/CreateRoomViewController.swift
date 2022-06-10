@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import MessageUI
 import FirebaseAuth
 
-class CreateRoomViewController: UIViewController {
+class CreateRoomViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
     // MARK: - Properties
     
@@ -24,19 +25,28 @@ class CreateRoomViewController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var roomCodeLabel: UILabel!
+    @IBOutlet weak var copyLabel: UILabel!
+    
+    @IBOutlet weak var qrCodeImage: UIImageView!
     
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var inRoomLabel: UILabel!
     @IBOutlet weak var playersLabel: UILabel!
     
     // MARK: - Lifecycles
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupViews()
         NotificationManager.observePlayerJoinRoom(observer: self, selector: #selector(onRoomJoin(notification:)))
         NotificationManager.observeMatchStart(observer: self, selector: #selector(onMatchStart(notification:)))
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: - Actions
@@ -49,9 +59,25 @@ class CreateRoomViewController: UIViewController {
     }
     
     @IBAction func messageTapped(_ sender: Any) {
+        guard let roomCode = roomCode else { return }
+        
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "Join my room in On The L-ine!\notl://join/\(roomCode)"
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true)
+        } else {
+            let toast = Toast.default(image: UIImage(systemName: "x.circle.fill") ?? UIImage(), title: "Text messages are not enabled on this device!", backgroundColor: Colors.highlight ?? UIColor(), textColor: Colors.light ?? UIColor())
+            toast.show(haptic: .error)
+        }
     }
     
     @IBAction func qrCodeTapped(_ sender: Any) {
+        guard let roomCode = roomCode,
+              qrCodeImage.image == nil else { return }
+        
+        qrCodeImage.image = QRCodeManager.generateQRCodeImage(from: "otl://join/\(roomCode)")
+        qrCodeImage.isHidden = false
     }
     
     @IBAction func startTapped(_ sender: Any) {
@@ -65,6 +91,10 @@ class CreateRoomViewController: UIViewController {
         
         roomCodeLabel.text = roomCodeText + roomCode
         startButton.customButton(titleText: "Start", titleColor: Colors.light, backgroundColor: Colors.green)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapToCopy))
+        roomCodeLabel.addGestureRecognizer(tapGestureRecognizer)
+        copyLabel.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func updateRoomPlayers() {
@@ -76,7 +106,13 @@ class CreateRoomViewController: UIViewController {
         playersLabel.text = players.first
         [startButton, inRoomLabel, playersLabel].forEach({ $0?.isHidden = false })
     }
+    
+    @objc func onTapToCopy() {
+        guard let roomCode = roomCode else { return }
 
+        UIPasteboard.general.string = roomCode
+    }
+    
     @objc func onRoomJoin(notification: Notification) {
         guard let opponent = notification.userInfo?["opponent"] as? String else { return }
         
@@ -94,5 +130,11 @@ class CreateRoomViewController: UIViewController {
         
         gameBoardViewController.modalPresentationStyle = .fullScreen
         self.present(gameBoardViewController, animated: true)
+    }
+    
+    // MARK: - MFMessageComposeViewControllerDelegate
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true)
     }
 }
