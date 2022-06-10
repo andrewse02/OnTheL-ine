@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         FirestoreManager.configure()
         
-//        SoundManager.shared.playSound(soundFileName: "music", volume: 0.4, loop: true)
+        SoundManager.shared.playSound(soundFileName: "music", volume: 0.4, loop: true)
 
         return true
     }
