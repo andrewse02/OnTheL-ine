@@ -84,6 +84,12 @@ class WebSocketManager {
         socket.emitWithAck("queue").timingOut(after: 0, callback: completion)
     }
     
+    func leaveQueue() {
+        guard let socket = socket else { return }
+
+        socket.emit("dequeue")
+    }
+    
     func createRoom(completion: @escaping AckCallback) {
         guard let socket = socket else { return }
         

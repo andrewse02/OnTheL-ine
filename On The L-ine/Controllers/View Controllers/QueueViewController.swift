@@ -21,6 +21,8 @@ class QueueViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func backTapped(_ sender: Any) {
+        WebSocketManager.shared.leaveQueue()
+        
         self.dismiss(animated: true)
     }
     
