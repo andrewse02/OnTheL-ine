@@ -149,9 +149,9 @@ class MoveManager {
         
         guard isValidL.0 else { return (false, -1) }
         
-        let isNewPlacement = isNewPlacement(for: player, selections: selections)
+        let isValidPlacement = isNewPlacement(for: player, selections: selections) && isOverlapping(for: player, selections: selections)
         
-        return (isNewPlacement, isValidL.1)
+        return (isValidPlacement, isValidL.1)
     }
     
     static func isNewPlacement(for player: PlayerType, selections: [SelectionCollectionViewCell]) -> Bool {
@@ -170,18 +170,21 @@ class MoveManager {
     }
     
     static func isNewPlacement(for player: PlayerType, in board: Board, indexes: [CellIndex]) -> Bool {
-        var result = false
-        
         for index in indexes {
             guard let type = board.piece(at: (row: index.row, column: index.column)) else { return false }
             
-            if type == .empty {
-                result = true
-                break
-            }
+            if type == .empty { return true }
         }
         
-        return result
+        return false
+    }
+    
+    static func isOverlapping(for player: PlayerType, selections: [SelectionCollectionViewCell]) -> Bool {
+        for selection in selections {
+            if selection.type == .neutral || selection.type == player.opposite.pieceValue { return false }
+        }
+        
+        return true
     }
     
     static func makeMove(for player: PlayerType, in board: Board, selections: [SelectionCollectionViewCell]) -> (Board?, Int) {
