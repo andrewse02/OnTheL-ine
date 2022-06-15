@@ -26,7 +26,7 @@ class TurnManager {
     
     // MARK: - Helper Functions
     
-    func setTurn(_ turn: Turn) {
+    func setTurn(_ turn: Turn?) {
         currentTurn = turn
     }
     

@@ -19,7 +19,8 @@ class BoardManager {
     weak var delegate: BoardManagerDelegate?
     var currentBoard: Board? {
         didSet {
-            guard let delegate = delegate else { return }
+            guard let delegate = delegate,
+                  currentBoard != nil else { return }
             delegate.currentBoardChanged()
         }
     }

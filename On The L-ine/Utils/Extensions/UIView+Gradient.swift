@@ -13,26 +13,58 @@ extension UIView {
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [
-            bottom?.cgColor ?? UIColor().cgColor,
-            top?.cgColor ?? UIColor().cgColor
+            top?.cgColor ?? UIColor().cgColor,
+            bottom?.cgColor ?? UIColor().cgColor
         ]
         
-        gradient.startPoint = CGPoint(x: 0.5, y: 0.8)
-        gradient.endPoint = CGPoint(x: 0.5, y: 0.2)
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.2)
+        gradient.endPoint = CGPoint(x: 0.5, y: 0.8)
         
+        if let foundLayer = self.layer.sublayers?[0] as? CAGradientLayer { foundLayer.removeFromSuperlayer() }
         self.layer.insertSublayer(gradient, at: 0)
     }
     
     func horizontalGradient(left: UIColor? = Colors.primary, right: UIColor? = Colors.primaryLight) {
         let gradient = CAGradientLayer()
         gradient.colors = [
-            right?.cgColor ?? UIColor().cgColor,
-            left?.cgColor ?? UIColor().cgColor
+            left?.cgColor ?? UIColor().cgColor,
+            right?.cgColor ?? UIColor().cgColor
         ]
         
-        gradient.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
-        gradient.frame = bounds
+        gradient.startPoint = CGPoint(x: 0.2, y: 0.5)
+        gradient.endPoint = CGPoint(x: 0.8, y: 0.5)
         
-        layer.insertSublayer(gradient, at: 1)
+        gradient.frame = bounds
+        layer.addSublayer(gradient)
+    }
+    
+    func textGradient(left: UIColor?, right: UIColor?) {
+        let gradient = getGradientLayer(left: left, right: right)
+        guard let self = self as? UILabel else { return }
+        
+        self.textColor = gradientColor(gradientLayer: gradient)
+    }
+    
+    private func gradientColor(gradientLayer: CAGradientLayer) -> UIColor? {
+        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        return UIColor(patternImage: image!)
+    }
+    
+    private func getGradientLayer(left: UIColor?, right: UIColor?) -> CAGradientLayer{
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds.insetBy(dx: -5, dy: 0)
+        gradient.colors = [
+            left?.cgColor ?? UIColor().cgColor,
+            right?.cgColor ?? UIColor().cgColor
+        ]
+        
+        gradient.startPoint = CGPoint(x: -0.1, y: 0.5)
+        gradient.endPoint = CGPoint(x: 0.8, y: 0.5)
+        
+        return gradient
     }
 }

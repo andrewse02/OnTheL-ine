@@ -115,7 +115,7 @@ class MainMenuViewController: UIViewController {
     
     func updateAccountButton() {
         if AuthManager.currentUser != nil {
-            accountButton.customButton(titleText: "Sign Out", titleColor: Colors.light, backgroundColor: Colors.highlight)
+            accountButton.customButton(titleText: "Sign Out", titleColor: Colors.light, backgroundColor: Colors.highlight, borderColor: Colors.light)
         } else {
             accountButton.customOutlinedButton(titleText: "Sign In/Sign Up", titleColor: Colors.light, borderColor: Colors.light)
         }

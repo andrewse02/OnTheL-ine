@@ -17,6 +17,8 @@ class Colors {
     static let primaryMiddleDark = UIColor(named: "Primary-Middle Dark")
     static let primaryDark = UIColor(named: "Primary-Dark")
     static let highlight = UIColor(named: "Highlight")
+    static let highlightMiddleDark = UIColor(named: "Highlight-Middle Dark")
+    static let highlightDark = UIColor(named: "Highlight-Dark")
     
     // MARK: - Mixed Main Colors
     

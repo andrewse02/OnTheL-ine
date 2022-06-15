@@ -52,6 +52,7 @@ class GameBoardViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var turnLabel: UILabel!
+    @IBOutlet weak var tipLabel: UILabel!
     
     // MARK: - Lifecycles
     
@@ -66,7 +67,7 @@ class GameBoardViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func skipButtonTapped(_ sender: Any) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let self = self else { return }
             
             TurnManager.shared.progressTurn()
@@ -119,8 +120,6 @@ class GameBoardViewController: UIViewController {
     // MARK: - Helper Functions
     
     func setupViews() {
-        view.verticalGradient()
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         BoardManager.shared.delegate = self
@@ -173,7 +172,16 @@ class GameBoardViewController: UIViewController {
             }
         } else {
             turnLabel.text = "\([PlayerType.player, PlayerType.local].contains(player) ? "Your" : "\(player.stringValue)'s") Turn"
-            turnLabel.textColor = player == players.player ? Colors.primary : Colors.highlight
+            switch turnType {
+            case .lPiece:
+                tipLabel.text = "Move your L-piece"
+            case .neutralPiece:
+                tipLabel.text = "Move your neutral piece, or skip"
+            case .waiting:
+                tipLabel.text = ""
+            }
+            
+            view.verticalGradient(top: player == players.player ? Colors.primaryDark : Colors.highlightDark, bottom: player == players.player ? Colors.primaryMiddleDark : Colors.highlightMiddleDark)
         }
         
         skipButton.isHidden = turnType != .neutralPiece
@@ -234,7 +242,7 @@ class GameBoardViewController: UIViewController {
                 guard let selectedNeutral = TurnManager.shared.selectedNeutral else { return }
                 
                 if let _ = MoveManager.makeNeutralMove(in: board, origin: selectedNeutral, destination: tappedCell) {
-                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
                         guard let self = self else { return }
                         
                         TurnManager.shared.progressTurn()
@@ -281,8 +289,8 @@ class GameBoardViewController: UIViewController {
         guard let gameMode = gameMode else { return }
         let players = gameMode.players()
         
-        BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
-        TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
+        BoardManager.shared.currentBoard = nil
+        TurnManager.shared.setTurn(nil)
         TurnManager.shared.gameEnded = false
         
         updateViews()
