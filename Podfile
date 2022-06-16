@@ -13,4 +13,8 @@ target 'On The L-ine' do
   pod 'Socket.IO-Client-Swift'
   
   pod 'IQKeyboardManagerSwift'
+  
+  pod 'SpotlightViewKit', git: 'https://github.com/vovkroman/SpotlightViewKit.git'
+ 
+  pod 'BulletinBoard'
 end

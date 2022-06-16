@@ -37,7 +37,7 @@ class MainMenuViewController: UIViewController {
         
         handle = Auth.auth().addStateDidChangeListener({ [weak self] auth, user in
             guard let self = self else { return }
-               
+            
             AuthManager.currentUser = user != nil ? user : nil
             self.updateAccountButton()
         })
@@ -47,6 +47,8 @@ class MainMenuViewController: UIViewController {
         if let roomCode = DeepLinkManager.roomCode {
             connectOnline()
         }
+        
+        handleLaunch()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -111,6 +113,22 @@ class MainMenuViewController: UIViewController {
         
         settingsButton.customOutlinedButton(titleText: "Settings", titleColor: Colors.light, borderColor: Colors.light)
         updateAccountButton()
+    }
+    
+    func handleLaunch() {
+        AlertCardManager.tutorial.showBulletin(above: self)
+        
+        if !UserDefaults.standard.bool(forKey: "HasLaunched") {
+            
+            
+            UserDefaults.standard.set(true, forKey: "HasLaunched")
+        }
+        
+        if UserDefaults.standard.string(forKey: "LastVersion") != Bundle.main.releaseVersionNumberPretty {
+            if Bundle.main.releaseVersionNumberPretty != "1.0" { AlertCardManager.changelog.showBulletin(above: self) }
+            
+            UserDefaults.standard.set(Bundle.main.releaseVersionNumberPretty, forKey: "LastVersion")
+        }
     }
     
     func updateAccountButton() {

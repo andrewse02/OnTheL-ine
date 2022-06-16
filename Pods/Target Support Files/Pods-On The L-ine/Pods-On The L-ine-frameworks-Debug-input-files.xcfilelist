@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-On The L-ine/Pods-On The L-ine-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework
+${BUILT_PRODUCTS_DIR}/BulletinBoard/BLTNBoard.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework
@@ -12,6 +13,7 @@ ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
 ${BUILT_PRODUCTS_DIR}/Libuv-gRPC/uv.framework
 ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework
+${BUILT_PRODUCTS_DIR}/SpotlightViewKit/SpotlightViewKit.framework
 ${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework
 ${BUILT_PRODUCTS_DIR}/abseil/absl.framework
 ${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework

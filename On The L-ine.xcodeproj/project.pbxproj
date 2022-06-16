@@ -19,6 +19,8 @@
 		9A153DD728244F2C00537CDE /* ResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A153DD628244F2C00537CDE /* ResultScreenViewController.swift */; };
 		9A170D15280F049E0012A60D /* ComputerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A170D14280F049E0012A60D /* ComputerManager.swift */; };
 		9A37C2A0281471EF003C5E55 /* UIButton+CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */; };
+		9A4146BB285B660C0046CE24 /* Bundle+VersionNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4146BA285B660B0046CE24 /* Bundle+VersionNumber.swift */; };
+		9A4146BD285B6D1F0046CE24 /* AlertCardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4146BC285B6D1F0046CE24 /* AlertCardManager.swift */; };
 		9A538FAA280DBE9A00E9E55C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A538FA9280DBE9A00E9E55C /* Board.swift */; };
 		9A57A9D12814F355001D8013 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57A9D02814F355001D8013 /* AuthManager.swift */; };
 		9A57A9D32814FE54001D8013 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57A9D22814FE54001D8013 /* FirestoreManager.swift */; };
@@ -101,6 +103,8 @@
 		9A153DD628244F2C00537CDE /* ResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreenViewController.swift; sourceTree = "<group>"; };
 		9A170D14280F049E0012A60D /* ComputerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerManager.swift; sourceTree = "<group>"; };
 		9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+CustomButton.swift"; sourceTree = "<group>"; };
+		9A4146BA285B660B0046CE24 /* Bundle+VersionNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+VersionNumber.swift"; sourceTree = "<group>"; };
+		9A4146BC285B6D1F0046CE24 /* AlertCardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCardManager.swift; sourceTree = "<group>"; };
 		9A4C0A2328149FB000765FAC /* On The L-ine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "On The L-ine.entitlements"; sourceTree = "<group>"; };
 		9A538FA9280DBE9A00E9E55C /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		9A57A9D02814F355001D8013 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 			children = (
 				9AA2BFDF2811C28C00A55D8F /* UIView+Gradient.swift */,
 				9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */,
+				9A4146BA285B660B0046CE24 /* Bundle+VersionNumber.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				9AC53DD128217BF5006E8A3E /* SoundManager.swift */,
 				9A153DD42823330E00537CDE /* DeepLinkManager.swift */,
 				9AF3079A2852554A00FCA51D /* QRCodeManager.swift */,
+				9A4146BC285B6D1F0046CE24 /* AlertCardManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -643,12 +649,14 @@
 				9A0678C728173F1500C7D82E /* NetworkError.swift in Sources */,
 				9AA8615428062699002FD013 /* MoveManager.swift in Sources */,
 				9AC53DE52821983D006E8A3E /* IconAppleToastView.swift in Sources */,
+				9A4146BD285B6D1F0046CE24 /* AlertCardManager.swift in Sources */,
 				9A9A12BB281B027300AE23E1 /* MatchFoundViewController.swift in Sources */,
 				9A170D15280F049E0012A60D /* ComputerManager.swift in Sources */,
 				9AA8615A28062922002FD013 /* Constants.swift in Sources */,
 				9AC53DE42821983D006E8A3E /* TextAppleToastView.swift in Sources */,
 				9AC53DE32821983D006E8A3E /* AppleToastView.swift in Sources */,
 				9A37C2A0281471EF003C5E55 /* UIButton+CustomButton.swift in Sources */,
+				9A4146BB285B660C0046CE24 /* Bundle+VersionNumber.swift in Sources */,
 				9A9252D2281058FF0069BAFC /* Benchmarkers.swift in Sources */,
 				9AA2BFE22811C33900A55D8F /* MainMenuViewController.swift in Sources */,
 				9A0678C9281752C600C7D82E /* WebSocketManager.swift in Sources */,
@@ -793,7 +801,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "On The L-ine/On The L-ine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 72A8K5D64W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "On The L-ine/Resources/Info.plist";
@@ -828,7 +836,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "On The L-ine/On The L-ine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 72A8K5D64W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "On The L-ine/Resources/Info.plist";
