@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import BLTNBoard
 
 class MainMenuViewController: UIViewController {
     
@@ -44,7 +45,7 @@ class MainMenuViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if let roomCode = DeepLinkManager.roomCode {
+        if DeepLinkManager.roomCode != nil {
             connectOnline()
         }
         
@@ -78,7 +79,7 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func helpButtonTapped(_ sender: Any) {
-        // TODO: - Present Tutorial
+        startTutorial()
     }
     
     @IBAction func accountButtonTapped(_ sender: Any) {
@@ -116,18 +117,17 @@ class MainMenuViewController: UIViewController {
     }
     
     func handleLaunch() {
-        AlertCardManager.tutorial.showBulletin(above: self)
-        
-        if !UserDefaults.standard.bool(forKey: "HasLaunched") {
-            
-            
-            UserDefaults.standard.set(true, forKey: "HasLaunched")
-        }
+        let hasLaunched = UserDefaults.standard.bool(forKey: "HasLaunched")
         
         if UserDefaults.standard.string(forKey: "LastVersion") != Bundle.main.releaseVersionNumberPretty {
-            if Bundle.main.releaseVersionNumberPretty != "1.0" { AlertCardManager.changelog.showBulletin(above: self) }
+            if hasLaunched { AlertCardManager.changelog.showBulletin(above: self) }
             
             UserDefaults.standard.set(Bundle.main.releaseVersionNumberPretty, forKey: "LastVersion")
+        }
+        
+        if !hasLaunched {
+            startTutorial()
+            UserDefaults.standard.set(true, forKey: "HasLaunched")
         }
     }
     
@@ -184,5 +184,17 @@ class MainMenuViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func startTutorial() {
+        let tutorial = AlertCardManager.tutorial { item in
+            item.manager?.dismissBulletin()
+            
+            TutorialManager.shared.tutorialActive = true
+            
+            // TODO: - Start Spotlight
+        }
+        AlertCardManager.manager = BLTNItemManager(rootItem: tutorial)
+        AlertCardManager.manager!.showBulletin(above: self)
     }
 }

@@ -18,6 +18,7 @@
 		9A153DD52823330E00537CDE /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A153DD42823330E00537CDE /* DeepLinkManager.swift */; };
 		9A153DD728244F2C00537CDE /* ResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A153DD628244F2C00537CDE /* ResultScreenViewController.swift */; };
 		9A170D15280F049E0012A60D /* ComputerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A170D14280F049E0012A60D /* ComputerManager.swift */; };
+		9A1937F3285E114800C39B5A /* TutorialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1937F2285E114800C39B5A /* TutorialManager.swift */; };
 		9A37C2A0281471EF003C5E55 /* UIButton+CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */; };
 		9A4146BB285B660C0046CE24 /* Bundle+VersionNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4146BA285B660B0046CE24 /* Bundle+VersionNumber.swift */; };
 		9A4146BD285B6D1F0046CE24 /* AlertCardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4146BC285B6D1F0046CE24 /* AlertCardManager.swift */; };
@@ -102,6 +103,7 @@
 		9A153DD42823330E00537CDE /* DeepLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
 		9A153DD628244F2C00537CDE /* ResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreenViewController.swift; sourceTree = "<group>"; };
 		9A170D14280F049E0012A60D /* ComputerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerManager.swift; sourceTree = "<group>"; };
+		9A1937F2285E114800C39B5A /* TutorialManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialManager.swift; sourceTree = "<group>"; };
 		9A37C29F281471EF003C5E55 /* UIButton+CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+CustomButton.swift"; sourceTree = "<group>"; };
 		9A4146BA285B660B0046CE24 /* Bundle+VersionNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+VersionNumber.swift"; sourceTree = "<group>"; };
 		9A4146BC285B6D1F0046CE24 /* AlertCardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCardManager.swift; sourceTree = "<group>"; };
@@ -379,8 +381,8 @@
 		9AA8614B28062251002FD013 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				9AA8614E280622B6002FD013 /* LaunchScreen.storyboard */,
 				9AA8614F280622B6002FD013 /* Main.storyboard */,
+				9AA8614E280622B6002FD013 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -410,6 +412,7 @@
 				9AA86162280670E0002FD013 /* TurnManager.swift */,
 				9A170D14280F049E0012A60D /* ComputerManager.swift */,
 				9A9A12BC281B037200AE23E1 /* OnlineMatchManager.swift */,
+				9A1937F2285E114800C39B5A /* TutorialManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				9A538FAA280DBE9A00E9E55C /* Board.swift in Sources */,
 				9A0678C428171CE800C7D82E /* HTTPServerManager.swift in Sources */,
 				9AC53DE12821983D006E8A3E /* ToastConfiguration.swift in Sources */,
+				9A1937F3285E114800C39B5A /* TutorialManager.swift in Sources */,
 				9A7304DA281B562800E86636 /* CreateRoomViewController.swift in Sources */,
 				9A153DD728244F2C00537CDE /* ResultScreenViewController.swift in Sources */,
 				9A0678D12818ACF600C7D82E /* CustomTextField.swift in Sources */,

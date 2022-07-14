@@ -9,6 +9,13 @@ import Foundation
 import BLTNBoard
 
 class AlertCardManager {
+    static var manager: BLTNItemManager? {
+        didSet {
+            guard let manager = manager else { return }
+            manager.backgroundColor = Colors.light ?? UIColor()
+        }
+    }
+    
     private static let changelogDescription = """
     - Added this
     - Fixed that and that too
@@ -49,7 +56,7 @@ class AlertCardManager {
         return manager
     }()
     
-    static var tutorial: BLTNItemManager = {
+    static func tutorial(action: @escaping (BLTNActionItem) -> Void) -> BLTNPageItem {
         let rootItem = BLTNPageItem(title: "Welcome to\nOn The L-ine!")
         let symbolConfig = UIImage.SymbolConfiguration(pointSize: 100)
         rootItem.image = UIImage(systemName: "hand.wave", withConfiguration: symbolConfig)
@@ -71,15 +78,14 @@ class AlertCardManager {
         rootItem.appearance.alternativeButtonFontSize = 16
         rootItem.appearance.alternativeButtonTitleColor = Colors.primary ?? UIColor()
         
+        
+        rootItem.actionHandler = action
         rootItem.alternativeHandler = { (item: BLTNActionItem) in
             item.manager?.dismissBulletin()
         }
         
         rootItem.isDismissable = false
         
-        let manager = BLTNItemManager(rootItem: rootItem)
-        manager.backgroundColor = Colors.light ?? UIColor()
-        
-        return manager
-    }()
+        return rootItem
+    }
 }

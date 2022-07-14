@@ -51,6 +51,9 @@ class GameBoardViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var rotateClockwiseButton: UIButton!
+    @IBOutlet weak var rotateCounterClockwiseButton: UIButton!
+    
     @IBOutlet weak var turnLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
     
@@ -171,7 +174,13 @@ class GameBoardViewController: UIViewController {
                 self.present(resultScreenViewController, animated: true)
             }
         } else {
+            view.verticalGradient(top: player == players.player ? Colors.primaryDark : Colors.highlightDark, bottom: player == players.player ? Colors.primaryMiddleDark : Colors.highlightMiddleDark)
+            
             turnLabel.text = "\([PlayerType.player, PlayerType.local].contains(player) ? "Your" : "\(player.stringValue)'s") Turn"
+            
+            guard player != .computer,
+                  player != .online else { return tipLabel.text = "" }
+            
             switch turnType {
             case .lPiece:
                 tipLabel.text = "Move your L-piece"
@@ -180,8 +189,6 @@ class GameBoardViewController: UIViewController {
             case .waiting:
                 tipLabel.text = ""
             }
-            
-            view.verticalGradient(top: player == players.player ? Colors.primaryDark : Colors.highlightDark, bottom: player == players.player ? Colors.primaryMiddleDark : Colors.highlightMiddleDark)
         }
         
         skipButton.isHidden = turnType != .neutralPiece
