@@ -9,15 +9,39 @@ import Foundation
 import AVFoundation
 
 class SoundManager: NSObject, AVAudioPlayerDelegate {
-    static let shared = SoundManager()
+    static var shared = SoundManager()
     static let pieceSoundName = "piece"
     static let musicSoundName = "music"
+    
     
     private override init() { }
     
     var players: [URL: AVAudioPlayer] = [:]
     var duplicatePlayers: [AVAudioPlayer] = []
     
+    var musicEnabled: Bool? {
+        didSet {
+            UserDefaults.standard.set(musicEnabled, forKey: "MusicEnabled")
+            
+            guard let bundle = Bundle.main.path(forResource: SoundManager.musicSoundName, ofType: "mp3") else { return }
+            let soundFileNameURL = URL(fileURLWithPath: bundle)
+            
+            if let player = players[soundFileNameURL] { //player for sound has been found
+                if musicEnabled! {
+                    if !player.isPlaying { //player is not in use, so use that one
+                        player.volume = 0.2
+                        player.numberOfLoops = -1
+                        player.prepareToPlay()
+                        player.play()
+                    }
+                } else {
+                    player.stop()
+                    player.currentTime = 0
+                }
+            }
+        }
+    }
+        
     func playSound(soundFileName: String, volume: Float = 1, loop: Bool = false) {
         
         guard let bundle = Bundle.main.path(forResource: soundFileName, ofType: "mp3") else { return }
@@ -92,33 +116,4 @@ class SoundManager: NSObject, AVAudioPlayerDelegate {
             duplicatePlayers.remove(at: index)
         }
     }
-    
-//    func startBackgroundMusic() {
-//        if let bundle = Bundle.main.path(forResource: "music", ofType: "mp3") {
-//            let backgroundMusic = NSURL(fileURLWithPath: bundle)
-//            do {
-//                audioPlayer = try AVAudioPlayer(contentsOf: backgroundMusic as URL)
-//                guard let audioPlayer = audioPlayer else { return }
-//                audioPlayer.numberOfLoops = -1
-//                audioPlayer.volume = 0.4
-//                audioPlayer.prepareToPlay()
-//                audioPlayer.play()
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
-//
-//    func playPieceSoundEffect() {
-//        if let bundle = Bundle.main.path(forResource: "piece", ofType: "mp3") {
-//            let soundEffectUrl = NSURL(fileURLWithPath: bundle)
-//            do {
-//                audioPlayer = try AVAudioPlayer(contentsOf: soundEffectUrl as URL)
-//                guard let audioPlayer = audioPlayer else { return }
-//                audioPlayer.play()
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
 }

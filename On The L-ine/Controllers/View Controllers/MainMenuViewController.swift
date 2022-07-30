@@ -9,12 +9,14 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import BLTNBoard
+import Instructions
 
 class MainMenuViewController: UIViewController {
     
     // MARK: - Properties
     
     var handle: AuthStateDidChangeListenerHandle?
+    let coachMarksController = CoachMarksController()
     
     // MARK: - Outlets
     
@@ -24,6 +26,8 @@ class MainMenuViewController: UIViewController {
     
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var accountButton: UIButton!
+    
+    @IBOutlet weak var musicButton: UIButton!
     
     // MARK: - Lifecycles
     
@@ -55,6 +59,8 @@ class MainMenuViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        self.coachMarksController.stop(immediately: true)
+        
         if let handle = handle {
             Auth.auth().removeStateDidChangeListener(handle)
         }
@@ -76,6 +82,13 @@ class MainMenuViewController: UIViewController {
     
     @IBAction func settingsButtonTapped(_ sender: Any) {
         // TODO: - Present Settings
+    }
+    
+    @IBAction func musicButtonTapped(_ sender: Any) {
+        guard SoundManager.shared.musicEnabled != nil else { return }
+        
+        SoundManager.shared.musicEnabled!.toggle()
+        musicButton.tintColor = SoundManager.shared.musicEnabled! ? Colors.light : Colors.lightDarkTransparent
     }
     
     @IBAction func helpButtonTapped(_ sender: Any) {
@@ -102,6 +115,9 @@ class MainMenuViewController: UIViewController {
     // MARK: - Helper Functions
     
     func setupViews() {
+        self.coachMarksController.dataSource = self
+        self.coachMarksController.delegate = self
+        
         view.verticalGradient()
         
         localButton.horizontalGradient()
@@ -114,6 +130,8 @@ class MainMenuViewController: UIViewController {
         
         settingsButton.customOutlinedButton(titleText: "Settings", titleColor: Colors.light, borderColor: Colors.light)
         updateAccountButton()
+        
+        musicButton.tintColor = SoundManager.shared.musicEnabled! ? Colors.light : Colors.lightDarkTransparent
     }
     
     func handleLaunch() {
@@ -192,9 +210,44 @@ class MainMenuViewController: UIViewController {
             
             TutorialManager.shared.tutorialActive = true
             
-            // TODO: - Start Spotlight
+            self.coachMarksController.start(in: .window(over: self))
         }
         AlertCardManager.manager = BLTNItemManager(rootItem: tutorial)
         AlertCardManager.manager!.showBulletin(above: self)
+    }
+}
+
+extension MainMenuViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation
+        )
+        
+        coachViews.bodyView.hintLabel.text = TutorialManager.shared.mainMenuInstructions[index]
+        coachViews.bodyView.nextLabel.text = "Next"
+        
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        switch index {
+        case 0: return coachMarksController.helper.makeCoachMark(pointOfInterest: view.center, in: view)
+        case 1: return coachMarksController.helper.makeCoachMark(forFrame: localButton.frame.union(computerButton.frame.union(onlineButton.frame)), in: view)
+        case 2: return coachMarksController.helper.makeCoachMark(for: localButton)
+        case 3: return coachMarksController.helper.makeCoachMark(for: computerButton)
+        case 4: return coachMarksController.helper.makeCoachMark(for: onlineButton)
+        default: return coachMarksController.helper.makeCoachMark()
+        }
+    }
+    
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return TutorialManager.shared.mainMenuInstructions.count
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
+        if !skipped {
+            presentGameBoard(gameMode: .tutorial)
+        }
     }
 }

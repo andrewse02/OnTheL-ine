@@ -45,27 +45,40 @@ class TurnManager {
         currentTurn.playerType = player
         currentTurn.turnType = .lPiece
         
-        let availableMoves = MoveManager.availableMoves(for: player, in: board)
+        guard !checkGameEnded(for: player, in: board) else { return }
         
-        if availableMoves.count <= 0 {
-            gameEnded = true
-        } else if player == .computer {
+        if player == .computer {
             var bestMove: (lPosition: LPosition, neutralMove: NeutralMove?)?
             Benchmarkers().printTimeElapsedWhenRunningCode(title: "Minimax") {
                 bestMove = ComputerManager.findBestMove(for: player, in: board)
             }
             guard let bestMove = bestMove else { return }
             
-            var newBoard = board.newBoard(for: player, lPosition: bestMove.lPosition)
-            if let neutralMove = bestMove.neutralMove {
-                newBoard = newBoard.newBoard(for: player, neutralMove: neutralMove)
-            }
-            
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 1...3)) {
+                var newBoard = board.newBoard(for: player, lPosition: bestMove.lPosition)
                 BoardManager.shared.currentBoard = newBoard
-                self.changeTurn()
+                SoundManager.shared.playSound(soundFileName: SoundManager.pieceSoundName)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 1...2)) {
+                    if let neutralMove = bestMove.neutralMove {
+                        newBoard = newBoard.newBoard(for: player, neutralMove: neutralMove)
+                    }
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        
+                        BoardManager.shared.currentBoard = newBoard
+                        SoundManager.shared.playSound(soundFileName: SoundManager.pieceSoundName)
+                        
+                        if TutorialManager.shared.tutorialActive {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                NotificationManager.postTutorialMove()
+                            }
+                        }
+                        
+                        self.changeTurn()
+                    }
+                }
             }
         }
     }
@@ -86,6 +99,18 @@ class TurnManager {
         }
     }
 
+    func checkGameEnded(for player: PlayerType, in board: Board) -> Bool {
+        let availableMoves = MoveManager.availableMoves(for: player, in: board)
+        
+        if availableMoves.count <= 0 {
+            gameEnded = true
+            NotificationManager.postTurnChanged()
+            
+            return true
+        }
+        
+        return false
+    }
 }
 
 enum TurnType {
@@ -98,7 +123,11 @@ class Turn {
     
     // MARK: - Properties
     
-    var playerType: PlayerType?
+    var playerType: PlayerType? {
+        didSet {
+            NotificationManager.postTurnChanged()
+        }
+    }
     var turnType: TurnType?
     
     init(playerType: PlayerType, turnType: TurnType) {

@@ -12,6 +12,7 @@ class ResultScreenViewController: UIViewController {
     // MARK: - Properties
     
     var didWin: Bool = true
+    var gameMode: GameMode?
     
     var labelCenter: CGPoint = CGPoint.zero
     var stackCenter: CGPoint = CGPoint.zero
@@ -35,7 +36,7 @@ class ResultScreenViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        animateViews()
+//        animateViews()
     }
     
     // MARK: - Actions
@@ -55,9 +56,12 @@ class ResultScreenViewController: UIViewController {
     // MARK: - Helper Functions
     
     func setupViews() {
+        guard let gameMode = gameMode else { return }
+        
         labelCenter = resultLabel.center
         resultLabel.center.y = -100
-        resultLabel.text = didWin ? "👑 You Win! 👑" : "👎 You Lost! 👎"
+        resultLabel.font = resultLabel.font.withSize(gameMode != .local ? 48 : 36)
+        resultLabel.text = gameMode != .local ? didWin ? "👑 You Win! 👑" : "👎 You Lost! 👎" : didWin ? "👑 Player 1 Wins! 👑" : "👑 Player 2 Wins! 👑"
         resultLabel.textColor = didWin ? Colors.primary ?? UIColor() : Colors.highlight ?? UIColor()
         
         stackCenter = endOptionsStackView.center

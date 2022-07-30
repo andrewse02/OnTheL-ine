@@ -1,3 +1,5 @@
+ source 'https://github.com/CocoaPods/Specs.git'
+
 # Uncomment the next line to define a global platform for your project
  platform :ios, '15.0'
 
@@ -13,8 +15,8 @@ target 'On The L-ine' do
   pod 'Socket.IO-Client-Swift'
   
   pod 'IQKeyboardManagerSwift'
-  
-  pod 'SpotlightViewKit', git: 'https://github.com/vovkroman/SpotlightViewKit.git'
+
+  pod 'Instructions', '~> 2.2.0'
  
   pod 'BulletinBoard'
 end

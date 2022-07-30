@@ -74,6 +74,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Instructions.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Libuv-gRPC.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -90,11 +95,6 @@
 			<false/>
 		</dict>
 		<key>Socket.IO-Client-Swift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SpotlightViewKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

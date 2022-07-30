@@ -736,6 +736,7 @@ PODS:
     - Libuv-gRPC (= 0.0.10)
   - gRPC-Core/Interface (1.44.0)
   - GTMSessionFetcher/Core (1.7.1)
+  - Instructions (2.2.0)
   - IQKeyboardManagerSwift (6.5.9)
   - leveldb-library (1.22.1)
   - Libuv-gRPC (0.0.10):
@@ -752,7 +753,6 @@ PODS:
   - PromisesObjC (2.1.0)
   - Socket.IO-Client-Swift (16.0.1):
     - Starscream (~> 4.0)
-  - SpotlightViewKit (0.0.1)
   - Starscream (4.0.4)
 
 DEPENDENCIES:
@@ -760,11 +760,13 @@ DEPENDENCIES:
   - Firebase/AnalyticsWithoutAdIdSupport
   - Firebase/Auth
   - Firebase/Firestore
+  - Instructions (~> 2.2.0)
   - IQKeyboardManagerSwift
   - Socket.IO-Client-Swift
-  - SpotlightViewKit (from `https://github.com/vovkroman/SpotlightViewKit.git`)
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Instructions
   trunk:
     - abseil
     - BoringSSL-GRPC
@@ -790,15 +792,6 @@ SPEC REPOS:
     - Socket.IO-Client-Swift
     - Starscream
 
-EXTERNAL SOURCES:
-  SpotlightViewKit:
-    :git: https://github.com/vovkroman/SpotlightViewKit.git
-
-CHECKOUT OPTIONS:
-  SpotlightViewKit:
-    :commit: 7fdd52f4b586c466285ec892b07adca490cc3a2f
-    :git: https://github.com/vovkroman/SpotlightViewKit.git
-
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
@@ -816,15 +809,15 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
   GTMSessionFetcher: 4577a4cc914a5a07c40a8a0ad0acc22080418c2d
+  Instructions: 07052901a398b42eb1d83de9755b8a0bac3e2f7d
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
-  SpotlightViewKit: 0abd0ebb0ba0ad17f36e630523ea76cb959f9905
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
-PODFILE CHECKSUM: 183efb894ce81015665985b9c9e22da05fb5e4c0
+PODFILE CHECKSUM: 72c488aa07e4811046c2d2ab1b2f6b5f189b4d95
 
 COCOAPODS: 1.11.3

@@ -10,6 +10,10 @@ import FirebaseAuth
 
 class MatchFoundViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    var mainMenu = false
+    
     // MARK: - Outlets
     
     @IBOutlet weak var playerLabel: UILabel!
@@ -22,6 +26,16 @@ class MatchFoundViewController: UIViewController {
 
         setupViews()
         NotificationManager.observeMatchStart(observer: self, selector: #selector(onStart(notification:)))
+        NotificationManager.observeMainMenu(observer: self, selector: #selector(onMainMenu))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if mainMenu {
+            mainMenu = false
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true)
+        }
     }
     
     // MARK: - Helper Functions
@@ -32,6 +46,15 @@ class MatchFoundViewController: UIViewController {
         
         playerLabel.text = player
         opponentLabel.text = opponent
+    }
+    
+    func presentMainMenu() {
+        mainMenu = true
+        
+        BoardManager.shared.currentBoard = nil
+        TurnManager.shared.setTurn(nil)
+        TurnManager.shared.gameEnded = false
+        TutorialManager.shared.reset()
     }
     
     @objc func onStart(notification: Notification) {
@@ -46,5 +69,8 @@ class MatchFoundViewController: UIViewController {
         gameBoardViewController.modalPresentationStyle = .fullScreen
         self.present(gameBoardViewController, animated: true)
     }
-
+    
+    @objc func onMainMenu() {
+        presentMainMenu()
+    }
 }

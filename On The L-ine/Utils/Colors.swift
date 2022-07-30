@@ -29,6 +29,7 @@ class Colors {
     
     static let light = UIColor(named: "Light")
     static let lightDark = UIColor(named: "Light Dark")
+    static let lightDarkTransparent = UIColor(named: "Light Dark-Transparent")
     static let middleDark = UIColor(named: "Middle Dark")
     static let dark = UIColor(named: "Dark")
     

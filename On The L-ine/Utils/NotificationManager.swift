@@ -17,6 +17,8 @@ class NotificationManager {
     private static let moveMadeName = Notification.Name("MoveMade")
     private static let playAgainName = Notification.Name("PlayAgain")
     private static let mainMenuName = Notification.Name("MainMenu")
+    private static let tutorialMoveName = Notification.Name("TutorialMove")
+    private static let turnChangedName = Notification.Name("TurnChanged")
     
     static func observeMatchFound(observer: Any, selector: Selector) {
         notificationCenter.addObserver(observer, selector: selector, name: matchFoundName, object: nil)
@@ -76,5 +78,21 @@ class NotificationManager {
     
     static func postMainMenu() {
         notificationCenter.post(name: mainMenuName, object: nil)
+    }
+    
+    static func observeTutorialMove(observer: Any, selector: Selector) {
+        notificationCenter.addObserver(observer, selector: selector, name: tutorialMoveName, object: nil)
+    }
+    
+    static func postTutorialMove() {
+        notificationCenter.post(name: tutorialMoveName, object: nil)
+    }
+    
+    static func observeTurnChanged(observer: Any, selector: Selector) {
+        notificationCenter.addObserver(observer, selector: selector, name: turnChangedName, object: nil)
+    }
+    
+    static func postTurnChanged() {
+        notificationCenter.post(name: turnChangedName, object: nil)
     }
 }

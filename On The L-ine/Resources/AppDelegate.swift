@@ -8,6 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import Firebase
+import AVFAudio
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         FirestoreManager.configure()
         
-//        SoundManager.shared.playSound(soundFileName: "music", volume: 0.2, loop: true)
+        var categoryError :NSError?
+        var success: Bool
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback, options: .duckOthers)
+            success = true
+        } catch let error as NSError {
+            categoryError = error
+            success = false
+        }
+        
+        if !success {
+            print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(categoryError!)\n\n\(categoryError!.localizedDescription)")
+        }
+        
+        SoundManager.shared.playSound(soundFileName: SoundManager.musicSoundName, volume: 0.2, loop: true)
+        SoundManager.shared.musicEnabled = UserDefaults.standard.object(forKey: "MusicEnabled") as? Bool ?? true
+        
 
         return true
     }

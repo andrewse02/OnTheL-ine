@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import Instructions
 
 private let reuseIdentifier = "selectionCell"
 
@@ -47,6 +48,8 @@ class GameBoardViewController: UIViewController {
     
     let cellSpacing: CGFloat = 3
     
+    let coachMarksController = CoachMarksController()
+    
     // MARK: - Outlets
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -67,13 +70,28 @@ class GameBoardViewController: UIViewController {
         NotificationManager.observePlayAgain(observer: self, selector: #selector(onPlayAgainTapped))
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if TutorialManager.shared.tutorialActive {
+            self.coachMarksController.start(in: .window(over: self))
+            NotificationManager.observeTutorialMove(observer: self, selector: #selector(onTutorialMoveMade))
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.coachMarksController.stop(immediately: true)
+    }
+    
     // MARK: - Actions
     
     @IBAction func skipButtonTapped(_ sender: Any) {
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let self = self else { return }
             
-            TurnManager.shared.progressTurn()
+            DispatchQueue.main.async {
+                TurnManager.shared.progressTurn()
+            }
             
             if self.gameMode == .online {
                 guard let lIndexes = self.currentLIndexes else { return }
@@ -91,7 +109,7 @@ class GameBoardViewController: UIViewController {
                 self.collectionView.reloadData()
                 self.updateViews()
                 
-                SoundManager.shared.playSound(soundFileName: "piece")
+                SoundManager.shared.playSound(soundFileName: SoundManager.pieceSoundName)
             }
         }
     }
@@ -112,7 +130,7 @@ class GameBoardViewController: UIViewController {
     
     @IBAction func backButtonTapped(_ sender: Any) {
         guard let gameMode = gameMode else { self.dismiss(animated: true); return }
-
+        
         if gameMode == .online {
             // TODO: - Call function to send a leave game event to the server
         }
@@ -125,7 +143,11 @@ class GameBoardViewController: UIViewController {
     func setupViews() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         BoardManager.shared.delegate = self
+        
+        coachMarksController.dataSource = self
+        coachMarksController.delegate = self
         
         guard let gameMode = gameMode else { return }
         let players = gameMode.players()
@@ -149,6 +171,7 @@ class GameBoardViewController: UIViewController {
         collectionView.addGestureRecognizer(tapGestureRecognizer)
         
         NotificationManager.observeMoveMade(observer: self, selector: #selector(onMoveMade(notification:)))
+        NotificationManager.observeTurnChanged(observer: self, selector: #selector(onTurnChanged))
         
         skipButton.customButton(titleText: "Skip", titleColor: Colors.dark)
         
@@ -162,9 +185,10 @@ class GameBoardViewController: UIViewController {
               let turnType = currentTurn.turnType else { return }
         let players = gameMode.players()
         
-        if TurnManager.shared.gameEnded {
+        if TurnManager.shared.gameEnded && !TutorialManager.shared.tutorialActive {
             guard let resultScreenViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Result") as? ResultScreenViewController else { return }
             
+            resultScreenViewController.gameMode = gameMode
             resultScreenViewController.didWin = player.opposite == players.player
             
             resultScreenViewController.modalPresentationStyle = .overCurrentContext
@@ -195,6 +219,20 @@ class GameBoardViewController: UIViewController {
         collectionView.reloadData()
     }
     
+    func presentMainMenu() {
+        self.dismiss(animated: true)
+        
+        guard let gameMode = gameMode else { return }
+        let players = gameMode.players()
+        
+        BoardManager.shared.currentBoard = nil
+        TurnManager.shared.setTurn(nil)
+        TurnManager.shared.gameEnded = false
+        TutorialManager.shared.reset()
+        
+        updateViews()
+    }
+    
     @objc func onPan(_ sender: UIPanGestureRecognizer) {
         guard !TurnManager.shared.gameEnded,
               let currentTurn = TurnManager.shared.currentTurn,
@@ -205,6 +243,8 @@ class GameBoardViewController: UIViewController {
             let location = sender.location(in: collectionView)
             if let indexPath = collectionView.indexPathForItem(at: location),
                let pannedCell = collectionView.cellForItem(at: indexPath) as? SelectionCollectionViewCell {
+                guard TutorialManager.shared.gameBoardConstraints.isEmpty ||
+                        TutorialManager.shared.gameBoardConstraints.contains(where: { $0 == pannedCell.index ?? (row: -1, column: -1) }) else { print("false"); return }
                 if selections.peek(elements: 2) != pannedCell {
                     guard !selections.contains(element: pannedCell),
                           selections.size() < 4 else { return }
@@ -223,8 +263,12 @@ class GameBoardViewController: UIViewController {
             if move.0 != nil {
                 BoardManager.shared.currentBoard!.setCurrentPosition(for: currentPlayer, selections: selections.toArray(), shapeIndex: move.1)
                 
-                TurnManager.shared.progressTurn()
+                if !TutorialManager.shared.pause { TurnManager.shared.progressTurn() }
                 updateViews()
+                
+                if TutorialManager.shared.tutorialActive {
+                    coachMarksController.flow.showNext()
+                }
             }
             
             collectionView.reloadData()
@@ -252,7 +296,12 @@ class GameBoardViewController: UIViewController {
                     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
                         guard let self = self else { return }
                         
-                        TurnManager.shared.progressTurn()
+                        if !TutorialManager.shared.tutorialActive {
+                            DispatchQueue.main.async {
+                                TurnManager.shared.progressTurn()
+                            }
+                        }
+                        
                         DispatchQueue.main.async {
                             self.updateViews()
                         }
@@ -268,13 +317,22 @@ class GameBoardViewController: UIViewController {
                     WebSocketManager.shared.sendMove(lIndexes: lIndexes, neutralMove: (origin: selectedNeutral.index!, destination: tappedCell.index!), completion: onMoveComplete)
                 }
                 
-                SoundManager.shared.playSound(soundFileName: "piece")
+                SoundManager.shared.playSound(soundFileName: SoundManager.pieceSoundName)
+            }
+            
+            if TutorialManager.shared.tutorialActive {
+                coachMarksController.flow.showNext()
             }
         }
     }
     
     func onMoveComplete(data: [Any]) {
         
+    }
+    
+    @objc func onTutorialMoveMade() {
+        coachMarksController.flow.showNext()
+        updateViews()
     }
     
     @objc func onMoveMade(notification: Notification) {
@@ -287,20 +345,19 @@ class GameBoardViewController: UIViewController {
         collectionView.reloadData()
         updateViews()
         
-        SoundManager.shared.playSound(soundFileName: "piece")
+        SoundManager.shared.playSound(soundFileName: SoundManager.pieceSoundName)
+        
+        guard let currentBoard = BoardManager.shared.currentBoard else { return }
+        
+        _ = TurnManager.shared.checkGameEnded(for: .local, in: currentBoard)
+    }
+    
+    @objc func onTurnChanged() {
+        updateViews()
     }
     
     @objc func onMainMenuTapped() {
-        self.dismiss(animated: true)
-        
-        guard let gameMode = gameMode else { return }
-        let players = gameMode.players()
-        
-        BoardManager.shared.currentBoard = nil
-        TurnManager.shared.setTurn(nil)
-        TurnManager.shared.gameEnded = false
-        
-        updateViews()
+        presentMainMenu()
     }
     
     @objc func onPlayAgainTapped() {
@@ -352,5 +409,143 @@ extension GameBoardViewController: UICollectionViewDelegate, UICollectionViewDel
 extension GameBoardViewController: BoardManagerDelegate {
     func currentBoardChanged() {
         collectionView.reloadData()
+        updateViews()
+    }
+}
+
+extension GameBoardViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation
+        )
+        
+        coachViews.bodyView.hintLabel.text = TutorialManager.shared.gameBoardInstructions[index]
+        coachViews.bodyView.nextLabel.text = "Next"
+        coachViews.bodyView.separator.isHidden = [4, 5, 6, 8].contains(index)
+        coachViews.bodyView.nextLabel.isHidden = [4, 5, 6, 8].contains(index)
+        
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        coachMarksController.overlay.isUserInteractionEnabledInsideCutoutPath = [4, 5, 6].contains(index)
+        
+        switch index {
+        case 0: return coachMarksController.helper.makeCoachMark(for: collectionView)
+        case 1:
+            let topLeft = collectionView.cellForItem(at: IndexPath(row: 1, section: 0)) ?? UICollectionViewCell()
+            let bottomRight = collectionView.cellForItem(at: IndexPath(row: 14, section: 0)) ?? UICollectionViewCell()
+            
+            return coachMarksController.helper.makeCoachMark(forFrame: topLeft.frame.union(bottomRight.frame), in: collectionView)
+        case 2: return coachMarksController.helper.makeCoachMark(for: collectionView.cellForItem(at: IndexPath(row: 0, section: 0)))
+        case 3: return coachMarksController.helper.makeCoachMark(for: collectionView.cellForItem(at: IndexPath(row: 15, section: 0)))
+        case 4:
+            let topLeft = collectionView.cellForItem(at: IndexPath(row: 4, section: 0)) ?? UICollectionViewCell()
+            let bottomRight = collectionView.cellForItem(at: IndexPath(row: 13, section: 0)) ?? UICollectionViewCell()
+            
+            TutorialManager.shared.gameBoardConstraints = [
+                (row: 1, column: 0),
+                (row: 2, column: 0),
+                (row: 3, column: 0),
+                (row: 3, column: 1)
+            ]
+            
+            let points: [CGPoint] = [
+                CGPoint(x: topLeft.frame.minX-4, y: topLeft.frame.minY-4),
+                CGPoint(x: topLeft.frame.minX-4, y: bottomRight.frame.maxY+4),
+                CGPoint(x: bottomRight.frame.maxX+4, y: bottomRight.frame.maxY+4),
+                CGPoint(x: bottomRight.frame.maxX+4, y: bottomRight.frame.minY-4),
+                CGPoint(x: topLeft.frame.maxX+4, y: bottomRight.frame.minY-4),
+                CGPoint(x: topLeft.frame.maxX+4, y: topLeft.frame.minY-4)
+            ]
+            
+            let path = UIBezierPath()
+            
+            path.move(to: collectionView.convert(points[0], to: view))
+            for point in points {
+                path.addLine(to: collectionView.convert(point, to: view))
+            }
+            path.close()
+            
+            let pathMaker = { (frame: CGRect) -> UIBezierPath in
+                return path
+            }
+            
+            var coachMark = coachMarksController.helper.makeCoachMark(forFrame: topLeft.frame.union(bottomRight.frame), in: collectionView, cutoutPathMaker: pathMaker)
+            coachMark.isUserInteractionEnabledInsideCutoutPath = true
+            
+            return coachMark
+        case 5:
+            TutorialManager.shared.gameBoardConstraints = [(row: 3, column: 3)]
+            
+            let bottomRight = collectionView.cellForItem(at: IndexPath(row: 15, section: 0)) ?? UICollectionViewCell()
+            let points = [
+                CGPoint(x: bottomRight.frame.minX-4, y: bottomRight.frame.minY-4),
+                CGPoint(x: bottomRight.frame.minX-4, y: bottomRight.frame.maxY+4),
+                CGPoint(x: bottomRight.frame.maxX+4, y: bottomRight.frame.maxY+4),
+                CGPoint(x: bottomRight.frame.maxX+4, y: bottomRight.frame.minY-4)
+            ]
+            
+            let path = UIBezierPath()
+            
+            path.move(to: collectionView.convert(points[0], to: view))
+            for point in points {
+                path.addLine(to: collectionView.convert(point, to: view))
+            }
+            path.close()
+            
+            let pathMaker = { (frame: CGRect) -> UIBezierPath in
+                return path
+            }
+            
+            var coachMark = coachMarksController.helper.makeCoachMark(forFrame: bottomRight.frame, in: collectionView, cutoutPathMaker: pathMaker)
+            coachMark.isUserInteractionEnabledInsideCutoutPath = true
+            
+            
+            return coachMark
+        case 6:
+            TutorialManager.shared.gameBoardConstraints = [(row: 1, column: 3)]
+            
+            let topRight = collectionView.cellForItem(at: IndexPath(row: 7, section: 0)) ?? UICollectionViewCell()
+            let points = [
+                CGPoint(x: topRight.frame.minX-4, y: topRight.frame.minY-4),
+                CGPoint(x: topRight.frame.minX-4, y: topRight.frame.maxY+4),
+                CGPoint(x: topRight.frame.maxX+4, y: topRight.frame.maxY+4),
+                CGPoint(x: topRight.frame.maxX+4, y: topRight.frame.minY-4)
+            ]
+            
+            let path = UIBezierPath()
+            
+            path.move(to: collectionView.convert(points[0], to: view))
+            for point in points {
+                path.addLine(to: collectionView.convert(point, to: view))
+            }
+            path.close()
+            
+            let pathMaker = { (frame: CGRect) -> UIBezierPath in
+                return path
+            }
+            
+            var coachMark = coachMarksController.helper.makeCoachMark(forFrame: topRight.frame, in: collectionView, cutoutPathMaker: pathMaker)
+            coachMark.isUserInteractionEnabledInsideCutoutPath = true
+            
+            return coachMark
+        case 7, 9: return coachMarksController.helper.makeCoachMark(for: collectionView)
+        case 8:
+            TurnManager.shared.progressTurn()
+             
+            return coachMarksController.helper.makeCoachMark(for: collectionView)
+        case 10: return coachMarksController.helper.makeCoachMark(pointOfInterest: view.center, in: view)
+        default: return coachMarksController.helper.makeCoachMark()
+        }
+    }
+    
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return TutorialManager.shared.gameBoardInstructions.count
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
+        presentMainMenu()
     }
 }

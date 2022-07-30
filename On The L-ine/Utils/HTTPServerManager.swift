@@ -9,8 +9,8 @@ import Foundation
 
 class HTTPServerManager {
     static let baseURL = URL(string: "http://otl.andrewelliott.me")
-//    static let baseURL = URL(string: "http://192.168.1.211:4000")
-//    static let baseURL = URL(string: "http://localhost")
+//    static let baseURL = URL(string: "http://192.168.0.125:4000")
+//    static let baseURL = URL(string: "http://localhost:4000")
     
     private static let signUpEndpoint = "signup"
     private static let signInEndpoint = "signin"

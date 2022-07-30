@@ -11,9 +11,9 @@ class TutorialManager {
     static let shared = TutorialManager()
     
     var tutorialActive = false
-    var currentStep = 0
+    var pause = false
     
-    let mainMenuInstructions = [
+    let mainMenuInstructions: [String] = [
         """
         Welcome to the tutorial!
         Let's first take a look around the Main Menu.
@@ -32,7 +32,7 @@ class TutorialManager {
         """
     ]
     
-    let gameBoardInstructions = [
+    let gameBoardInstructions: [String] = [
         """
         This is the game board.
         """,
@@ -40,15 +40,39 @@ class TutorialManager {
         Each player has their own L-piece.
         """,
         """
-        There are also two neutral pieces.
+        There are also two Neutral pieces.
+        """,
+        """
+        These act as obstacles in the way of your L-piece.
         """,
         """
         To make Blue's first move, drag your finger in an L-shape on the board to move your piece.
+        """,
+        """
+        Now, tap on the Neutral piece to select it.
+        """,
+        """
+        Tap to move the Neutral piece to the selected space to block Red from moving there.
+        """,
+        """
+        Now it's Red's turn.
+        """,
+        """
+        Red is moving...
+        """,
+        """
+        As you can see, there are no available places to move Blue's L-piece.
+        If you can't move anywhere, the other player wins.
+        """,
+        """
+        And that concludes the tutorial! Thanks for playing the game, enjoy!
         """
     ]
     
+    var gameBoardConstraints: [CellIndex] = []
+    
     func reset() {
         tutorialActive = false
-        currentStep = 0
+        pause = false
     }
 }

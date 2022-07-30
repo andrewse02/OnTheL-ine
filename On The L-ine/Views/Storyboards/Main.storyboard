@@ -338,7 +338,7 @@
                                 <color key="backgroundColor" name="Primary"/>
                                 <color key="tintColor" name="Light"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Onl-ine">
+                                <buttonConfiguration key="configuration" style="plain" title="Online">
                                     <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
                                     <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
                                 </buttonConfiguration>
@@ -346,7 +346,7 @@
                                     <action selector="onlineButtonTapped:" destination="0ND-BR-ZsX" eventType="touchUpInside" id="kC2-DD-Xcn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RU7-Bw-SEO">
+                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RU7-Bw-SEO">
                                 <rect key="frame" x="41.5" y="491" width="331" height="41"/>
                                 <color key="tintColor" name="Light"/>
                                 <state key="normal" title="Button"/>
@@ -359,7 +359,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8A-qa-QNc">
-                                <rect key="frame" x="351" y="801" width="47" height="45"/>
+                                <rect key="frame" x="353" y="801" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="Cfo-fe-Hcp"/>
+                                    <constraint firstAttribute="height" constant="45" id="MmG-KX-Yck"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" name="Light"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -383,6 +387,23 @@
                                     <action selector="accountButtonTapped:" destination="0ND-BR-ZsX" eventType="touchUpInside" id="0HL-BJ-8Wy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qOs-lw-eqQ">
+                                <rect key="frame" x="292" y="801" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="YA2-EZ-yGn"/>
+                                    <constraint firstAttribute="width" constant="45" id="wRA-hG-7kR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" name="Light"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="music.note" catalog="system" symbolScale="default"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
+                                </state>
+                                <connections>
+                                    <action selector="musicButtonTapped:" destination="0ND-BR-ZsX" eventType="touchUpInside" id="NGz-fJ-k6b"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1d4-VU-GjI"/>
                         <color key="backgroundColor" name="Primary-Middle Dark"/>
@@ -395,16 +416,18 @@
                             <constraint firstItem="RU7-Bw-SEO" firstAttribute="width" secondItem="qFO-32-g8A" secondAttribute="width" multiplier="0.8" id="Hgg-j5-9wN"/>
                             <constraint firstItem="nxS-LO-2vx" firstAttribute="centerX" secondItem="1d4-VU-GjI" secondAttribute="centerX" id="I6k-R9-Fcj"/>
                             <constraint firstItem="RU7-Bw-SEO" firstAttribute="centerX" secondItem="1d4-VU-GjI" secondAttribute="centerX" id="MZa-Iv-pNQ"/>
-                            <constraint firstItem="1d4-VU-GjI" firstAttribute="bottom" secondItem="p8A-qa-QNc" secondAttribute="bottom" constant="16" id="QQi-gq-A1s"/>
                             <constraint firstItem="1gd-tn-djr" firstAttribute="centerX" secondItem="1d4-VU-GjI" secondAttribute="centerX" id="Qya-sM-kTm"/>
-                            <constraint firstItem="1d4-VU-GjI" firstAttribute="trailing" secondItem="p8A-qa-QNc" secondAttribute="trailing" constant="16" id="UNh-Kf-qej"/>
+                            <constraint firstItem="1d4-VU-GjI" firstAttribute="trailing" secondItem="p8A-qa-QNc" secondAttribute="trailing" constant="16" id="SA0-dI-usp"/>
                             <constraint firstItem="ofo-aJ-gj7" firstAttribute="top" secondItem="1gd-tn-djr" secondAttribute="bottom" constant="16" id="YIZ-Bw-uIJ"/>
                             <constraint firstItem="1gd-tn-djr" firstAttribute="width" secondItem="qFO-32-g8A" secondAttribute="width" multiplier="0.8" id="Z6f-pi-q2k"/>
+                            <constraint firstItem="1d4-VU-GjI" firstAttribute="bottom" secondItem="p8A-qa-QNc" secondAttribute="bottom" constant="16" id="aEe-Sa-dSV"/>
                             <constraint firstItem="1gd-tn-djr" firstAttribute="top" secondItem="nxS-LO-2vx" secondAttribute="bottom" constant="16" id="fDy-bF-LEl"/>
                             <constraint firstItem="ofo-aJ-gj7" firstAttribute="centerX" secondItem="1d4-VU-GjI" secondAttribute="centerX" id="gOD-if-YnF"/>
                             <constraint firstItem="6sM-vX-8ep" firstAttribute="top" secondItem="ofo-aJ-gj7" secondAttribute="bottom" constant="16" id="kxH-Tr-x2J"/>
                             <constraint firstItem="bid-xl-kEx" firstAttribute="width" secondItem="qFO-32-g8A" secondAttribute="width" multiplier="0.8" id="ljc-lO-n0z"/>
                             <constraint firstItem="RU7-Bw-SEO" firstAttribute="top" secondItem="6sM-vX-8ep" secondAttribute="bottom" constant="96" id="o5l-pl-Ftq"/>
+                            <constraint firstItem="p8A-qa-QNc" firstAttribute="leading" secondItem="qOs-lw-eqQ" secondAttribute="trailing" constant="16" id="pGD-5I-J0V"/>
+                            <constraint firstItem="1d4-VU-GjI" firstAttribute="bottom" secondItem="qOs-lw-eqQ" secondAttribute="bottom" constant="16" id="qSp-7y-msG"/>
                             <constraint firstItem="bLq-gI-j62" firstAttribute="top" secondItem="1d4-VU-GjI" secondAttribute="top" constant="32" id="rxZ-l0-LUg"/>
                             <constraint firstItem="nxS-LO-2vx" firstAttribute="top" secondItem="bLq-gI-j62" secondAttribute="bottom" constant="64" id="ugj-9Y-6WZ"/>
                             <constraint firstItem="6sM-vX-8ep" firstAttribute="centerX" secondItem="1d4-VU-GjI" secondAttribute="centerX" id="xOR-3V-Grh"/>
@@ -414,6 +437,7 @@
                         <outlet property="accountButton" destination="bid-xl-kEx" id="jiE-l4-Gcu"/>
                         <outlet property="computerButton" destination="ofo-aJ-gj7" id="HkL-1S-uAr"/>
                         <outlet property="localButton" destination="1gd-tn-djr" id="264-SP-HRO"/>
+                        <outlet property="musicButton" destination="qOs-lw-eqQ" id="ypj-cB-zjh"/>
                         <outlet property="onlineButton" destination="6sM-vX-8ep" id="2Fl-Mr-oiG"/>
                         <outlet property="settingsButton" destination="RU7-Bw-SEO" id="Iu3-Ld-sx6"/>
                     </connections>
@@ -1068,14 +1092,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHK-sR-eTv">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHK-sR-eTv">
+                                <rect key="frame" x="0.0" y="5" width="414" height="896"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6ok-YH-Sxc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👑 You Win! 👑" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfI-OV-EUO">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👑 You Win! 👑" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="TfI-OV-EUO">
                                             <rect key="frame" x="45" y="256" width="324.5" height="56.5"/>
                                             <fontDescription key="fontDescription" name="Raleway-Black" family="Raleway" pointSize="48"/>
                                             <color key="textColor" name="Light"/>
@@ -1120,10 +1143,16 @@
                                         <constraint firstItem="TfI-OV-EUO" firstAttribute="centerX" secondItem="6ok-YH-Sxc" secondAttribute="centerX" id="pUQ-XU-LB9"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="regular"/>
+                                <blurEffect style="dark"/>
                             </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Pcu-nT-noq"/>
+                        <constraints>
+                            <constraint firstItem="NHK-sR-eTv" firstAttribute="height" secondItem="N6j-Bh-0Fr" secondAttribute="height" id="Tcs-C6-4B8"/>
+                            <constraint firstItem="NHK-sR-eTv" firstAttribute="width" secondItem="N6j-Bh-0Fr" secondAttribute="width" id="dgq-hw-JLb"/>
+                            <constraint firstItem="NHK-sR-eTv" firstAttribute="centerY" secondItem="Pcu-nT-noq" secondAttribute="centerY" id="oMG-vD-3xp"/>
+                            <constraint firstItem="NHK-sR-eTv" firstAttribute="centerX" secondItem="Pcu-nT-noq" secondAttribute="centerX" id="uNl-SZ-hoo"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="blur" destination="6ok-YH-Sxc" id="Iu1-K0-Ry5"/>
@@ -1144,6 +1173,7 @@
         <image name="arrowshape.turn.up.backward.fill" catalog="system" width="128" height="106"/>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
+        <image name="music.note" catalog="system" width="97" height="128"/>
         <image name="person.fill.badge.plus" catalog="system" width="128" height="124"/>
         <image name="qrcode" catalog="system" width="128" height="114"/>
         <image name="questionmark.circle.fill" catalog="system" width="128" height="121"/>
