@@ -33,12 +33,12 @@ class AlertCardManager {
         rootItem.descriptionText = changelogDescription
         rootItem.actionButtonTitle = "Ok"
         
-        rootItem.appearance.titleFontSize = 32
+        rootItem.appearance.titleFontDescriptor = UIFontDescriptor(name: "RalewayRoman-SemiBold", size: 32)
         rootItem.appearance.titleTextColor = Colors.dark ?? UIColor()
         
         rootItem.appearance.imageViewTintColor = Colors.primary ?? UIColor()
         
-        rootItem.appearance.descriptionFontSize = 20
+        rootItem.appearance.descriptionFontDescriptor = UIFontDescriptor(name: "RalewayRoman-Medium", size: 16)
         rootItem.appearance.descriptionTextColor = Colors.dark ?? UIColor()
         rootItem.appearance.descriptionTextAlignment = .left
         
@@ -64,11 +64,12 @@ class AlertCardManager {
         rootItem.actionButtonTitle = "Start"
         rootItem.alternativeButtonTitle = "Skip Tutorial"
         
-        rootItem.appearance.titleFontSize = 32
+        rootItem.appearance.titleFontDescriptor = UIFontDescriptor(name: "RalewayRoman-SemiBold", size: 32)
         rootItem.appearance.titleTextColor = Colors.dark ?? UIColor()
         
         rootItem.appearance.imageViewTintColor = Colors.primary ?? UIColor()
         
+        rootItem.appearance.descriptionFontDescriptor = UIFontDescriptor(name: "RalewayRoman-Medium", size: 16)
         rootItem.appearance.descriptionTextColor = Colors.dark ?? UIColor()
         
         rootItem.appearance.actionButtonFontSize = 20

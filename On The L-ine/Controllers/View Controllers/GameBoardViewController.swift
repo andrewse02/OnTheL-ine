@@ -244,7 +244,7 @@ class GameBoardViewController: UIViewController {
             if let indexPath = collectionView.indexPathForItem(at: location),
                let pannedCell = collectionView.cellForItem(at: indexPath) as? SelectionCollectionViewCell {
                 guard TutorialManager.shared.gameBoardConstraints.isEmpty ||
-                        TutorialManager.shared.gameBoardConstraints.contains(where: { $0 == pannedCell.index ?? (row: -1, column: -1) }) else { print("false"); return }
+                        TutorialManager.shared.gameBoardConstraints.contains(where: { $0 == pannedCell.index ?? (row: -1, column: -1) }) else { return }
                 if selections.peek(elements: 2) != pannedCell {
                     guard !selections.contains(element: pannedCell),
                           selections.size() < 4 else { return }
@@ -419,9 +419,15 @@ extension GameBoardViewController: CoachMarksControllerDataSource, CoachMarksCon
             withArrow: true,
             arrowOrientation: coachMark.arrowOrientation
         )
+    
+        let attributes = [NSAttributedString.Key.font: UIFont(name: "RalewayRoman-Medium", size: 18) ?? UIFont(), NSAttributedString.Key.foregroundColor: Colors.dark ?? UIColor()] as [NSAttributedString.Key : Any]
         
-        coachViews.bodyView.hintLabel.text = TutorialManager.shared.gameBoardInstructions[index]
-        coachViews.bodyView.nextLabel.text = "Next"
+        let hintAttributes = NSMutableAttributedString(string: TutorialManager.shared.gameBoardInstructions[index], attributes: attributes)
+        let nextAttributes = NSMutableAttributedString(string: "Next", attributes: attributes)
+        
+        coachViews.bodyView.hintLabel.attributedText = hintAttributes
+        coachViews.bodyView.nextLabel.attributedText = nextAttributes
+        
         coachViews.bodyView.separator.isHidden = [4, 5, 6, 8].contains(index)
         coachViews.bodyView.nextLabel.isHidden = [4, 5, 6, 8].contains(index)
         

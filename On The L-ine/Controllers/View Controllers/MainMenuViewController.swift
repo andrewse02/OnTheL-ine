@@ -224,8 +224,13 @@ extension MainMenuViewController: CoachMarksControllerDataSource, CoachMarksCont
             arrowOrientation: coachMark.arrowOrientation
         )
         
-        coachViews.bodyView.hintLabel.text = TutorialManager.shared.mainMenuInstructions[index]
-        coachViews.bodyView.nextLabel.text = "Next"
+        let attributes = [NSAttributedString.Key.font: UIFont(name: "RalewayRoman-Medium", size: 18) ?? UIFont(), NSAttributedString.Key.foregroundColor: Colors.dark ?? UIColor()] as [NSAttributedString.Key : Any]
+        
+        let hintAttributes = NSMutableAttributedString(string: TutorialManager.shared.mainMenuInstructions[index], attributes: attributes)
+        let nextAttributes = NSMutableAttributedString(string: "Next", attributes: attributes)
+        
+        coachViews.bodyView.hintLabel.attributedText = hintAttributes
+        coachViews.bodyView.nextLabel.attributedText = nextAttributes
         
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
