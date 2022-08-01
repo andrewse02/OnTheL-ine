@@ -35,10 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("\n~~~~~Error in \(#file) within function \(#function) at line \(#line)~~~~~\n", "\n\(categoryError!)\n\n\(categoryError!.localizedDescription)")
         }
         
-        SoundManager.shared.playSound(soundFileName: SoundManager.musicSoundName, volume: 0.2, loop: true)
+        SoundManager.shared.playSound(soundFileName: SoundManager.musicSoundName, volume: 0.1, loop: true)
         SoundManager.shared.musicEnabled = UserDefaults.standard.object(forKey: "MusicEnabled") as? Bool ?? true
         
-
         return true
     }
     

@@ -21,10 +21,14 @@ class OnlineMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViews()
+        setupGradients() // Called for quicker setup time
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+ 
+        setupGradients() // Called for correct setup
+        
         if let roomCode = DeepLinkManager.roomCode {
             presentJoinRoom()
         }
@@ -67,7 +71,7 @@ class OnlineMenuViewController: UIViewController {
     
     // MARK: - Helper Functions
     
-    func setupViews() {
+    func setupGradients() {
         view.verticalGradient()
         
         quickMatchButton.horizontalGradient()

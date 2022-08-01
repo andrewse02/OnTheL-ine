@@ -31,8 +31,9 @@ class JoinRoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupViews()
+        
         NotificationManager.observeMatchStart(observer: self, selector: #selector(onMatchStart(notification:)))
     }
     
@@ -42,6 +43,12 @@ class JoinRoomViewController: UIViewController {
         if let roomCode = DeepLinkManager.roomCode {
             joinRoom(roomCode: roomCode)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupGradients()
     }
     
     // MARK: - Actions
@@ -66,6 +73,9 @@ class JoinRoomViewController: UIViewController {
     
     func setupViews() {
         codeTextField.setupView()
+    }
+    
+    func setupGradients() {
         joinButton.customButton(titleText: "Join", titleColor: Colors.light, backgroundColor: Colors.green)
     }
     

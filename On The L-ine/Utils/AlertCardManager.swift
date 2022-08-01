@@ -16,13 +16,9 @@ class AlertCardManager {
         }
     }
     
-    private static let changelogDescription = """
-    - Added this
-    - Fixed that and that too
-    - Refactored my entire being for no apparent reason
-    """
+    static let changelogDescription = ""
     
-    private static let tutorialDescription = """
+    static let tutorialDescription = """
     To get started, it's recommended that you get a feel for how the game works with the tutorial.
     """
     

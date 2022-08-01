@@ -39,8 +39,15 @@ class CreateRoomViewController: UIViewController, MFMessageComposeViewController
         super.viewDidLoad()
         
         setupViews()
+        
         NotificationManager.observePlayerJoinRoom(observer: self, selector: #selector(onRoomJoin(notification:)))
         NotificationManager.observeMatchStart(observer: self, selector: #selector(onMatchStart(notification:)))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupGradients()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,6 +104,10 @@ class CreateRoomViewController: UIViewController, MFMessageComposeViewController
         copyLabel.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    func setupGradients() {
+        startButton.customButton(titleText: "Start", titleColor: Colors.light, backgroundColor: Colors.green)
+    }
+    
     func updateRoomPlayers() {
         guard !players.isEmpty else {
             [startButton, inRoomLabel, playersLabel].forEach({ $0?.isHidden = true })
@@ -111,6 +122,9 @@ class CreateRoomViewController: UIViewController, MFMessageComposeViewController
         guard let roomCode = roomCode else { return }
 
         UIPasteboard.general.string = roomCode
+        
+        let toast = Toast.default(image: UIImage(systemName: "checkmark.circle.fill") ?? UIImage(), title: "Code Copied!", backgroundColor: Colors.green ?? UIColor(), textColor: Colors.light ?? UIColor())
+        return toast.show(haptic: .success)
     }
     
     @objc func onRoomJoin(notification: Notification) {

@@ -13,7 +13,6 @@ class SoundManager: NSObject, AVAudioPlayerDelegate {
     static let pieceSoundName = "piece"
     static let musicSoundName = "music"
     
-    
     private override init() { }
     
     var players: [URL: AVAudioPlayer] = [:]
@@ -29,7 +28,7 @@ class SoundManager: NSObject, AVAudioPlayerDelegate {
             if let player = players[soundFileNameURL] { //player for sound has been found
                 if musicEnabled! {
                     if !player.isPlaying { //player is not in use, so use that one
-                        player.volume = 0.2
+                        player.volume = 0.1
                         player.numberOfLoops = -1
                         player.prepareToPlay()
                         player.play()

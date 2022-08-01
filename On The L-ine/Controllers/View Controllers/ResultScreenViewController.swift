@@ -36,6 +36,9 @@ class ResultScreenViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupGradients()
 //        animateViews()
     }
     
@@ -66,6 +69,9 @@ class ResultScreenViewController: UIViewController {
         
         stackCenter = endOptionsStackView.center
         endOptionsStackView.center.y = blur.frame.height + 100
+    }
+    
+    func setupGradients() {
         mainMenuButton.customButton(titleText: "Main Menu", titleColor: Colors.dark)
         playAgainButton.customButton(titleText: "Play Again", titleColor: Colors.dark)
     }

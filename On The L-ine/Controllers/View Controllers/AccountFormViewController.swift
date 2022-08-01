@@ -37,9 +37,13 @@ class AccountFormViewController: UIViewController {
     // MARK: - Lifecycles
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
         setupViews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupGradients()
     }
     
     // MARK: - Actions
@@ -218,9 +222,9 @@ class AccountFormViewController: UIViewController {
     // MARK: - Helper Functions
     
     func setupViews() {
-        containerView.verticalGradient(top: Colors.primaryMiddleDark, bottom: Colors.primary)
         containerView.layer.masksToBounds = true
         containerView.layer.cornerRadius = containerView.frame.height / 18
+        containerView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
         logoImageView.image = UIImage(named: "Logo")
         logoImageView.layer.cornerRadius = logoImageView.frame.height / 6.4
@@ -229,11 +233,14 @@ class AccountFormViewController: UIViewController {
         passwordTextField.setupView()
         
         self.underline = CALayer()
-        selected = signInButton
-        
-        submitButton.horizontalGradient()
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap(_:))))
+    }
+    
+    func setupGradients() {
+        containerView.verticalGradient(top: Colors.primaryMiddleDark, bottom: Colors.primary)
+        submitButton.horizontalGradient()
+        selected = signInButton
     }
     
     @objc func onTap(_ sender: UITapGestureRecognizer) {

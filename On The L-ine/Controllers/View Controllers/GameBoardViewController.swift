@@ -66,11 +66,16 @@ class GameBoardViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
+        
         NotificationManager.observeMainMenu(observer: self, selector: #selector(onMainMenuTapped))
         NotificationManager.observePlayAgain(observer: self, selector: #selector(onPlayAgainTapped))
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupGradients()
+        
         if TutorialManager.shared.tutorialActive {
             self.coachMarksController.start(in: .window(over: self))
             NotificationManager.observeTutorialMove(observer: self, selector: #selector(onTutorialMoveMade))
@@ -172,10 +177,13 @@ class GameBoardViewController: UIViewController {
         
         NotificationManager.observeMoveMade(observer: self, selector: #selector(onMoveMade(notification:)))
         NotificationManager.observeTurnChanged(observer: self, selector: #selector(onTurnChanged))
-        
-        skipButton.customButton(titleText: "Skip", titleColor: Colors.dark)
+
         
         updateViews()
+    }
+    
+    func setupGradients() {
+        skipButton.customButton(titleText: "Skip", titleColor: Colors.dark)
     }
     
     func updateViews() {
@@ -364,9 +372,9 @@ class GameBoardViewController: UIViewController {
         guard let gameMode = gameMode else { return }
         let players = gameMode.players()
         
+        TurnManager.shared.gameEnded = false
         BoardManager.shared.currentBoard = BoardManager.shared.createStartingBoard(player: players.player, opponent: players.opponent)
         TurnManager.shared.setTurn(Turn(playerType: players.player, turnType: .lPiece))
-        TurnManager.shared.gameEnded = false
         
         updateViews()
     }
@@ -458,12 +466,12 @@ extension GameBoardViewController: CoachMarksControllerDataSource, CoachMarksCon
             ]
             
             let points: [CGPoint] = [
-                CGPoint(x: topLeft.frame.minX-4, y: topLeft.frame.minY-4),
-                CGPoint(x: topLeft.frame.minX-4, y: bottomRight.frame.maxY+4),
-                CGPoint(x: bottomRight.frame.maxX+4, y: bottomRight.frame.maxY+4),
-                CGPoint(x: bottomRight.frame.maxX+4, y: bottomRight.frame.minY-4),
-                CGPoint(x: topLeft.frame.maxX+4, y: bottomRight.frame.minY-4),
-                CGPoint(x: topLeft.frame.maxX+4, y: topLeft.frame.minY-4)
+                CGPoint(x: topLeft.frame.minX-3, y: topLeft.frame.minY-3),
+                CGPoint(x: topLeft.frame.minX-3, y: bottomRight.frame.maxY+3),
+                CGPoint(x: bottomRight.frame.maxX+3, y: bottomRight.frame.maxY+3),
+                CGPoint(x: bottomRight.frame.maxX+3, y: bottomRight.frame.minY-3),
+                CGPoint(x: topLeft.frame.maxX+3, y: bottomRight.frame.minY-3),
+                CGPoint(x: topLeft.frame.maxX+3, y: topLeft.frame.minY-3)
             ]
             
             let path = UIBezierPath()
@@ -487,10 +495,10 @@ extension GameBoardViewController: CoachMarksControllerDataSource, CoachMarksCon
             
             let bottomRight = collectionView.cellForItem(at: IndexPath(row: 15, section: 0)) ?? UICollectionViewCell()
             let points = [
-                CGPoint(x: bottomRight.frame.minX-4, y: bottomRight.frame.minY-4),
-                CGPoint(x: bottomRight.frame.minX-4, y: bottomRight.frame.maxY+4),
-                CGPoint(x: bottomRight.frame.maxX+4, y: bottomRight.frame.maxY+4),
-                CGPoint(x: bottomRight.frame.maxX+4, y: bottomRight.frame.minY-4)
+                CGPoint(x: bottomRight.frame.minX-3, y: bottomRight.frame.minY-3),
+                CGPoint(x: bottomRight.frame.minX-3, y: bottomRight.frame.maxY+3),
+                CGPoint(x: bottomRight.frame.maxX+3, y: bottomRight.frame.maxY+3),
+                CGPoint(x: bottomRight.frame.maxX+3, y: bottomRight.frame.minY-3)
             ]
             
             let path = UIBezierPath()
@@ -515,10 +523,10 @@ extension GameBoardViewController: CoachMarksControllerDataSource, CoachMarksCon
             
             let topRight = collectionView.cellForItem(at: IndexPath(row: 7, section: 0)) ?? UICollectionViewCell()
             let points = [
-                CGPoint(x: topRight.frame.minX-4, y: topRight.frame.minY-4),
-                CGPoint(x: topRight.frame.minX-4, y: topRight.frame.maxY+4),
-                CGPoint(x: topRight.frame.maxX+4, y: topRight.frame.maxY+4),
-                CGPoint(x: topRight.frame.maxX+4, y: topRight.frame.minY-4)
+                CGPoint(x: topRight.frame.minX-3, y: topRight.frame.minY-3),
+                CGPoint(x: topRight.frame.minX-3, y: topRight.frame.maxY+3),
+                CGPoint(x: topRight.frame.maxX+3, y: topRight.frame.maxY+3),
+                CGPoint(x: topRight.frame.maxX+3, y: topRight.frame.minY-3)
             ]
             
             let path = UIBezierPath()
@@ -542,7 +550,10 @@ extension GameBoardViewController: CoachMarksControllerDataSource, CoachMarksCon
             TurnManager.shared.progressTurn()
              
             return coachMarksController.helper.makeCoachMark(for: collectionView)
-        case 10: return coachMarksController.helper.makeCoachMark(pointOfInterest: view.center, in: view)
+        case 10:
+            TutorialManager.shared.reset()
+            
+            return coachMarksController.helper.makeCoachMark(pointOfInterest: view.center, in: view)
         default: return coachMarksController.helper.makeCoachMark()
         }
     }

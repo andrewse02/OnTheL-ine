@@ -74,5 +74,6 @@ class TutorialManager {
     func reset() {
         tutorialActive = false
         pause = false
+        gameBoardConstraints = []
     }
 }

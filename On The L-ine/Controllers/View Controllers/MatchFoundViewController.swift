@@ -25,6 +25,7 @@ class MatchFoundViewController: UIViewController {
         super.viewDidLoad()
 
         setupViews()
+        
         NotificationManager.observeMatchStart(observer: self, selector: #selector(onStart(notification:)))
         NotificationManager.observeMainMenu(observer: self, selector: #selector(onMainMenu))
     }

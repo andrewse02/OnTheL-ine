@@ -58,12 +58,12 @@
                                 <cells/>
                             </collectionView>
                             <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Vl-4k-wRd">
-                                <rect key="frame" x="62" y="417" width="97" height="37.5"/>
+                                <rect key="frame" x="62" y="417" width="105" height="42"/>
                                 <color key="backgroundColor" name="Yellow"/>
                                 <color key="tintColor" name="Dark"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Skip">
-                                    <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                    <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="22"/>
                                     <directionalEdgeInsets key="contentInsets" top="8" leading="30" bottom="8" trailing="30"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -71,11 +71,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDe-3Z-YWZ">
-                                <rect key="frame" x="354" y="376" width="49.5" height="33"/>
+                                <rect key="frame" x="354" y="371" width="56" height="38"/>
                                 <color key="tintColor" name="Light"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.backward.fill" catalog="system" title="">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="16"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20"/>
                                     <color key="baseForegroundColor" name="Light"/>
                                 </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
@@ -88,17 +88,17 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(player)'s turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMP-Cq-n2m">
-                                <rect key="frame" x="102" y="518.5" width="210.5" height="38"/>
+                                <rect key="frame" x="102" y="523" width="210.5" height="38"/>
                                 <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="32"/>
                                 <color key="textColor" name="Light"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I26-Fh-RhN">
-                                <rect key="frame" x="302.5" y="411" width="49.5" height="33"/>
+                                <rect key="frame" x="296" y="411" width="56" height="38"/>
                                 <color key="tintColor" name="Light"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.right.fill" catalog="system" title="">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="16"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20"/>
                                     <color key="baseForegroundColor" name="Light"/>
                                 </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
@@ -122,8 +122,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Move your L-piece" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvw-WZ-04S">
-                                <rect key="frame" x="140.5" y="564.5" width="133" height="19"/>
-                                <fontDescription key="fontDescription" name="Raleway-SemiBoldItalic" family="Raleway" pointSize="16"/>
+                                <rect key="frame" x="132.5" y="569" width="149.5" height="21.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-SemiBoldItalic" family="Raleway" pointSize="18"/>
                                 <color key="textColor" name="Light"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -359,17 +359,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8A-qa-QNc">
-                                <rect key="frame" x="353" y="801" width="45" height="45"/>
+                                <rect key="frame" x="343" y="791" width="55" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="Cfo-fe-Hcp"/>
-                                    <constraint firstAttribute="height" constant="45" id="MmG-KX-Yck"/>
+                                    <constraint firstAttribute="width" constant="55" id="Cfo-fe-Hcp"/>
+                                    <constraint firstAttribute="height" constant="55" id="MmG-KX-Yck"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" name="Light"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal">
                                     <imageReference key="image" image="questionmark.circle.fill" catalog="system" symbolScale="default"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="55"/>
                                 </state>
                                 <connections>
                                     <action selector="helpButtonTapped:" destination="0ND-BR-ZsX" eventType="touchUpInside" id="LCO-aL-ZfP"/>
@@ -388,17 +388,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qOs-lw-eqQ">
-                                <rect key="frame" x="292" y="801" width="45" height="45"/>
+                                <rect key="frame" x="272" y="791" width="55" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="YA2-EZ-yGn"/>
-                                    <constraint firstAttribute="width" constant="45" id="wRA-hG-7kR"/>
+                                    <constraint firstAttribute="height" constant="55" id="YA2-EZ-yGn"/>
+                                    <constraint firstAttribute="width" constant="55" id="wRA-hG-7kR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" name="Light"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal">
                                     <imageReference key="image" image="music.note" catalog="system" symbolScale="default"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="55"/>
                                 </state>
                                 <connections>
                                     <action selector="musicButtonTapped:" destination="0ND-BR-ZsX" eventType="touchUpInside" id="NGz-fJ-k6b"/>
@@ -1001,7 +1001,7 @@
                                 <color key="textColor" name="Light"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="abc123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k9S-a6-2eB" customClass="CustomTextField" customModule="On_The_L_ine" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ABC123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k9S-a6-2eB" customClass="CustomTextField" customModule="On_The_L_ine" customModuleProvider="target">
                                 <rect key="frame" x="124" y="242" width="166" height="20.5"/>
                                 <color key="backgroundColor" name="Light"/>
                                 <color key="textColor" name="Dark"/>
@@ -1009,10 +1009,10 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xOT-VJ-7Jd">
-                                <rect key="frame" x="31" y="294.5" width="352" height="52"/>
+                                <rect key="frame" x="31" y="294.5" width="352" height="41.5"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="100" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFB-Ft-iY9">
-                                        <rect key="frame" x="0.0" y="5.5" width="265" height="41.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="352" height="41.5"/>
                                         <color key="backgroundColor" name="Green"/>
                                         <color key="tintColor" name="Light"/>
                                         <state key="normal" title="Button"/>
@@ -1025,8 +1025,8 @@
                                             <action selector="startTapped:" destination="T7h-ed-RFI" eventType="touchUpInside" id="cjW-jY-c3f"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKy-3J-hSF">
-                                        <rect key="frame" x="281" y="0.0" width="71" height="52"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKy-3J-hSF">
+                                        <rect key="frame" x="0.0" y="-5" width="0.0" height="52"/>
                                         <color key="tintColor" name="Light"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="qrcode" catalog="system">
@@ -1040,14 +1040,14 @@
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Room:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XjZ-mQ-Znu">
-                                <rect key="frame" x="157.5" y="378.5" width="99" height="28.5"/>
+                                <rect key="frame" x="157.5" y="368" width="99" height="28.5"/>
                                 <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="24"/>
                                 <color key="textColor" name="Light"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(username)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mwd-NC-AHU">
-                                <rect key="frame" x="160" y="415" width="94.5" height="21.5"/>
-                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="18"/>
+                                <rect key="frame" x="154.5" y="404.5" width="105" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="20"/>
                                 <color key="textColor" name="Light"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1093,7 +1093,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHK-sR-eTv">
-                                <rect key="frame" x="0.0" y="5" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6ok-YH-Sxc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1148,10 +1148,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Pcu-nT-noq"/>
                         <constraints>
-                            <constraint firstItem="NHK-sR-eTv" firstAttribute="height" secondItem="N6j-Bh-0Fr" secondAttribute="height" id="Tcs-C6-4B8"/>
+                            <constraint firstAttribute="bottom" secondItem="NHK-sR-eTv" secondAttribute="bottom" id="0tJ-sX-R0z"/>
                             <constraint firstItem="NHK-sR-eTv" firstAttribute="width" secondItem="N6j-Bh-0Fr" secondAttribute="width" id="dgq-hw-JLb"/>
-                            <constraint firstItem="NHK-sR-eTv" firstAttribute="centerY" secondItem="Pcu-nT-noq" secondAttribute="centerY" id="oMG-vD-3xp"/>
+                            <constraint firstItem="NHK-sR-eTv" firstAttribute="top" secondItem="N6j-Bh-0Fr" secondAttribute="top" id="gQT-jn-phs"/>
+                            <constraint firstItem="NHK-sR-eTv" firstAttribute="leading" secondItem="Pcu-nT-noq" secondAttribute="leading" id="oM5-O5-eUz"/>
                             <constraint firstItem="NHK-sR-eTv" firstAttribute="centerX" secondItem="Pcu-nT-noq" secondAttribute="centerX" id="uNl-SZ-hoo"/>
+                            <constraint firstItem="NHK-sR-eTv" firstAttribute="trailing" secondItem="Pcu-nT-noq" secondAttribute="trailing" id="ugP-i6-1on"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1164,7 +1166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgV-98-4lH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="832" y="48"/>
+            <point key="canvasLocation" x="831.88405797101461" y="47.544642857142854"/>
         </scene>
     </scenes>
     <resources>

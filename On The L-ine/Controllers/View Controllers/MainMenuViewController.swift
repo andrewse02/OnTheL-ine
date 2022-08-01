@@ -44,11 +44,17 @@ class MainMenuViewController: UIViewController {
             guard let self = self else { return }
             
             AuthManager.currentUser = user != nil ? user : nil
+            self.checkAuth()
+            
             self.updateAccountButton()
         })
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupGradients()
+        
         if DeepLinkManager.roomCode != nil {
             connectOnline()
         }
@@ -118,6 +124,10 @@ class MainMenuViewController: UIViewController {
         self.coachMarksController.dataSource = self
         self.coachMarksController.delegate = self
         
+        musicButton.tintColor = SoundManager.shared.musicEnabled! ? Colors.light : Colors.lightDarkTransparent
+    }
+    
+    func setupGradients() {
         view.verticalGradient()
         
         localButton.horizontalGradient()
@@ -130,14 +140,13 @@ class MainMenuViewController: UIViewController {
         
         settingsButton.customOutlinedButton(titleText: "Settings", titleColor: Colors.light, borderColor: Colors.light)
         updateAccountButton()
-        
-        musicButton.tintColor = SoundManager.shared.musicEnabled! ? Colors.light : Colors.lightDarkTransparent
     }
     
     func handleLaunch() {
         let hasLaunched = UserDefaults.standard.bool(forKey: "HasLaunched")
         
-        if UserDefaults.standard.string(forKey: "LastVersion") != Bundle.main.releaseVersionNumberPretty {
+        if UserDefaults.standard.string(forKey: "LastVersion") != Bundle.main.releaseVersionNumberPretty,
+           !AlertCardManager.changelogDescription.isEmpty {
             if hasLaunched { AlertCardManager.changelog.showBulletin(above: self) }
             
             UserDefaults.standard.set(Bundle.main.releaseVersionNumberPretty, forKey: "LastVersion")
@@ -202,6 +211,23 @@ class MainMenuViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func checkAuth() {
+        AuthManager.currentUser?.getIDTokenForcingRefresh(true, completion: { _, error in
+            guard error != nil else { return }
+            
+            DispatchQueue.global(qos: .userInteractive).async {
+                try? Auth.auth().signOut()
+                AuthManager.currentUser = nil
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.updateAccountButton()
+                }
+            }
+        })
     }
     
     func startTutorial() {
