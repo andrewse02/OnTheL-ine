@@ -9,6 +9,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import Firebase
 import AVFAudio
+import AppTrackingTransparency
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         FirestoreManager.configure()
         
-        var categoryError :NSError?
+        var categoryError: NSError?
         var success: Bool
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback, options: .duckOthers)
@@ -58,5 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+            print("Tracking Granted: \(status == .authorized)")
+        })
     }
 }

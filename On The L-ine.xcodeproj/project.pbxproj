@@ -819,6 +819,7 @@
 				INFOPLIST_FILE = "On The L-ine/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "On The L-ine";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Used to deliver personalized ads";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -854,6 +855,7 @@
 				INFOPLIST_FILE = "On The L-ine/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "On The L-ine";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Used to deliver personalized ads";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
