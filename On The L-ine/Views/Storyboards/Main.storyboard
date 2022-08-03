@@ -377,6 +377,7 @@
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bid-xl-kEx">
                                 <rect key="frame" x="41.5" y="548" width="331" height="41"/>
+                                <color key="backgroundColor" name="Primary"/>
                                 <color key="tintColor" name="Light"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sign In/Sign Up">
@@ -1167,6 +1168,103 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgV-98-4lH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="831.88405797101461" y="47.544642857142854"/>
+        </scene>
+        <!--Account Settings View Controller-->
+        <scene sceneID="KUD-Fs-MeE">
+            <objects>
+                <viewController storyboardIdentifier="AccountSettings" id="XWq-dv-4gW" customClass="AccountSettingsViewController" customModule="On_The_L_ine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CjD-dU-ATa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kon-pj-ULt">
+                                <rect key="frame" x="38.5" y="92" width="337.5" height="47"/>
+                                <fontDescription key="fontDescription" name="Raleway-Black" family="Raleway" pointSize="40"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o2e-kb-4nN">
+                                <rect key="frame" x="41.5" y="247" width="331" height="41"/>
+                                <color key="backgroundColor" name="Highlight"/>
+                                <color key="tintColor" name="Light"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Local">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="18" name="Raleway-SemiBold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain" title="Sign Out">
+                                    <fontDescription key="titleFontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="18"/>
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="signOutTapped:" destination="XWq-dv-4gW" eventType="touchUpInside" id="R38-8F-WQp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1g-gf-8O0">
+                                <rect key="frame" x="16" y="44" width="61" height="43"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backTapped:" destination="XWq-dv-4gW" eventType="touchUpInside" id="bhd-lg-kj7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPU-Jb-wne">
+                                <rect key="frame" x="41.5" y="304" width="331" height="41"/>
+                                <color key="backgroundColor" name="Highlight"/>
+                                <color key="tintColor" name="Light"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete Account">
+                                    <fontDescription key="titleFontDescription" name="Raleway-Bold" family="Raleway" pointSize="18"/>
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="deleteAccountTapped:" destination="XWq-dv-4gW" eventType="touchUpInside" id="CtH-fy-Qqt"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(username)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRH-Tc-oeH">
+                                <rect key="frame" x="41.5" y="203" width="331" height="28"/>
+                                <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="24"/>
+                                <color key="textColor" name="Light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OSz-ya-6t3"/>
+                        <color key="backgroundColor" name="Primary-Middle Dark"/>
+                        <constraints>
+                            <constraint firstItem="e1g-gf-8O0" firstAttribute="leading" secondItem="OSz-ya-6t3" secondAttribute="leading" constant="16" id="8fv-5H-Vjz"/>
+                            <constraint firstItem="o2e-kb-4nN" firstAttribute="centerX" secondItem="OSz-ya-6t3" secondAttribute="centerX" id="DkD-bK-E1F"/>
+                            <constraint firstItem="IRH-Tc-oeH" firstAttribute="width" secondItem="CjD-dU-ATa" secondAttribute="width" multiplier="0.8" id="EK7-b3-Ee5"/>
+                            <constraint firstItem="WPU-Jb-wne" firstAttribute="top" secondItem="o2e-kb-4nN" secondAttribute="bottom" constant="16" id="JHs-GB-4xc"/>
+                            <constraint firstItem="IRH-Tc-oeH" firstAttribute="top" secondItem="kon-pj-ULt" secondAttribute="bottom" constant="64" id="M5y-gX-2e6"/>
+                            <constraint firstItem="kon-pj-ULt" firstAttribute="centerX" secondItem="OSz-ya-6t3" secondAttribute="centerX" id="Stl-yH-Xew"/>
+                            <constraint firstItem="o2e-kb-4nN" firstAttribute="width" secondItem="CjD-dU-ATa" secondAttribute="width" multiplier="0.8" id="Zrt-t4-CUk"/>
+                            <constraint firstItem="WPU-Jb-wne" firstAttribute="width" secondItem="CjD-dU-ATa" secondAttribute="width" multiplier="0.8" id="bU7-Tc-B5N"/>
+                            <constraint firstItem="kon-pj-ULt" firstAttribute="top" secondItem="OSz-ya-6t3" secondAttribute="top" constant="48" id="cOn-QL-Edz"/>
+                            <constraint firstItem="IRH-Tc-oeH" firstAttribute="centerX" secondItem="CjD-dU-ATa" secondAttribute="centerX" id="eEK-0K-NY3"/>
+                            <constraint firstItem="WPU-Jb-wne" firstAttribute="centerX" secondItem="CjD-dU-ATa" secondAttribute="centerX" id="hQw-5Z-LYi"/>
+                            <constraint firstItem="e1g-gf-8O0" firstAttribute="top" secondItem="CjD-dU-ATa" secondAttribute="topMargin" id="qVZ-ct-FnQ"/>
+                            <constraint firstItem="o2e-kb-4nN" firstAttribute="top" secondItem="IRH-Tc-oeH" secondAttribute="bottom" constant="16" id="rY5-y9-H5H"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deleteAccountButton" destination="WPU-Jb-wne" id="bhi-jR-RNf"/>
+                        <outlet property="signOutButton" destination="o2e-kb-4nN" id="Trh-GA-Jvr"/>
+                        <outlet property="usernameLabel" destination="IRH-Tc-oeH" id="roJ-dX-YKc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u6b-7K-9ys" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1845" y="765"/>
         </scene>
     </scenes>
     <resources>

@@ -19,6 +19,8 @@ extension UIButton {
         
         if let backgroundColor = backgroundColor {
             self.backgroundColor = backgroundColor
+        } else {
+            self.backgroundColor = nil
         }
         
         if let borderColor = borderColor {
@@ -26,7 +28,7 @@ extension UIButton {
             self.layer.borderColor = borderColor.cgColor
         } else {
             self.layer.borderWidth = 0
-            self.layer.borderColor = .none
+            self.layer.borderColor = nil
         }
     }
     

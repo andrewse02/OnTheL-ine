@@ -13,6 +13,7 @@
 		9A0678C9281752C600C7D82E /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0678C8281752C600C7D82E /* WebSocketManager.swift */; };
 		9A0678CD2818A30E00C7D82E /* AccountFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0678CC2818A30E00C7D82E /* AccountFormViewController.swift */; };
 		9A0678D12818ACF600C7D82E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0678D02818ACF600C7D82E /* CustomTextField.swift */; };
+		9A0AEC202898518D0070BFE4 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0AEC1F2898518D0070BFE4 /* AccountSettingsViewController.swift */; };
 		9A1433F12814998B00FCDC70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A1433F02814998B00FCDC70 /* GoogleService-Info.plist */; };
 		9A153DD32822D31000537CDE /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A153DD22822D31000537CDE /* LoadingViewController.swift */; };
 		9A153DD52823330E00537CDE /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A153DD42823330E00537CDE /* DeepLinkManager.swift */; };
@@ -99,6 +100,7 @@
 		9A0678C8281752C600C7D82E /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
 		9A0678CC2818A30E00C7D82E /* AccountFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFormViewController.swift; sourceTree = "<group>"; };
 		9A0678D02818ACF600C7D82E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		9A0AEC1F2898518D0070BFE4 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		9A1433F02814998B00FCDC70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A153DD22822D31000537CDE /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		9A153DD42823330E00537CDE /* DeepLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				9A7304DB281C3CD600E86636 /* JoinRoomViewController.swift */,
 				9A153DD22822D31000537CDE /* LoadingViewController.swift */,
 				9A153DD628244F2C00537CDE /* ResultScreenViewController.swift */,
+				9A0AEC1F2898518D0070BFE4 /* AccountSettingsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				9A4146BB285B660C0046CE24 /* Bundle+VersionNumber.swift in Sources */,
 				9A9252D2281058FF0069BAFC /* Benchmarkers.swift in Sources */,
 				9AA2BFE22811C33900A55D8F /* MainMenuViewController.swift in Sources */,
+				9A0AEC202898518D0070BFE4 /* AccountSettingsViewController.swift in Sources */,
 				9A0678C9281752C600C7D82E /* WebSocketManager.swift in Sources */,
 				9AA8615C28062B5B002FD013 /* BoardManager.swift in Sources */,
 				9AA8615F28062ED5002FD013 /* BoardPiece.swift in Sources */,
@@ -809,7 +813,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "On The L-ine/On The L-ine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 72A8K5D64W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "On The L-ine/Resources/Info.plist";
@@ -844,7 +848,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "On The L-ine/On The L-ine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 72A8K5D64W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "On The L-ine/Resources/Info.plist";

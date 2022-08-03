@@ -8,9 +8,9 @@
 import Foundation
 
 class HTTPServerManager {
-    static let baseURL = URL(string: "http://otl.andrewelliott.me")
+//    static let baseURL = URL(string: "http://otl.andrewelliott.me")
 //    static let baseURL = URL(string: "http://192.168.0.125:4000")
-//    static let baseURL = URL(string: "http://localhost:4000")
+    static let baseURL = URL(string: "http://localhost:4000")
     
     private static let signUpEndpoint = "signup"
     private static let signInEndpoint = "signin"
@@ -36,7 +36,7 @@ class HTTPServerManager {
             guard let response = response as? HTTPURLResponse else { return completion(.failure(.invalidResponse)) }
             
             switch response.statusCode {
-            case 409: return completion(.failure(.invalidCredentials))
+            case 400, 409: return completion(.failure(.invalidCredentials))
             case 201:
                 guard let data = data else { return completion(.failure(.noData)) }
                 guard let token = String(data: data, encoding: .utf8) else { return completion(.failure(.invalidResponse)) }
@@ -67,7 +67,7 @@ class HTTPServerManager {
             guard let response = response as? HTTPURLResponse else { return completion(.failure(.invalidResponse)) }
             
             switch response.statusCode {
-            case 401: return completion(.failure(.invalidCredentials))
+            case 400, 401: return completion(.failure(.invalidCredentials))
             case 200:
                 guard let data = data else { return completion(.failure(.noData)) }
                 guard let token = String(data: data, encoding: .utf8) else { return completion(.failure(.invalidResponse)) }
@@ -95,7 +95,31 @@ class HTTPServerManager {
             guard let response = response as? HTTPURLResponse else { return completion(.invalidResponse) }
             
             switch response.statusCode {
-            case 401: return completion(.invalidCredentials)
+            case 400, 401: return completion(.invalidCredentials)
+            case 200: return completion(nil)
+            default: return completion(.invalidResponse)
+            }
+        }.resume()
+    }
+    
+    static func deleteAccount(token: String, completion: @escaping (NetworkError?) -> Void) {
+        guard let baseURL = baseURL else { return completion(.invalidURL) }
+        
+        let finalURL = baseURL.appendingPathComponent(userEndpoint)
+        
+        var request = URLRequest(url: finalURL)
+        request.httpMethod = "DELETE"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error { return completion(.thrownError(error)) }
+            
+            guard let response = response as? HTTPURLResponse else { return completion(.invalidResponse) }
+            
+            switch response.statusCode {
+            case 400, 401: return completion(.invalidCredentials)
             case 200: return completion(nil)
             default: return completion(.invalidResponse)
             }

@@ -28,4 +28,8 @@ class AuthManager {
     static func setDisplayName(token: String, completion: @escaping (NetworkError?) -> Void) {
         HTTPServerManager.setDisplayName(token: token, completion: completion)
     }
+    
+    static func deleteAccount(token: String, completion: @escaping (NetworkError?) -> Void) {
+        HTTPServerManager.deleteAccount(token: token, completion: completion)
+    }
 }

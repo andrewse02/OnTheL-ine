@@ -22,6 +22,8 @@ class AlertCardManager {
     To get started, it's recommended that you get a feel for how the game works with the tutorial.
     """
     
+    static let deleteDescription = "Are you sure you want to delete your acount? This process cannot be undone."
+    
     static var changelog: BLTNItemManager = {
         let rootItem = BLTNPageItem(title: "What's new in\nv\(Bundle.main.releaseVersionNumberPretty)?")
         let symbolConfig = UIImage.SymbolConfiguration(pointSize: 100)
@@ -78,6 +80,40 @@ class AlertCardManager {
         
         rootItem.actionHandler = action
         rootItem.alternativeHandler = { (item: BLTNActionItem) in
+            item.manager?.dismissBulletin()
+        }
+        
+        rootItem.isDismissable = false
+        
+        return rootItem
+    }
+    
+    static func deleteAccount(action: @escaping (BLTNActionItem) -> Void) -> BLTNPageItem {
+        let rootItem = BLTNPageItem(title: "Delete Account?")
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 100)
+        rootItem.image = UIImage(systemName: "x.circle.fill", withConfiguration: symbolConfig)
+        rootItem.descriptionText = deleteDescription
+        rootItem.actionButtonTitle = "Cancel"
+        rootItem.alternativeButtonTitle = "Delete Account"
+        
+        rootItem.appearance.titleFontDescriptor = UIFontDescriptor(name: "RalewayRoman-SemiBold", size: 32)
+        rootItem.appearance.titleTextColor = Colors.dark ?? UIColor()
+        
+        rootItem.appearance.imageViewTintColor = Colors.highlight ?? UIColor()
+        
+        rootItem.appearance.descriptionFontDescriptor = UIFontDescriptor(name: "RalewayRoman-Medium", size: 16)
+        rootItem.appearance.descriptionTextColor = Colors.highlight ?? UIColor()
+        
+        rootItem.appearance.actionButtonFontSize = 20
+        rootItem.appearance.actionButtonColor = Colors.middleDark ?? UIColor()
+        rootItem.appearance.actionButtonTitleColor = Colors.light ?? UIColor()
+        
+        rootItem.appearance.alternativeButtonFontSize = 16
+        rootItem.appearance.alternativeButtonTitleColor = Colors.highlight ?? UIColor()
+        
+        
+        rootItem.alternativeHandler = action
+        rootItem.actionHandler = { (item: BLTNActionItem) in
             item.manager?.dismissBulletin()
         }
         

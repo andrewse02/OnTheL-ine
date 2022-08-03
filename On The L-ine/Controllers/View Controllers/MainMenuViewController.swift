@@ -103,16 +103,7 @@ class MainMenuViewController: UIViewController {
     
     @IBAction func accountButtonTapped(_ sender: Any) {
         if AuthManager.currentUser != nil {
-            DispatchQueue.global(qos: .userInteractive).async {
-                try? Auth.auth().signOut()
-                AuthManager.currentUser = nil
-                
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    
-                    self.updateAccountButton()
-                }
-            }
+            presentAccountSettings()
         } else {
             presentAccountForm()
         }
@@ -160,7 +151,7 @@ class MainMenuViewController: UIViewController {
     
     func updateAccountButton() {
         if AuthManager.currentUser != nil {
-            accountButton.customButton(titleText: "Sign Out", titleColor: Colors.light, backgroundColor: Colors.highlight, borderColor: Colors.light)
+            accountButton.customOutlinedButton(titleText: "Account Settings", titleColor: Colors.light, borderColor: Colors.light)
         } else {
             accountButton.customOutlinedButton(titleText: "Sign In/Sign Up", titleColor: Colors.light, borderColor: Colors.light)
         }
@@ -180,6 +171,13 @@ class MainMenuViewController: UIViewController {
         
         accountFormViewController.modalPresentationStyle = .fullScreen
         self.present(accountFormViewController, animated: true)
+    }
+    
+    func presentAccountSettings() {
+        guard let accountSettingsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountSettings") as? AccountSettingsViewController else { return }
+        
+        accountSettingsViewController.modalPresentationStyle = .fullScreen
+        self.present(accountSettingsViewController, animated: true)
     }
     
     func presentOnlineMenu() {
